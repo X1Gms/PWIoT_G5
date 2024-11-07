@@ -1,67 +1,244 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="imgs/logo/logo.jpg" type="image/x-icon" />
     <title>WearWeather</title>
-    <link rel="stylesheet" href="../../main.css">
-    <link rel="stylesheet" href="./edit_profile.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="../../main.css" />
+    <script src="..\..\js\index.js"></script>
+    <link rel="stylesheet" href="./edit_profile.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-        href="https://fonts.googleapis.com/css2?family=Lobster&family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap"
-        rel="stylesheet">
+      href="https://fonts.googleapis.com/css2?family=Lobster&family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap"
+      rel="stylesheet"
+    />
     <link
-        href="https://fonts.googleapis.com/css2?family=Lobster&family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap"
-        rel="stylesheet">
-</head>
+      href="https://fonts.googleapis.com/css2?family=Lobster&family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-<body>
-
+  <body>
     <nav class="nav">
-        <header class="logo">
-            <p>G5</p>
-        </header>
-        <header class="nav-hamb">
-            <span class="bar"></span><span class="bar"></span><span class="bar"></span>
-        </header>
+      <header class="logo">
+        <p>G5</p>
+      </header>
+      <header onclick="showNavbar()" id="nav-opener" class="nav-hamb">
+        <span class="bar"></span><span class="bar"></span
+        ><span class="bar"></span>
+      </header>
+      <div class="hidden">
+        <h2>WearWeather</h2>
+        <span></span>
+        <ul>
+          <li>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="50"
+              height="50"
+              fill="none"
+              viewBox="0 0 50 50"
+            >
+              <rect width="50" height="50" fill="url(#a)" rx="10" />
+              <mask
+                id="b"
+                width="37"
+                height="37"
+                x="6"
+                y="6"
+                maskUnits="userSpaceOnUse"
+                style="mask-type: alpha"
+              >
+                <path fill="#D9D9D9" d="M6 6h37v37H6z" />
+              </mask>
+              <g mask="url(#b)">
+                <path
+                  fill="#fff"
+                  d="M22.958 13.708V7.542h3.084v6.166h-3.084Zm10.252 4.24-2.12-2.12 4.317-4.432 2.159 2.197-4.356 4.355Zm2.082 8.094v-3.084h6.166v3.084h-6.166ZM22.958 41.458v-6.166h3.084v6.166h-3.084ZM15.79 17.871l-4.394-4.278 2.197-2.159 4.355 4.356-2.158 2.08Zm19.579 19.733-4.278-4.432 2.08-2.081 4.395 4.24-2.197 2.273ZM7.542 26.042v-3.084h6.166v3.084H7.542Zm6.05 11.562-2.158-2.197 4.317-4.316 1.118 1.04 1.117 1.08-4.393 4.393ZM24.5 33.75c-2.57 0-4.753-.9-6.552-2.698-1.799-1.799-2.698-3.982-2.698-6.552 0-2.57.9-4.753 2.698-6.552 1.799-1.799 3.983-2.698 6.552-2.698 2.57 0 4.753.9 6.552 2.698 1.799 1.799 2.698 3.983 2.698 6.552 0 2.57-.9 4.753-2.698 6.552-1.799 1.799-3.982 2.698-6.552 2.698Z"
+                />
+              </g>
+              <defs>
+                <linearGradient
+                  id="a"
+                  x1="0"
+                  x2="50"
+                  y1="0"
+                  y2="50"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#DFDBDB" />
+                  <stop offset="1" stop-color="#9F9F9F" />
+                </linearGradient>
+              </defs>
+            </svg>
+            Home
+          </li>
+          <li>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="50"
+              height="50"
+              fill="none"
+              viewBox="0 0 50 50"
+            >
+              <rect width="50" height="50" fill="none" rx="10" />
+              <mask
+                id="b"
+                width="37"
+                height="37"
+                x="6"
+                y="6"
+                maskUnits="userSpaceOnUse"
+                style="mask-type: alpha"
+              >
+                <path fill="#D9D9D9" d="M6 6h37v37H6z" />
+              </mask>
+              <g mask="url(#b)">
+                <path
+                  fill="#9F9F9F"
+                  d="M24.5 24.5c-1.696 0-3.148-.604-4.355-1.811-1.208-1.208-1.812-2.66-1.812-4.355 0-1.696.604-3.148 1.812-4.356 1.207-1.207 2.66-1.811 4.355-1.811 1.696 0 3.148.604 4.355 1.811 1.208 1.208 1.812 2.66 1.812 4.356 0 1.695-.604 3.147-1.812 4.355-1.207 1.207-2.66 1.811-4.355 1.811ZM12.167 36.834v-4.317c0-.874.225-1.677.674-2.409a4.495 4.495 0 0 1 1.792-1.677 22.88 22.88 0 0 1 4.857-1.792 21.21 21.21 0 0 1 5.01-.597c1.696 0 3.366.199 5.01.597a22.88 22.88 0 0 1 4.857 1.793 4.495 4.495 0 0 1 1.792 1.676c.45.732.674 1.535.674 2.409v4.316H12.167Z"
+                />
+              </g>
+              <defs>
+                <linearGradient
+                  id="a"
+                  x1="0"
+                  x2="50"
+                  y1="0"
+                  y2="50"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#fff" />
+                  <stop offset="1" stop-color="#fff" />
+                </linearGradient>
+              </defs>
+            </svg>
+            Edit Profile
+          </li>
+          <li>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="50"
+              height="50"
+              fill="none"
+              viewBox="0 0 50 50"
+            >
+              <rect width="50" height="50" fill="none" rx="10" />
+              <mask
+                id="b"
+                width="37"
+                height="37"
+                x="6"
+                y="6"
+                maskUnits="userSpaceOnUse"
+                style="mask-type: alpha"
+              >
+                <path fill="#D9D9D9" d="M6 6h37v37H6z" />
+              </mask>
+              <g mask="url(#b)">
+                <path
+                  fill="#9F9F9F"
+                  d="m15.25 22.881-1.542.848a1.51 1.51 0 0 1-1.156.154 1.416 1.416 0 0 1-.925-.693l-3.083-5.396a1.51 1.51 0 0 1-.154-1.157 1.42 1.42 0 0 1 .693-.925l8.865-5.087h2.698c.231 0 .417.07.559.212a.756.756 0 0 1 .212.559v.77c0 .849.302 1.575.905 2.178a2.97 2.97 0 0 0 2.178.906 2.97 2.97 0 0 0 2.178-.906 2.97 2.97 0 0 0 .905-2.177v-.771c0-.231.071-.418.212-.559a.756.756 0 0 1 .56-.212h2.697l8.865 5.088c.36.205.59.513.693.925a1.51 1.51 0 0 1-.154 1.156l-3.083 5.396c-.206.36-.508.584-.906.674-.398.09-.79.032-1.175-.173l-1.542-.771v13.913c0 .437-.148.803-.443 1.099a1.492 1.492 0 0 1-1.099.443H16.792c-.437 0-.803-.148-1.099-.443a1.492 1.492 0 0 1-.443-1.099V22.881Z"
+                />
+              </g>
+              <defs>
+                <linearGradient
+                  id="a"
+                  x1="0"
+                  x2="50"
+                  y1="0"
+                  y2="50"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#fff" />
+                  <stop offset="1" stop-color="#fff" />
+                </linearGradient>
+              </defs>
+            </svg>
+            Clothes
+          </li>
+        </ul>
+        <a>Sign Out</a>
+        <p class="nav-copyright">&copy; Group 5 PWDAM 2024/2026</p>
+      </div>
     </nav>
     <main class="content-main">
-        <div class="login-form">
-            <h2>Edit Profile</h2>
-            <form action="" method="post">
-                <fieldset>
-                    <label for="name">Name</label>
-                    <input type="text" id="name" placeholder="Insert Your Name" required>
-                </fieldset>
-                <fieldset>
-                    <label for="email">E-mail</label>
-                    <input type="email" id="email" placeholder="Insert Your E-mail" required>
-                </fieldset>
-                <fieldset>
-                    <div>
-                        <label for="password">Current Password</label>
-                        <a title="Verify your current password in order to apply the changes">
-                            <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="11.5" cy="11.5" r="10.5" fill="white" stroke="#777575" stroke-width="2" />
-                                <path d="M11.02 17V9.425H12.895V17H11.02ZM10.915 8V6.17H13V8H10.915Z" fill="black" />
-                            </svg></a>
-                    </div>
-                    <input type="password" id="password" placeholder="Insert Your Password" required>
-                </fieldset>
-                </fieldset>
-                <fieldset>
-                    <label for="password">Current Password</label>
-                    <input type="password" id="password" placeholder="Insert Your Password" required>
-                </fieldset>
-                <button type="submit">Sign In</button>
-            </form>
-        </div>
+      <div class="login-form">
+        <h2>Edit Profile</h2>
+        <form action="" method="post">
+          <fieldset>
+            <label for="name">Name</label>
+            <input
+              type="text"
+              id="name"
+              placeholder="Insert Your Name"
+              required
+            />
+          </fieldset>
+          <fieldset>
+            <label for="email">E-mail</label>
+            <input
+              type="email"
+              id="email"
+              placeholder="Insert Your E-mail"
+              required
+            />
+          </fieldset>
+          <fieldset>
+            <div>
+              <label for="password">Current Password</label>
+              <a
+                title="Verify your current password in order to apply the changes"
+              >
+                <svg
+                  width="23"
+                  height="23"
+                  viewBox="0 0 23 23"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle
+                    cx="11.5"
+                    cy="11.5"
+                    r="10.5"
+                    fill="white"
+                    stroke="#777575"
+                    stroke-width="2"
+                  />
+                  <path
+                    d="M11.02 17V9.425H12.895V17H11.02ZM10.915 8V6.17H13V8H10.915Z"
+                    fill="black"
+                  />
+                </svg>
+              </a>
+            </div>
+            <input
+              type="password"
+              id="password"
+              placeholder="Insert Your Password"
+              required
+            />
+          </fieldset>
+          <fieldset>
+            <label for="password">Current Password</label>
+            <input
+              type="password"
+              id="password"
+              placeholder="Insert Your Password"
+              required
+            />
+          </fieldset>
+          <button type="submit">Sign In</button>
+        </form>
+      </div>
     </main>
     <!-- Copyright desativado no design. -->
     <!-- <p id="copyright">&copy; Group 5 PWDAM 2024/2026</p> -->
-</body>
-
+  </body>
 </html>
