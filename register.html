@@ -12,7 +12,7 @@
             href="https://fonts.googleapis.com/css2?family=Lobster&family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap"
             rel="stylesheet"
     />
-    <title>Login WearWeather</title>
+    <title>Register WearWeather</title>
 </head>
 
 <body>
@@ -21,8 +21,17 @@
 </header>
 <main id="content-main">
     <div id="content-left" class="login-form">
-        <h2>Login</h2>
+        <h2>Register</h2>
         <form action="" method="post">
+            <fieldset>
+                <label for="name">Name</label>
+                <input
+                        type="text"
+                        id="name"
+                        placeholder="Insert Your Name"
+                        required
+                />
+
             <fieldset>
                 <label for="email">E-mail</label>
                 <input
@@ -41,10 +50,29 @@
                         required
                 />
             </fieldset>
+            <fieldset>
+                <label for="Cpassword">Confirm Password</label>
+                <input
+                        type="password"
+                        id="Cpassword"
+                        placeholder="Confirm Your Password"
+                        required
+                />
+            </fieldset>
+                <div class="checkboxdiv">
+                    <label>
+                        <input type="checkbox">
+
+                    <span class="textcheck">I confirm that my data will be processed in accordance with the privacy policy.</span>
+                    </label>
+                </div>
+
             <div id="align-helper">
                 <button type="submit">Sign In</button>
-                <a href="#">Create an Account</a>
+                <a href="#">You have an Account?</a>
             </div>
+                
+
         </form>
     </div>
     <div id="content-right" class="hero">

@@ -5,14 +5,15 @@
 }
 
 #content-left h1 {
-    font-size: 40px;
-    font-weight: bold;
+    font-family: var(--main-font);
+    font-size: 80px;
+    font-weight: 900;
     color: var(--button-color);
 }
 
 #content-left p {
-    font-weight: lighter;
-    font-size: 25px;
+    font-weight: 700;
+    font-size: 30px;
     margin-top: 2.6rem;
     margin-bottom: 3.3rem;
     text-wrap: wrap;
@@ -40,10 +41,6 @@
     background-color: var(--button-hover);
 }
 
-#content-right img {
-    width: 54.7rem;
-    height: 54.7rem;
-}
 
 @media screen and (max-width: 1110px) {
     #content-main {
