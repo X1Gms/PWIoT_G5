@@ -1,0 +1,136 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+:root {
+  font-size: 62.5%;
+  --primary-color: #c4ebdf;
+  --button-color: #05b780;
+  --text-color: #032e20;
+  --gray-box: #e5e5e5;
+  --gray-box-text: #777575;
+}
+
+body {
+  font-family: "Mulish", sans-serif;
+  font-size: 1.6rem;
+  padding: 0;
+  min-height: 100vh;
+  margin: 0;
+  max-width: none;
+}
+
+header {
+  margin-bottom: 10rem;
+}
+
+.content-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px 20px;
+}
+
+.login-form {
+  align-self: center;
+  width: 100%;
+  max-width: 60rem;
+  height: 70rem;
+  padding: calc(10px + 3vw);
+  border-radius: 3.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #ffffff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+.login-form h2 {
+  font-size: 4rem;
+  font-weight: bold;
+  color: var(--text-color);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.login-form form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.6rem;
+}
+
+.login-form fieldset {
+  border: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  justify-content: flex-start;
+  max-width: 25em;
+  width: 100%;
+}
+
+.login-form label {
+  font-size: 2rem;
+  display: block;
+  color: var(--text-color);
+  font-weight: 500;
+}
+
+.login-form input {
+  font-size: 2rem;
+  padding-left: 1rem;
+  width: 100%;
+  background-color: var(--gray-box);
+  padding-left: 3.6rem;
+}
+
+.login-form input::placeholder {
+  color: var(--gray-box-text);
+}
+
+.login-form input,
+button {
+  height: 6rem;
+  border-radius: 1.4rem;
+  border: none;
+}
+
+.login-form button {
+  max-width: 28rem;
+  width: 100%;
+  margin-top: 4.2rem;
+  font-size: 2.4rem;
+  font-weight: bold;
+  background-color: #777575;
+  color: #ffffff;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.login-form button:hover {
+  filter: brightness(0.8);
+}
+
+.login-form > a {
+  font-size: 2rem;
+  display: inline-block;
+  margin-top: 0.8rem;
+  color: var(--button-color);
+}
+
+.login-form > a:hover {
+  text-decoration: underline;
+}
+
+/* Css for (i) icon on current password */
+body > main > div > form > fieldset:nth-child(3) > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

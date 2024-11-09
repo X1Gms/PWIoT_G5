@@ -1,0 +1,116 @@
+/*
+ This file is also used for the register.html
+*/
+
+.login-form {
+  width: 40rem;
+  padding: 4.6rem;
+  border-radius: 3.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #ffffff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+.login-form h2 {
+  font-size: 4rem;
+  font-weight: bold;
+  color: var(--text-color);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.login-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.login-form fieldset {
+  border: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  justify-content: flex-start;
+}
+
+.login-form label {
+  font-size: 20px;
+  display: block;
+  color: var(--text-color);
+  font-weight: 500;
+}
+
+.login-form input[type="text"],
+.login-form input[type="email"],
+.login-form input[type="password"] {
+  font-size: 2rem;
+  padding-left: 2rem;
+  background-color: #d8f0e8;
+  border: 0px;
+}
+
+.login-form input[type="text"]:focus,
+.login-form input[type="email"]:focus,
+.login-form input[type="password"]:focus {
+  outline: solid 3px var(--button-hover);
+}
+
+.login-form input[type="text"]::placeholder,
+.login-form input[type="email"]::placeholder,
+.login-form input[type="password"]::placeholder {
+  color: #69b29a;
+}
+
+.login-form input[type="text"],
+.login-form input[type="email"],
+.login-form input[type="password"],
+.button {
+  height: 6rem;
+  border-radius: 1.4rem;
+  border: none;
+  width: 100%;
+}
+
+.login-form .button {
+  margin-top: 4.2rem;
+  font-size: 2.4rem;
+  font-weight: bold;
+  background-color: var(--button-color);
+  color: #ffffff;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-form .button:hover {
+  background-color: var(--button-hover);
+}
+
+.login-form a {
+  font-size: 2rem;
+  display: inline-block;
+  margin-top: 0.8rem;
+  color: var(--button-color);
+}
+
+input[type="checkbox"] {
+  /* Fallback for browsers that don't support accent-color */
+  width: 25px; /* Customize size if needed */
+  height: 25px;
+  border-radius: 5px;
+  border-color: #05b780;
+}
+
+.textcheck {
+  font-family: var(--main-font), sans-serif;
+}
+
+/* @media screen and (max-width:1110px) {
+    #content-main {
+        flex-direction: column;
+    }
+} */

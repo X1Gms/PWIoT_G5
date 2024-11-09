@@ -1,0 +1,201 @@
+.nav:not(.nav-context) {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+.nav-hamb {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 6rem;
+  height: 5rem;
+  padding: 0;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.nav-hamb .bar {
+  width: 100%;
+  height: 0.9rem;
+  background-color: #918f8f;
+  border-radius: 20rem;
+  transition: transform 0.3s ease;
+}
+
+.neo-nav {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  padding: 15px calc(10px + 3vw) 0 calc(10px + 3vw);
+}
+
+.logo {
+  height: 9.4rem;
+  width: 9.4rem;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 5px solid var(--primary-color);
+}
+
+.logo p {
+  font-size: 4.5rem;
+  font-family: "Lobster", sans-serif;
+}
+
+main {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+}
+
+#copyright {
+  margin-top: auto;
+  font-size: 2rem;
+  color: #a1b7b0;
+}
+
+/* NavBar Experimental Code */
+
+.night {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  background: #00000036;
+  display: none;
+}
+
+.night.enable {
+  display: block;
+}
+
+.nav-context {
+  position: fixed;
+  justify-content: space-between;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 280px;
+  border-top-right-radius: 2rem;
+  border-bottom-right-radius: 2rem;
+  z-index: 1;
+  background-color: #ffffff;
+}
+
+.nav-context h2 {
+  font-family: "Inter", sans-serif;
+  justify-content: center;
+  display: flex;
+  margin-top: 7rem;
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.nav-context hr {
+  border-radius: 20px;
+  border: none;
+  margin-top: 1.2rem;
+  margin-right: auto;
+  margin-left: auto;
+  display: block;
+  width: 24.4rem;
+  height: 0.5rem;
+  background: #d9d9d9;
+  margin-bottom: 50px;
+}
+
+.nav-copyright {
+  font-family: "Mulish", sans-serif;
+  font-size: 2rem;
+  color: #a9a9a9;
+  bottom: 4.6rem;
+  position: absolute;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: 2rem;
+}
+
+.nav-context > a {
+  width: 24rem;
+  height: 6rem;
+  display: flex;
+  position: absolute;
+  bottom: 11.6rem;
+  left: 2rem;
+  font-family: "Inter", sans-serif;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1.5rem;
+  background-color: #9f9f9f;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 2.5rem;
+}
+
+.nav-context ul {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-left: 4.4rem;
+}
+
+.nav-context ul li > a {
+  font-size: 2.5rem;
+  font-family: "Inter", sans-serif;
+  font-weight: bold;
+  color: #000000;
+  display: flex;
+  gap: 1.6rem;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.nav-context ul li {
+  list-style: none;
+}
+
+.hidden {
+  position: relative;
+  pointer-events: none;
+  display: none;
+  z-index: 0;
+  /* hide pls*/
+}
+
+.equis {
+  position: absolute;
+  cursor: pointer;
+  right: 20px;
+  top: 20px;
+  color: var(--text-color);
+}
+
+.list-bar {
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: aqua;
+}
+
+.list-bar > svg {
+  fill: #9f9f9f;
+}
+
+.list-bar.enable {
+  background: linear-gradient(to bottom right, #dfdbdb, #9f9f9f);
+}
+
+.list-bar.enable > svg {
+  fill: #fff;
+}
