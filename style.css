@@ -1,5 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Lobster&family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lobster&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -14,6 +13,8 @@
   --text-color: #032e20;
   --button-hover: #00825a;
   --main-font: "Mulish", sans-serif;
+  --inter: "Inter", sans-serif;
+  --lobster: "Lobster", sans-serif;
 }
 
 body {
@@ -41,6 +42,7 @@ header {
   align-items: center;
   border: 5px solid var(--primary-color);
   cursor: pointer;
+  background-color: #fff;
 }
 
 .logo p {
