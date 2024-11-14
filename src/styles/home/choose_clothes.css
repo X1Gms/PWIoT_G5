@@ -1,0 +1,53 @@
+h4,h1{
+    font-family: 'Mulish', sans-serif;
+}
+.clothes, .clothes-item{
+    display: flex;
+}
+.clothes{
+    font-size: 2.5rem;
+    /* margin-top: 7rem; */
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.clothes-item{
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    flex-basis: 33.33%;
+    padding: 1.5rem;
+    /* Development code */
+}
+.clothes-item img{
+    width: 7.5rem;
+    height: 7.5rem;
+}
+.img-background{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    height: 10rem;
+    width: 10rem;
+    background-color: #A1CEF3
+}
+
+section>h1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--button-color);
+    font-size: 5rem;
+    font-weight: 900;
+}
+
+.clothes-item h4{
+    font-size: 2.5rem;
+}
+
+nav{
+    display: block;
+    position: absolute;
+}
+
