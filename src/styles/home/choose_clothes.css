@@ -1,0 +1,80 @@
+h4,h1{
+    font-family: 'Mulish', sans-serif;
+}
+.clothes, .clothes-item{
+    display: flex;
+}
+.clothes{
+    font-size: 2.5rem;
+    /* margin-top: 7rem; */
+    flex-direction: row;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    flex-wrap: wrap;
+}
+.clothes-item{
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    flex-basis: 33.33%;
+    padding: 1.5rem;
+}
+.clothes-item img{
+    width: 7.5rem;
+    height: 7.5rem;
+}
+.img-background{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    height: 12rem;
+    width: 12rem;
+    background-color: #A1CEF3
+}
+
+section>h1{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 7rem;
+    color: var(--button-color);
+    font-size: 5rem;
+    font-weight: 900;
+}
+
+.clothes-item h4{
+    text-wrap: nowrap;
+    font-size: 2.5rem;
+}
+
+nav{
+    display: block;
+    position: absolute;
+}
+
+.holder{
+    max-width: 80rem;
+}
+
+section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.clothes-item:nth-child(4n + 1) > .img-background {
+    background-color: #A1CEF3;
+}
+.clothes-item:nth-child(4n + 2) > .img-background {
+    background-color: #90F897;
+}
+.clothes-item:nth-child(4n + 3) > .img-background{
+    background-color: #FFBBBB;
+}
+.clothes-item:nth-child(4n + 4) > .img-background{
+    background-color: #E8F890;
+}
