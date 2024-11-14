@@ -8,16 +8,17 @@ h4,h1{
     font-size: 2.5rem;
     /* margin-top: 7rem; */
     flex-direction: row;
+    gap: 0;
+    margin: 0;
+    padding: 0;
     flex-wrap: wrap;
 }
-
 .clothes-item{
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     flex-basis: 33.33%;
     padding: 1.5rem;
-    /* Development code */
 }
 .clothes-item img{
     width: 7.5rem;
@@ -35,6 +36,7 @@ h4,h1{
 
 section>h1{
     display: flex;
+    width: 100%;
     justify-content: center;
     align-items: center;
     margin-bottom: 7rem;
@@ -75,4 +77,116 @@ section{
 }
 .clothes-item:nth-child(4n + 4) > .img-background{
     background-color: #E8F890;
+}
+
+@media screen and (max-width: 280px){
+    .clothes-item{
+        flex-basis: 50%;
+    }
+    .clothes{
+        flex-direction: column;
+    }
+    body{
+        display:  flex;
+        align-items: center;
+        overflow-y: scroll;
+        width: 100vw;
+        justify-content:  center;
+    }
+}
+
+@media screen and (min-width: 281px) and (max-width: 900px){
+    .clothes-item{
+        flex-basis: 50%;
+    }
+    section{
+        justify-content: center;
+    }
+}
+
+@media screen and (max-width: 900px) {
+  .clothes-item {
+    flex-basis: 25%;
+  }
+  .clothes {
+    flex-direction: row;
+  }
+  section {
+    justify-content: space-between;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .clothes-item {
+    flex-basis: 33.33%;
+  }
+  .clothes {
+    flex-direction: row;
+  }
+  section {
+    justify-content: space-around;
+  }
+  body{
+    overflow-x: hidden;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .clothes-item {
+    flex-basis: 50%;
+  }
+  .clothes {
+    flex-direction: row;
+  }
+  section {
+    justify-content: space-around;
+  }
+    body{
+    overflow-x: hidden;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .clothes-item {
+    flex-basis: 50%;
+  }
+  .clothes {
+    flex-direction: column;
+  }
+  section {
+    justify-content: center;
+  }
+  body{
+    overflow-x: hidden;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .clothes-item {
+    flex-basis: 100%;
+  }
+  .clothes {
+    flex-direction: column;
+  }
+  section {
+    justify-content: center;
+  }
+  body{
+    overflow-x: hidden;
+  }
+}
+
+@media screen and (max-width: 280px) {
+  .clothes-item {
+    flex-basis: 100%;
+  }
+  .clothes {
+    flex-direction: column;
+  }
+  section {
+    justify-content: center;
+  }
+  body{
+    overflow-x: hidden;
+  }
 }
