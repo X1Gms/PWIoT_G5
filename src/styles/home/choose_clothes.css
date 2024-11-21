@@ -14,7 +14,218 @@ nav {
   width: 100%;
 }
 
+main {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
+aside.filter {
+  min-height: 25em;
+  max-width: 300px;
+  width: 100%;
+  box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 0 20px 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 15px 30px 15px;
+}
+
+aside.all_clothes {
+  min-height: 25em;
+  max-width: 300px;
+  width: 100%;
+  box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 20px 0 0 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 15px 30px 15px;
+  position: relative;
+  bottom: 0;
+  align-self: flex-end;
+}
+
+#Set_Clothes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  display: none;
+}
+
+.img_clothes {
+  height: 90px;
+  width: 90px;
+  background: #91e0c8;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0 20px 0;
+}
+
+.img_clothes > img {
+  width: 50px;
+  height: 50px;
+}
+
+.clothes_list {
+  max-width: 260px;
+  width: 100%;
+  min-height: 500px;
+  margin: 20px 0 20px 0;
+  border-radius: 15px;
+  background: #f1faf7;
+  padding: 15px;
+}
+
+h2 {
+  font-size: 20px;
+}
+
+.dropdown {
+  width: 100%;
+  max-width: 230px;
+}
+
+input[type="text"],
+.dropdown-box,
+.dpt_name,
+.mdropdown-box {
+  margin-top: 30px;
+  max-width: 230px;
+  width: 100%;
+  height: 45px;
+  padding: 0px 15px 0px 20px;
+  border-radius: 10px;
+  border: none;
+  background: #d8f0e8;
+  font-weight: 700;
+  font-size: 17px;
+}
+
+input[type="text"]::placeholder {
+  color: #69b29a;
+  font-family: "Mulish", sans-serif;
+}
+
+input[type="text"]:focus {
+  outline: var(--button-hover) solid;
+}
+
+#S_Dropdowns {
+  width: 100%;
+  max-width: 230px;
+}
+
+.dropdown-box,
+.dpt_name,
+.mdropdown-box {
+  display: flex;
+  align-items: center;
+  color: #69b29a;
+  justify-content: space-between;
+  border-radius: 10px;
+}
+
+.dpt_name {
+  background: var(--button-color);
+  color: #fff;
+  margin-top: 0px;
+}
+
+.dpt {
+  margin-top: 0px;
+  margin-bottom: 30px;
+}
+
+.dropdown-box.enable,
+.dpt_name.enable,
+.mdropdown-box.enable {
+  border-radius: 10px 10px 0px 0px;
+}
+
+#Set_Clothes .mdropdown-box,
+#Set_Clothes .dropdown-box {
+  margin-top: 0;
+}
+
+#Set_Clothes .dropdown,
+#Set_Clothes input[type="text"] {
+  margin-top: 0;
+  margin-bottom: 30px;
+}
+
+.dpt_desc {
+  padding: 10px;
+  background: #d8f0e8;
+  font-size: 14px;
+  border-radius: 0px 0px 20px 20px;
+  color: #69b29a;
+}
+
+.dpt_desc_edit {
+  display: flex;
+  justify-content: center;
+  font-size: 17px;
+  gap: 10px;
+  font-weight: 700;
+  color: var(--button-color);
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.dpt_desc_edit > span {
+  font-size: 20px;
+}
+
+.submit {
+  width: 100%;
+  max-width: 260px;
+  background: var(--button-hover);
+  height: 60px;
+  color: #fff;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.dropdown-list {
+  display: none;
+  max-height: 120px;
+  background: #e8f3f0;
+  overflow-y: auto;
+  border-radius: 0 0 20px 20px;
+}
+
+.dropdown-list.enable {
+  display: block;
+}
+
+.dropdown-list::-webkit-scrollbar {
+  width: 9px;
+}
+
+.dl-item {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  font-weight: 700;
+}
+
+.dl-item:hover {
+  background: var(--button-color);
+  color: #fff;
+}
+
 h4,
+h2,
 h1 {
   font-family: "Mulish", sans-serif;
   text-align: center;
@@ -25,7 +236,6 @@ h1 {
 }
 .clothes {
   font-size: 2.5rem;
-  justify-content: center;
   flex-direction: row;
   gap: 0;
   margin: 0;
@@ -39,6 +249,8 @@ h1 {
   align-items: center;
   width: 200px;
   padding: 1.5rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 .clothes-item img {
   width: 7.5rem;
@@ -71,6 +283,10 @@ section > h1 {
 
 .holder {
   max-width: 80rem;
+  height: 574px;
+  overflow-y: auto;
+  display: flex;
+  align-items: center;
 }
 
 section {

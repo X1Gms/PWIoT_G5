@@ -1,4 +1,6 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lobster&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lobster&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined");
+
 * {
   margin: 0;
   padding: 0;
@@ -98,4 +100,36 @@ a:hover {
   #homepage {
     justify-content: center;
   }
+}
+
+/*Scrollbar*/
+
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border-radius: 100px;
+  background: var(--button-color);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--button-hover);
+}
+
+.arrow {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  transform: rotate(-180deg);
+  transition: transform 0.5s ease;
+  user-select: none;
+}
+
+.arrow.rotate {
+  transform: rotate(0);
 }

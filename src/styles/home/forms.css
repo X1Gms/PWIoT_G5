@@ -108,9 +108,3 @@ input[type="checkbox"] {
 .textcheck {
   font-family: var(--main-font), sans-serif;
 }
-
-/* @media screen and (max-width:1110px) {
-    #content-main {
-        flex-direction: column;
-    }
-} */
