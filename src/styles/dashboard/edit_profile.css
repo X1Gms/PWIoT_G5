@@ -134,3 +134,24 @@ body > main > div > form > fieldset:nth-child(3) > div {
   justify-content: space-between;
   align-items: center;
 }
+
+#error{
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  margin: 1rem 3rem;
+  font-family: 'Mulish', sans-serif;
+  font-size: 2.4rem;
+}
+
+.red{
+  background-color: #AE809A;
+  color: #F0D8E8;
+}
+
+.green{
+  color: #69b29a;
+  background-color: #d8f0e0;
+}
+

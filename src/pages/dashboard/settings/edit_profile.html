@@ -176,6 +176,7 @@
       <div class="night"></div>
       <div class="login-form">
         <h2>Edit Profile</h2>
+        <div id="error"  class=""><p>Dados Inválidos, verifique-os</p></div>
         <form action="" method="post">
           <fieldset>
             <label for="name">Name</label>
@@ -197,9 +198,9 @@
           </fieldset>
           <fieldset>
             <div>
-              <label for="password">Current Password</label>
+              <label for="password">New Password</label>
               <a
-                title="Verify your current password in order to apply the changes"
+                title="A new password is optional. If you wish to change, include at least 8 characters, 1 uppercase, 1 lowercase and 1 special character"
               >
                 <svg
                   width="23"
@@ -225,9 +226,8 @@
             </div>
             <input
               type="password"
-              id="password"
-              placeholder="Insert Your Password"
-              required
+              id="new-password"
+              placeholder="Fill for a new password"
             />
           </fieldset>
           <fieldset>
@@ -235,7 +235,7 @@
             <input
               type="password"
               id="password"
-              placeholder="Insert Your Password"
+              placeholder="Insert your password"
               required
             />
           </fieldset>
