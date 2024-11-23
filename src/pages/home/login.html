@@ -21,14 +21,15 @@
       <div id="homepage">
         <div id="content-left" class="login-form">
           <h2>Login</h2>
-          <form action="" method="post">
+          <form id="login-form" action="" method="post">
+            <div class="validation-error"></div>
             <fieldset>
               <label for="email">E-mail</label>
               <input
                 type="email"
                 id="email"
+                name="email"
                 placeholder="Insert Your E-mail"
-                required
               />
             </fieldset>
             <fieldset>
@@ -36,15 +37,12 @@
               <input
                 type="password"
                 id="password"
+                name="password"
                 placeholder="Insert Your Password"
-                required
               />
             </fieldset>
             <div id="align-helper">
-              <!-- <button class="button" type="submit">Sign In</button> -->
-              <a href="welcome.html" class="button" style="color: #fff"
-                >Sign In</a
-              >
+              <button class="button" type="submit">Sign In</button>
               <a href="./register.html">Create an Account</a>
             </div>
           </form>
@@ -59,5 +57,6 @@
     <div id="copyright">
       <p>&copy; Group 5 PWDAM 2024/2026</p>
     </div>
+    <script type="module" src="./../../js/home/login.js"></script>
   </body>
 </html>
