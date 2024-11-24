@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Lobster&family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined");
 
 * {
   margin: 0;
@@ -89,8 +90,8 @@ th {
 
 /* Linhas do corpo da tabela */
 td {
-  padding: 40px;
   text-align: center;
+  height: 110px;
 }
 
 /* Linha escura */
@@ -116,7 +117,7 @@ body > main > div > form > fieldset:nth-child(3) > div {
 .button-container {
   display: flex;
   gap: 30px;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
   margin-right: auto;
   padding-left: 30px;
   flex-wrap: wrap;
@@ -144,165 +145,111 @@ body > main > div > form > fieldset:nth-child(3) > div {
   border: 2px solid #bcbcbc; /* Borda cinzenta */
 }
 
-.button-new-container {
-  display: flex;
-  gap: 30px;
-  margin-bottom: 20px;
-  margin-right: auto;
-  padding-left: 30px;
-  flex-wrap: wrap;
-}
-
-.add-button{
-  background-color: #777575;
-  color: #ffffff;
-}
-
-.overlay{
-  z-index: 2;
-  position: fixed;
+.popup {
   display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  width: 300px;
+  text-align: center;
+  z-index: 1000;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* Botão de fechar maior */
+.popup .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 34px; /* Aumentar tamanho do botão de fechar */
+  font-weight: bold;
+}
+
+/* Estilo para o ícone de sucesso */
+.popup .success-icon {
+  font-size: 80px; /* Tamanho do ícone de certo */
+  color: gray;
+  margin-bottom: 10px;
+  border: 15px solid gray; /* Adicionar um círculo ao redor */
+  border-radius: 50%; /* Deixar o círculo perfeitamente arredondado */
+  width: 140px; /* Largura igual à altura */
+  height: 140px; /* Altura igual à largura */
+  display: inline-flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 100%;
+}
+
+/* Estilos para o overlay (fundo escuro) */
+.overlay {
+  display: none;
+  position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.2)
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
 }
 
-.error-box{
-  font-family: 'Inter', sans-serif;
-  font-weight: bold;
+.deletePopup {
   display: none;
-  position: relative;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  width: 300px;
   text-align: center;
-  height: 40vh;
-  border-radius: 15px;
-  width: 40vh;
-  background-color: #ffffff;
-}
-.error-box p{
-  font-size: 3.2rem;
-  padding: 0 3px;
-}
-.error-box svg{
-  margin-bottom: 20px;
-}
-
- #close-overlay{
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  cursor: pointer;
-}
-
-.form-holder {
-  height: 70vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  overflow-y: auto;
-  width: 60rem;
-  font-family: 'Inter',sans-serif;
-  background-color: #ffffff;
-}
-.form-holder form label{
-  display: block;
-  font-family: 'Inter',sans-serif;
-  font-size: 1.7rem;
-}
-.form-cloth-img img{
-  height: 8rem;
-  width: 8rem;
-}
-
-.img-box{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #E5E5E5;
-  border-radius: 50%;
-  height: 12rem;
-  width: 12rem;
-}
-
-.img-box img{
-  border-radius: 50%;
-}
-
-fieldset {
-  margin-inline-start: 0;
-  margin-inline-end: 0;
-  padding-block-start: 0;
-  padding-block-end: 0;
-  padding-inline-start: 0;
-  padding-inline-end: 0;
-  border: none;
-  min-inline-size: min-content;
-}
-
-.form-holder form input{
-  background-color: #E5E5E5;
-  font-family: 'Inter',sans-serif;
-  font-size: 2rem;
-  margin-bottom: 15px;
-  height: 4.5rem;
-  width: 30rem;
-  border: none;
-  border-radius: 15px;
-  padding-left: 30px;
-  color: #000000;
-}
-
-.form-holder form select{
-  font-family: 'Mulish',sans-serif;
-  font-size: 2rem;
+  z-index: 1000;
+  font-size: 14px;
   font-weight: bold;
-  margin-top: 15px;
-  padding-left: 3rem;
-  margin-bottom: 15px;
-  background-color: #E5E5E5;
-  width: 30rem;
-  border-radius: 15px;
-  border:none;
-  height: 4.5rem;
-
 }
 
-.wrap-center{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-}
-
-.form-holder form button{
-  margin-top: 15px;
-
-}
-
-.wrap-center button{
-  border-radius: 20px;
-  font-size: 3rem;
-  font-family: 'Inter',sans-serif;
-  color: #FFFFFF;
-  text-align: center;
-  height: 6rem;
+/* Estilos para os botões "Sim" e "Não" */
+.confirm-btn {
+  background-color: red;
+  color: white;
   border: none;
-  width: 30rem;
+  padding: 20px 30px;
+  margin-right: 10px;
+  cursor: pointer;
+  border-radius: 10px;
+  font-weight: bold;
+}
+.close-btnn {
+  display: none;
 }
 
-.light-background{
-  background-color: #BCBCBC;
+.cancel-btn {
+  background-color: gray;
+  color: white;
+  border: none;
+  padding: 20px 30px;
+  cursor: pointer;
+  border-radius: 10px;
+  font-weight: bold;
 }
 
-.dark-background{
-  background-color: #444343;
+/* Estilos para o overlay (fundo escuro) */
+.overlayDelete {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
 }
