@@ -21,14 +21,16 @@
       <div id="homepage">
         <div id="content-left" class="login-form">
           <h2>Register</h2>
-          <form action="./login.html" method="post">
+          <form id="register-form" action="./login.html" method="post">
+            <div class="validation-error"></div>
+
             <fieldset>
               <label for="name">Name</label>
               <input
                 type="text"
                 id="name"
+                name="name"
                 placeholder="Insert Your Name"
-                required
               />
             </fieldset>
 
@@ -37,8 +39,8 @@
               <input
                 type="email"
                 id="email"
+                name="email"
                 placeholder="Insert Your E-mail"
-                required
               />
             </fieldset>
 
@@ -48,7 +50,7 @@
                 type="password"
                 id="password"
                 placeholder="Insert Your Password"
-                required
+                name="password"
               />
             </fieldset>
 
@@ -57,14 +59,16 @@
               <input
                 type="password"
                 id="Cpassword"
+                name="confirm-password"
                 placeholder="Confirm Your Password"
-                required
               />
             </fieldset>
 
             <div class="checkboxdiv">
               <label>
-                <input type="checkbox" required />
+
+                <input type="checkbox" name="terms" />
+
                 <span class="textcheck"
                   >I confirm that my data will be processed in accordance with
                   the privacy policy.</span
@@ -90,5 +94,6 @@
     <div id="copyright">
       <p>&copy; Group 5 PWDAM 2024/2026</p>
     </div>
+    <script type="module" src="./../../js/home/register.js"></script>
   </body>
 </html>

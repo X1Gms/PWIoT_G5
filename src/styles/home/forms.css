@@ -101,6 +101,14 @@ body {
   color: var(--button-color);
 }
 
+.validation-error {
+  display: none;
+  border-radius: 1.4rem;
+  padding: 1.2rem;
+  color: white;
+  background-color: rgba(255, 0, 0, 0.7);
+}
+
 input[type="checkbox"] {
   /* Fallback for browsers that don't support accent-color */
   width: 25px; /* Customize size if needed */
