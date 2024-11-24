@@ -121,6 +121,7 @@ main {
   align-items: center;
   justify-content: center;
   left: 2rem;
+  max-width: 240px;
 }
 
 .nav-context > a {

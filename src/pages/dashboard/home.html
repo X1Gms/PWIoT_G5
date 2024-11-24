@@ -4,8 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../../../style.css" />
-    <link rel="stylesheet" href="../../styles/dashboard/home.css" />
+
     <link rel="stylesheet" href="../../styles/dashboard/navbar.css" />
+    <link rel="stylesheet" href="../../styles/dashboard/home.css" />
+    <script src="/src/js/dashboard/edit_profile.js"></script>
     <link
       rel="shortcut icon"
       href="/public/imgs/logo/logo.png"
@@ -15,6 +17,7 @@
     <title>WearWeather</title>
   </head>
   <body>
+    <div class="night"></div>
     <div class="hidden">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -33,7 +36,7 @@
       <ul>
         <li>
           <a href="../home.html">
-            <div class="list-bar">
+            <div class="list-bar enable">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="37"
@@ -62,7 +65,7 @@
           </a>
         </li>
         <li>
-          <a href="./edit_profile.html">
+          <a href="./settings/edit_profile.html">
             <div class="list-bar">
               <svg
                 width="37"
@@ -93,7 +96,7 @@
           </a>
         </li>
         <li>
-          <a href="">
+          <a href="./settings/choose_clothes.html">
             <div class="list-bar">
               <svg
                 width="37"
@@ -124,8 +127,8 @@
           </a>
         </li>
         <li>
-          <a href="./account.html">
-            <div class="list-bar enable">
+          <a href="./settings/account.html">
+            <div class="list-bar">
               <svg
                 width="37"
                 height="37"
@@ -158,7 +161,6 @@
       <a href="/index.html">Sign Out</a>
       <p class="nav-copyright">&copy; Group 5 PWDAM 2024/2026</p>
     </div>
-
     <div class="neo-nav">
       <div class="logo">
         <p>G5</p>
@@ -168,187 +170,189 @@
         ><span class="bar"></span>
       </div>
     </div>
-    <main>
-      <section>
-        <div class="weather-status">
-          <div class="weather-info">
-            <div class="weather-info-container">
-              <div class="weather-status_text">
-                <h2>Weather</h2>
-                <h5>Sunny</h5>
-                <h1>25ºC</h1>
-              </div>
-              <div class="weather-status_image">
-                <img src="/public/imgs/weather/sunny.png" alt="" height="125" />
-              </div>
-            </div>
-          </div>
-          <div class="recommendation-main">
-            <div class="clothe-type">
-              <div class="event-type active">
-                <p>Any</p>
-              </div>
-              <div class="event-type">
-                <p>Walk</p>
-              </div>
-              <div class="event-type">
-                <p>Business</p>
-              </div>
-              <div class="event-type">
-                <p>Academic</p>
-              </div>
-              <div class="event-type">
-                <p>Running</p>
+    <div class="page">
+      <main>
+        <section>
+          <div class="weather-status">
+            <div class="weather-info">
+              <div class="weather-info-container">
+                <div class="weather-status_text">
+                  <h2>Weather</h2>
+                  <h5>Sunny</h5>
+                  <h1>25ºC</h1>
+                </div>
+                <div class="weather-status_image">
+                  <img src="/public/imgs/weather/sunny.png" alt="" />
+                </div>
               </div>
             </div>
-            <div class="recommendations">
-              <h4>Recommendations</h4>
-              <div class="recommendations_options">
-                <div class="recommendations_option">
-                  <div class="recommendations_option_text">
-                    <h4>1st Option:</h4>
-                  </div>
-                  <div class="recommendations_option_clothes">
-                    <div class="clothes_item">
-                      <div class="clothes_image">
-                        <img
-                          src="/public/imgs/clothes/t-shirt.png"
-                          alt="T-Shirt Image"
-                          height="60"
-                        />
+            <div class="recommendation-main">
+              <div class="clothe-type">
+                <div class="event-type active">
+                  <p>Any</p>
+                </div>
+                <div class="event-type">
+                  <p>Walk</p>
+                </div>
+                <div class="event-type">
+                  <p>Business</p>
+                </div>
+                <div class="event-type">
+                  <p>Academic</p>
+                </div>
+                <div class="event-type">
+                  <p>Running</p>
+                </div>
+              </div>
+              <div class="recommendations">
+                <h4>Recommendations</h4>
+                <div class="recommendations_options">
+                  <div class="recommendations_option">
+                    <div class="recommendations_option_text">
+                      <h4>1st Option:</h4>
+                    </div>
+                    <div class="recommendations_option_clothes">
+                      <div class="clothes_item">
+                        <div class="clothes_image">
+                          <img
+                            src="/public/imgs/clothes/t-shirt.png"
+                            alt="T-Shirt Image"
+                            height="60"
+                          />
+                        </div>
                         <h4>T-Shirt</h4>
                       </div>
-                    </div>
-                    <div class="plus">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="18"
-                        height="18"
-                        viewBox="0 0 18 18"
-                        fill="none"
-                      >
-                        <path
-                          d="M8 18V10H0V8H8V0H10V8H18V10H10V18H8Z"
-                          fill="#1C1B1F"
-                        />
-                      </svg>
-                    </div>
-                    <div class="clothes_item">
-                      <div class="clothes_image">
-                        <img
-                          src="/public/imgs/clothes/shorts.png"
-                          alt="Shorts Image"
-                          height="60"
-                        />
+                      <div class="plus">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="18"
+                          height="18"
+                          viewBox="0 0 18 18"
+                          fill="none"
+                        >
+                          <path
+                            d="M8 18V10H0V8H8V0H10V8H18V10H10V18H8Z"
+                            fill="#1C1B1F"
+                          />
+                        </svg>
+                      </div>
+                      <div class="clothes_item">
+                        <div class="clothes_image">
+                          <img
+                            src="/public/imgs/clothes/shorts.png"
+                            alt="Shorts Image"
+                            height="60"
+                          />
+                        </div>
                         <h4>Shorts</h4>
                       </div>
                     </div>
                   </div>
-                </div>
-                <hr />
-                <div class="recommendations_option">
-                  <div class="recommendations_option_text">
-                    <h4>2nd Option:</h4>
-                  </div>
-                  <div class="recommendations_option_clothes">
-                    <div class="clothes_item">
-                      <div class="clothes_image">
-                        <img
-                          src="/public/imgs/clothes/t-shirt.png"
-                          alt="T-Shirt Image"
-                          height="60"
-                        />
+                  <hr />
+                  <div class="recommendations_option">
+                    <div class="recommendations_option_text">
+                      <h4>2nd Option:</h4>
+                    </div>
+                    <div class="recommendations_option_clothes">
+                      <div class="clothes_item">
+                        <div class="clothes_image">
+                          <img
+                            src="/public/imgs/clothes/t-shirt.png"
+                            alt="T-Shirt Image"
+                            height="60"
+                          />
+                        </div>
                         <h4>T-Shirt</h4>
                       </div>
-                    </div>
-                    <div class="plus">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="18"
-                        height="18"
-                        viewBox="0 0 18 18"
-                        fill="none"
-                      >
-                        <path
-                          d="M8 18V10H0V8H8V0H10V8H18V10H10V18H8Z"
-                          fill="#1C1B1F"
-                        />
-                      </svg>
-                    </div>
-                    <div class="clothes_item">
-                      <div class="clothes_image">
-                        <img
-                          src="/public/imgs/clothes/pants.png"
-                          alt="Pants Image"
-                          height="60"
-                        />
+                      <div class="plus">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="18"
+                          height="18"
+                          viewBox="0 0 18 18"
+                          fill="none"
+                        >
+                          <path
+                            d="M8 18V10H0V8H8V0H10V8H18V10H10V18H8Z"
+                            fill="#1C1B1F"
+                          />
+                        </svg>
+                      </div>
+                      <div class="clothes_item">
+                        <div class="clothes_image">
+                          <img
+                            src="/public/imgs/clothes/pants.png"
+                            alt="Pants Image"
+                            height="60"
+                          />
+                        </div>
                         <h4>Pants</h4>
                       </div>
                     </div>
                   </div>
-                </div>
-                <hr />
-                <div class="recommendations_option">
-                  <div class="recommendations_option_text">
-                    <h4>3rd Option:</h4>
-                  </div>
-                  <div class="recommendations_option_clothes">
-                    <div class="clothes_item">
-                      <div class="clothes_image">
-                        <img
-                          src="/public/imgs/clothes/t-shirt.png"
-                          alt="T-Shirt Image"
-                          height="60"
-                        />
+                  <hr />
+                  <div class="recommendations_option">
+                    <div class="recommendations_option_text">
+                      <h4>3rd Option:</h4>
+                    </div>
+                    <div class="recommendations_option_clothes">
+                      <div class="clothes_item">
+                        <div class="clothes_image">
+                          <img
+                            src="/public/imgs/clothes/t-shirt.png"
+                            alt="T-Shirt Image"
+                            height="60"
+                          />
+                        </div>
                         <h4>T-Shirt</h4>
                       </div>
-                    </div>
-                    <div class="plus">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="18"
-                        height="18"
-                        viewBox="0 0 18 18"
-                        fill="none"
-                      >
-                        <path
-                          d="M8 18V10H0V8H8V0H10V8H18V10H10V18H8Z"
-                          fill="#1C1B1F"
-                        />
-                      </svg>
-                    </div>
-                    <div class="clothes_item">
-                      <div class="clothes_image">
-                        <img
-                          src="/public/imgs/clothes/shorts.png"
-                          alt="Shorts Image"
-                          height="60"
-                        />
+                      <div class="plus">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="18"
+                          height="18"
+                          viewBox="0 0 18 18"
+                          fill="none"
+                        >
+                          <path
+                            d="M8 18V10H0V8H8V0H10V8H18V10H10V18H8Z"
+                            fill="#1C1B1F"
+                          />
+                        </svg>
+                      </div>
+                      <div class="clothes_item">
+                        <div class="clothes_image">
+                          <img
+                            src="/public/imgs/clothes/shorts.png"
+                            alt="Shorts Image"
+                            height="60"
+                          />
+                        </div>
                         <h4>Shorts</h4>
                       </div>
-                    </div>
-                    <div class="plus">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="18"
-                        height="18"
-                        viewBox="0 0 18 18"
-                        fill="none"
-                      >
-                        <path
-                          d="M8 18V10H0V8H8V0H10V8H18V10H10V18H8Z"
-                          fill="#1C1B1F"
-                        />
-                      </svg>
-                    </div>
-                    <div class="clothes_item">
-                      <div class="clothes_image">
-                        <img
-                          src="/public/imgs/clothes/track_suit_jacket.png"
-                          alt="Track
+                      <div class="plus">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="18"
+                          height="18"
+                          viewBox="0 0 18 18"
+                          fill="none"
+                        >
+                          <path
+                            d="M8 18V10H0V8H8V0H10V8H18V10H10V18H8Z"
+                            fill="#1C1B1F"
+                          />
+                        </svg>
+                      </div>
+                      <div class="clothes_item">
+                        <div class="clothes_image">
+                          <img
+                            src="/public/imgs/clothes/track_suit_jacket.png"
+                            alt="Track
                   Suit Jacket Image"
-                          height="60"
-                        />
+                            height="60"
+                          />
+                        </div>
                         <h4>Track Suit Jacket</h4>
                       </div>
                     </div>
@@ -357,9 +361,9 @@
               </div>
             </div>
           </div>
-        </div>
-      </section>
-      <aside></aside>
-    </main>
+        </section>
+        <aside></aside>
+      </main>
+    </div>
   </body>
 </html>

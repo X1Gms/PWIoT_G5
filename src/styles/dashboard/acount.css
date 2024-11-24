@@ -80,7 +80,7 @@ table {
 
 /* Cabeçalho da tabela */
 th {
-  background-color: #d1d1d1;
+  background-color: #bcbcbc;
   color: white;
   padding: 20px;
   text-align: center;
@@ -97,7 +97,7 @@ td {
 
 /* Linhas claras */
 .linha-clara {
-  background-color: #f1f0f0;
+  background-color: #efefef;
 }
 
 /* Estilo dos ícones */
@@ -133,7 +133,7 @@ body > main > div > form > fieldset:nth-child(3) > div {
 
 /* Estilo do botão Account Management */
 .button-account {
-  background-color: #d1d1d1; /* Cinzento */
+  background-color: #bcbcbc; /* Cinzento */
   color: white;
 }
 
@@ -141,5 +141,5 @@ body > main > div > form > fieldset:nth-child(3) > div {
 .button-secondary {
   background-color: white;
   color: black;
-  border: 2px solid #d1d1d1; /* Borda cinzenta */
+  border: 2px solid #bcbcbc; /* Borda cinzenta */
 }

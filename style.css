@@ -1,9 +1,12 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lobster&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lobster&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined");
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   text-decoration: none;
+  font-family: var(--main-font);
 }
 
 :root {
@@ -21,7 +24,6 @@ body {
   font-family: var(--main-font), sans-serif;
   font-size: 1.6rem;
   max-width: 1400px;
-  padding: 2rem;
   width: 100%;
   margin: 0 auto;
   min-height: 100vh;
@@ -31,6 +33,7 @@ body {
 
 header {
   margin-bottom: 10rem;
+  margin-top: 5rem;
 }
 
 .logo {
@@ -61,6 +64,7 @@ main {
   margin-top: auto;
   font-size: 2rem;
   color: #a1b7b0;
+  margin-bottom: 20px;
 }
 
 #homepage {
@@ -68,7 +72,7 @@ main {
   justify-content: space-between;
   align-self: center;
   width: 100%;
-  flex-wrap: wrap;
+  flex-wrap: wrap-reverse;
   gap: 30px;
   margin: 0 0 50px 0;
 }
@@ -96,4 +100,36 @@ a:hover {
   #homepage {
     justify-content: center;
   }
+}
+
+/*Scrollbar*/
+
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border-radius: 100px;
+  background: var(--button-color);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--button-hover);
+}
+
+.arrow {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  transform: rotate(-180deg);
+  transition: transform 0.5s ease;
+  user-select: none;
+}
+
+.arrow.rotate {
+  transform: rotate(0);
 }

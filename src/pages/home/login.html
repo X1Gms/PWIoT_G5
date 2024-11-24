@@ -21,31 +21,37 @@
       <div id="homepage">
         <div id="content-left" class="login-form">
           <h2>Login</h2>
-          <form id="login-form" action="" method="post">
-            <div class="validation-error"></div>
-            <fieldset>
-              <label for="email">E-mail</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="Insert Your E-mail"
-              />
-            </fieldset>
-            <fieldset>
-              <label for="password">Password</label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                placeholder="Insert Your Password"
-              />
-            </fieldset>
-            <div id="align-helper">
-              <button class="button" type="submit">Sign In</button>
-              <a href="./register.html">Create an Account</a>
-            </div>
-          </form>
+        <form action="./welcome.html" method="post">
+          <fieldset>
+            <label for="email">E-mail</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Insert Your E-mail"
+            />
+          </fieldset>
+          <fieldset>
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Insert Your Password"
+            />
+          </fieldset>
+          <div id="align-helper">
+            <!-- Accepting Flavio's change: Using input for the submit button -->
+            <input
+              type="submit"
+              class="button"
+              style="color: #fff"
+              value="Sign In"
+            />
+            <a href="./register.html">Create an Account</a>
+          </div>
+        </form>
+
         </div>
         <img
           id="content-right"
