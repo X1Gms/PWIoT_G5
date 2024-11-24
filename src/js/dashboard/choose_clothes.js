@@ -340,7 +340,7 @@ const AllClothes = () => {
   document.querySelector("#T-Dropdown").innerHTML =
     selClothes !== ""
       ? selClothes
-      : "<h2 style='color: #69B29A; margin-top: 50%;'>Select clothes to continue</h2>";
+      : "<h2 style='color: #a3a3a3; margin-top: 50%;'>Select clothes to continue</h2>";
 };
 
 const SelClothes = () => {
