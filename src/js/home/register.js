@@ -19,7 +19,7 @@ form.addEventListener("submit", function (e) {
   const confirmPassword = formData.get("confirm-password");
   const confirmTerms = formData.get("terms") === "on" ? true : false;
 
-  const isValidPassword = validator.password(password);
+  const passwordHasError = validator.password(password);
 
   if (!validator.name(name)) {
     error.show("Invalid Name");
@@ -46,8 +46,8 @@ form.addEventListener("submit", function (e) {
     return;
   }
 
-  if (isValidPassword === "string") {
-    error.show(isValidPassword);
+  if (passwordHasError) {
+    error.show(passwordHasError);
     return;
   }
 

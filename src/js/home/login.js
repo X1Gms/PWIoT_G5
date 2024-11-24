@@ -6,10 +6,10 @@ const form = document.querySelector("#login-form");
 const users = [
   {
     email: "flavio@gmail.com",
-    password: "touchmebetter",
+    password: "pass123",
   },
   {
-    email: "gui@brainrot.com",
+    email: "gui@gmail.com",
     password: "amIGui",
   },
 ];

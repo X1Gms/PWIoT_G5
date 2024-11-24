@@ -4,23 +4,23 @@ export const validator = {
     return regex.test(value);
   },
   password(value) {
-    const hasMinLength = /^.{8,}$/.test(password);
+    const hasMinLength = /^.{8,}$/.test(value);
 
-    const hasCapitalAndLowercase = /^(?=.*[A-Z])(?=.*[a-z])/.test(password);
+    const hasCapitalAndLowercase = /^(?=.*[A-Z])(?=.*[a-z])/.test(value);
 
-    const hasNumbersOrSymbols = /^(?=.*[\d@$!%*#?&])/.test(password);
+    const hasNumbersOrSymbols = /[!@#$%^&*(),.?":{}|<>~\[\]\\\/`';+=_-]/.test(value);
 
-    if (hasMinLength) {
+    if (!hasMinLength) {
       return "Should contain at least 8 characters";
     }
-    if (hasCapitalAndLowercase) {
+    if (!hasCapitalAndLowercase) {
       return "Should contain both lowercase and capital letters";
     }
-    if (hasNumbersOrSymbols) {
+    if (!hasNumbersOrSymbols) {
       return "Should contain symbols and numbers";
     }
 
-    return true;
+    return undefined;
   },
   required(value) {
     return value.trim() !== "";
