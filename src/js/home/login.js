@@ -40,16 +40,16 @@ form.addEventListener("submit", function (e) {
     return;
   }
 
-  const userExists = users.find(function (user) {
-    return user.email === email;
-  });
+  // const userExists = users.find(function (user) {
+  //   return user.email === email;
+  // });
 
-  if (!userExists || password !== userExists.password) {
-    error.show("Invalid Credentials");
-    return;
-  }
+  // if (!userExists || password !== userExists.password) {
+  //   error.show("Invalid Credentials");
+  //   return;
+  // }
 
   error.hide();
 
-  window.location.href = "/src/pages/dashboard/home.html";
+  window.location.href = "/src/pages/home/welcome.html";
 });
