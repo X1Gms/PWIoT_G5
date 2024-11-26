@@ -23,10 +23,10 @@ const search = [
   {
     values: [
       "Temperature Range",
-      "-10 - 10ºC",
-      "10 - 20ºC",
-      "20 - 30ºC",
-      "30 - 40ºC",
+      "-10 – 10ºC",
+      "10 – 20ºC",
+      "20 – 30ºC",
+      "30 – 40ºC",
     ],
     arrow: "s_temp",
     dropdown: "TempRange",
@@ -85,10 +85,10 @@ const clothes_attributes = [
   {
     values: [
       "Temperature Range",
-      "-10 - 10ºC",
-      "10 - 20ºC",
-      "20 - 30ºC",
-      "30 - 40ºC",
+      "-10 – 10ºC",
+      "10 – 20ºC",
+      "20 – 30ºC",
+      "30 – 40ºC",
     ],
     arrow: "t_temp",
     dropdown: "T-TempRange",
@@ -672,9 +672,23 @@ const submitClothe = (path, id) => {
   }
 };
 
+var show_class = "";
+
 const CreateClothe = (src, id) => {
   resetNames(clothes_attributes);
   SelClothes();
+
+  if (window.innerWidth < 1201) {
+    const aside = document.querySelector(`.all_clothes`);
+    const night = document.querySelector(".night");
+    const neonav = document.querySelector(".neo-nav");
+
+    neonav.classList.add("enable");
+    night.classList.toggle("enable");
+    aside.classList.toggle("enable");
+
+    show_class = "all_clothes";
+  }
 
   const backup = SelectedClothes;
 
@@ -749,8 +763,6 @@ const showNavbar = () => {
   neoNav.classList.toggle("enable");
 };
 
-var show_class = "";
-
 const showAside = (aside) => {
   const aside01 = document.querySelector(`.${aside}`);
   const night = document.querySelector(".night");
@@ -786,7 +798,7 @@ const showAside = (aside) => {
 
 const SubmitAllClothes = () => {
   if (created_clothes.length > 3) {
-    window.location.href = "/src/pages/home/get-started.html";
+    window.location.href = "/src/pages/dashboard/home.html";
   } else {
     const error = document.querySelector("#validation_all_clothes.error");
     const message = document.querySelector("#validation_all_clothes .message");

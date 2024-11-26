@@ -98,7 +98,6 @@ aside.all_clothes {
   align-items: center;
   padding: 30px 15px 30px 15px;
   position: relative;
-  bottom: 0;
   align-self: flex-end;
   background: #fff;
 }
@@ -205,6 +204,7 @@ section > h1 {
   color: #032e20;
   font-size: 5rem;
   font-weight: 900;
+  margin-top: 3rem;
 }
 
 .clothes-item h4 {
@@ -460,6 +460,10 @@ input[type="text"],
 }
 
 @media (max-width: 1200px) {
+  .holder {
+    height: auto;
+  }
+
   .night {
     top: 0;
     width: 100%;
@@ -492,6 +496,9 @@ input[type="text"],
   aside.all_clothes.enable,
   aside.filter.enable {
     display: flex;
+    max-height: 770px;
+    height: 100%;
+    top: 20px;
   }
 
   main {
