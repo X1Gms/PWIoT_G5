@@ -72,7 +72,8 @@ main {
 }
 
 aside.filter {
-  min-height: 25em;
+  height: 650px;
+  overflow-y: auto;
   max-width: 300px;
   width: 100%;
   box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.2);
@@ -97,7 +98,6 @@ aside.all_clothes {
   align-items: center;
   padding: 30px 15px 30px 15px;
   position: relative;
-  bottom: 0;
   align-self: flex-end;
   background: #fff;
 }
@@ -204,6 +204,7 @@ section > h1 {
   color: var(--button-color);
   font-size: 5rem;
   font-weight: 900;
+  margin-top: 3rem;
 }
 
 .clothes-item h4 {
@@ -262,6 +263,32 @@ DropDowns
 
 
 */
+
+.error {
+  border-radius: 15px;
+  background: #f00;
+  padding: 10px;
+  font-size: 25px;
+  color: #fff;
+  margin-top: 15px;
+  width: 100%;
+  display: none;
+}
+
+.error > .material-symbols-outlined {
+  font-size: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+}
+
+.error > .message {
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 #Set_Clothes {
   display: flex;
@@ -420,7 +447,15 @@ input[type="text"],
   display: none;
 }
 
+.m-item > input[type="checkbox"] {
+  margin-right: 5px;
+}
+
 @media (max-width: 1200px) {
+  .holder {
+    height: auto;
+  }
+
   .night {
     top: 0;
     width: 100%;
@@ -453,6 +488,9 @@ input[type="text"],
   aside.all_clothes.enable,
   aside.filter.enable {
     display: flex;
+    max-height: 770px;
+    height: 100%;
+    top: 20px;
   }
 
   main {

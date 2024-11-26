@@ -23,10 +23,10 @@ const search = [
   {
     values: [
       "Temperature Range",
-      "-10 - 10ºC",
-      "10 - 20ºC",
-      "20 - 30ºC",
-      "30 - 40ºC",
+      "-10 – 10ºC",
+      "10 – 20ºC",
+      "20 – 30ºC",
+      "30 – 40ºC",
     ],
     arrow: "s_temp",
     dropdown: "TempRange",
@@ -85,10 +85,10 @@ const clothes_attributes = [
   {
     values: [
       "Temperature Range",
-      "-10 - 10ºC",
-      "10 - 20ºC",
-      "20 - 30ºC",
-      "30 - 40ºC",
+      "-10 – 10ºC",
+      "10 – 20ºC",
+      "20 – 30ºC",
+      "30 – 40ºC",
     ],
     arrow: "t_temp",
     dropdown: "T-TempRange",
@@ -284,7 +284,9 @@ const multipleDropdown = ({ values, dropdown, name, arrow }) => `
           dropdown + "_check_" + index
         }', '${dropdown}')"
         />
-        <p>${item.name}</p>
+          <label for="${dropdown + "_check_" + index}"><p>${
+          item.name
+        }</p></label>
       </div>`
       )
       .join("")}
@@ -337,10 +339,20 @@ const AllClothes = () => {
     )
     .join("");
 
-  document.querySelector("#T-Dropdown").innerHTML =
-    selClothes !== ""
-      ? selClothes
-      : "<h2 style='color: #69B29A; margin-top: 50%;'>Select clothes to continue</h2>";
+  document.getElementById("All_Clothes").innerHTML = `
+          <h2>Selected Clothes</h2>
+          <div class="error" id="validation_all_clothes">
+            <span class="material-symbols-outlined"> cancel </span>
+            <div class="message">Lorem Ipsum</div>
+          </div>
+          <div class="clothes_list" id="T-Dropdown">${
+            selClothes !== ""
+              ? selClothes
+              : "<h2 style='color: #a3a3a3; margin-top: 50%;'>Select clothes to continue</h2>"
+          }</div>
+          <div class="submit" onclick="SubmitAllClothes();">
+            Submit All Clothes
+          </div>`;
 };
 
 const SelClothes = () => {
@@ -348,6 +360,10 @@ const SelClothes = () => {
 <span class="material-symbols-outlined close" onclick="changeSchema();" >
 close
 </span><h2>Add Your Preferences</h2>
+  <div class="error" id="validation-clothe">
+      <span class="material-symbols-outlined"> cancel </span>
+      <div class="message">Lorem Ipsum</div>
+  </div>
   <div class="img_clothes">
     <img src="/public/imgs/clothes/coat.png" alt="Coat Image"/>
    
@@ -364,6 +380,10 @@ const SelEditClothes = (id) => {
 <span class="material-symbols-outlined close" onclick="changeSchema();" >
 close
 </span><h2>Add Your Preferences</h2>
+  <div class="error">
+      <span class="material-symbols-outlined"> cancel </span>
+      <div class="message">Lorem Ipsum</div>
+  </div>
   <div class="img_clothes">
     <img src="/public/imgs/clothes/coat.png" alt="Coat Image"/>
    
@@ -614,35 +634,61 @@ var SelectedClothes = null;
 const submitClothe = (path, id) => {
   const backup = { ...create_clothes };
 
-  if (path == "edit") {
-    created_clothes[id] = backup;
-  } else if (path == "delete") {
-    created_clothes.splice(id, 1);
+  const checkEmpty = Object.entries(create_clothes).find(([key, value]) => {
+    return value === "" || (Array.isArray(value) && value.length === 0);
+  });
+
+  if (checkEmpty?.length == 0 || checkEmpty == undefined) {
+    if (path == "edit") {
+      created_clothes[id] = backup;
+    } else if (path == "delete") {
+      created_clothes.splice(id, 1);
+    } else {
+      created_clothes.push(backup);
+    }
+
+    create_clothes.name = "";
+    create_clothes.brand = "";
+    create_clothes.events = [];
+    create_clothes.weather = "";
+    create_clothes.tempRange = "";
+    create_clothes.src = "";
+    create_clothes.type = "";
+
+    if (SelectedClothes != null) {
+      SelectedClothes.classList.toggle("enable");
+    }
+
+    SelectedClothes = null;
+    document.querySelector(".set_clothes").style.display = "none";
+    document.querySelector(".my_clothes").style.display = "block";
+    AllClothes();
   } else {
-    created_clothes.push(backup);
+    const error = document.querySelector("#validation-clothe");
+    const message = document.querySelector("#validation-clothe .message");
+
+    error.style.display = "flex";
+    message.textContent = `Field ${checkEmpty[0]} is not filled`;
   }
-
-  create_clothes.name = "";
-  create_clothes.brand = "";
-  create_clothes.events = [];
-  create_clothes.weather = "";
-  create_clothes.tempRange = "";
-  create_clothes.src = "";
-  create_clothes.type = "";
-
-  if (SelectedClothes != null) {
-    SelectedClothes.classList.toggle("enable");
-  }
-
-  SelectedClothes = null;
-  document.querySelector(".set_clothes").style.display = "none";
-  document.querySelector(".my_clothes").style.display = "block";
-  AllClothes();
 };
+
+var show_class = "";
 
 const CreateClothe = (src, id) => {
   resetNames(clothes_attributes);
   SelClothes();
+
+  if (window.innerWidth < 1201) {
+    const aside = document.querySelector(`.all_clothes`);
+    const night = document.querySelector(".night");
+    const neonav = document.querySelector(".neo-nav");
+
+    neonav.classList.add("enable");
+    night.classList.toggle("enable");
+    aside.classList.toggle("enable");
+
+    show_class = "all_clothes";
+  }
 
   const backup = SelectedClothes;
 
@@ -686,8 +732,6 @@ const onEdit = (id) => {
     }
   });
 
-  console.log(id);
-
   SelEditClothes(id);
   document.querySelector(".my_clothes").style.display = "none";
   document.querySelector(".set_clothes").style.display = "flex";
@@ -719,8 +763,6 @@ const showNavbar = () => {
   neoNav.classList.toggle("enable");
 };
 
-var show_class = "";
-
 const showAside = (aside) => {
   const aside01 = document.querySelector(`.${aside}`);
   const night = document.querySelector(".night");
@@ -751,5 +793,16 @@ const showAside = (aside) => {
 
     aside01.classList.toggle("enable");
     show_class = aside;
+  }
+};
+
+const SubmitAllClothes = () => {
+  if (created_clothes.length > 3) {
+    window.location.href = "/src/pages/dashboard/home.html";
+  } else {
+    const error = document.querySelector("#validation_all_clothes.error");
+    const message = document.querySelector("#validation_all_clothes .message");
+    error.style.display = "flex";
+    message.textContent = "Selecione pelo menos 4 roupas";
   }
 };
