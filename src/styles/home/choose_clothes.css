@@ -72,7 +72,8 @@ main {
 }
 
 aside.filter {
-  min-height: 25em;
+  height: 650px;
+  overflow-y: auto;
   max-width: 300px;
   width: 100%;
   box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.2);
@@ -263,6 +264,32 @@ DropDowns
 
 */
 
+.error {
+  border-radius: 15px;
+  background: #f00;
+  padding: 10px;
+  font-size: 25px;
+  color: #fff;
+  margin-top: 15px;
+  width: 100%;
+  display: none;
+}
+
+.error > .material-symbols-outlined {
+  font-size: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+}
+
+.error > .message {
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 #Set_Clothes {
   display: flex;
   flex-direction: column;
@@ -418,6 +445,10 @@ input[type="text"],
 
 .night {
   display: none;
+}
+
+.m-item > input[type="checkbox"] {
+  margin-right: 5px;
 }
 
 @media (max-width: 1200px) {
