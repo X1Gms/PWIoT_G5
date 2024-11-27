@@ -9,102 +9,15 @@
       type="image/x-icon"
     />
     <title>WearWeather</title>
-    <script src="/src/js/dashboard/clothes.js" defer></script>
+    <script src="/src/js/dashboard/navbar.js" defer></script>
     <link rel="stylesheet" href="../../../styles/dashboard/acount.css" />
     <link rel="stylesheet" href="../../../styles/dashboard/navbar.css" />
   </head>
 
   <body>
-    <div id="overlay" class="overlay">
-      <div id="form-holder" class="form-holder">
-        <span id="close-form" class="close-form">X</span>
-        <form id="clothForm" action="" method="post">
-          <div class="img-box" id="img-box">
-            <div>
-              <img
-                id="form-cloth-img"
-                width="80px"
-                height="80px"
-                class="form-cloth-img"
-                src="../../../../public/imgs/clothes/jacket.png"
-                alt=""
-              />
-            </div>
-          </div>
-          <!-- <fieldset>
-            <label for="jacket-name">Jacket Name</label>
-
-            <input
-              type="text"
-              id="jacket-name"
-              name="jacket-name"
-              placeholder="Jacket Name"
-              required
-            />
-          </fieldset>
-          <fieldset>
-            <select name="event-type" id="event-type">
-              <option selected>Events</option>
-
-              <option value="business">Business</option>
-
-              <option value="walking">Walking</option>
-
-              <option value="academic">Academic</option>
-
-              <option value="running">Running</option>
-            </select>
-          </fieldset>
-          <fieldset>
-            <select name="weather-type" id="weather-type">
-              <option selected>Weather</option>
-
-              <option value="sunny">Sunny</option>
-
-              <option value="rainy">Rainy</option>
-
-              <option value="windy">Windy</option>
-
-              <option value="tropical">Tropical</option>
-            </select>
-          </fieldset>
-          <fieldset>
-            <select name="temperature-range" id="temperature-range">
-              <option selected>Temperature Range</option>
-
-              <option value="raining">Raining</option>
-
-              <option value="negative-cold">-10º - 0ºC</option>
-
-              <option value="cold">10º - 20ºC</option>
-
-              <option value="hot">20º - 30ºC</option>
-
-              <option value="desert">30º - 40ºC</option>
-            </select>
-          </fieldset> -->
-          <!-- Div for Custom Inputs -->
-           <div class="customDiv" id="customDiv"></div>
-           <div id="S_Dropdowns"></div>
-          <div class="wrap-center">
-            <button
-              type="button"
-              onclick="ChangeClothes()"
-              class="change-image light-background"
-              id="change-image"
-            >
-              Change Image</button
-            ><br />
-
-            <input id="fileH" type="file" style="display: none" />
-
-            <button type="submit" class="submit dark-background">
-              Submit Changes
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
+    <div id="AddClothe"></div>
+    <div id="PopMessage"></div>
+    <div id="YON"></div>
     <div class="hidden">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -258,8 +171,8 @@
         ><span class="bar"></span>
       </div>
     </div>
+    <div class="night"></div>
     <main class="content-main">
-      <div class="night"></div>
       <div class="page">
         <div class="button-container">
           <a href="account.html" class="button button-secondary"
@@ -273,7 +186,7 @@
         <div class="button-new-container">
           <button
             type="button"
-            onclick="ShowForm()"
+            onclick="RenderCreateClothe()"
             id="add-button"
             href="account.html"
             class="button add-button"
@@ -299,7 +212,7 @@
                 <td style="background-color: transparent">
                   <img
                     src="/public/imgs/clothes/jacket.png"
-                    alt="Casaco AleatÃ³rio"
+                    alt="Casaco Aleatório"
                     style="width: 50px; height: 50px"
                   />
                 </td>
@@ -314,6 +227,7 @@
                       cursor: pointer;
                       margin-right: 30px;
                     "
+                    onclick="RenderEditClothe()"
                   >
                     <span
                       class="material-symbols-outlined"
@@ -331,6 +245,7 @@
                       cursor: pointer;
                       margin-left: 8px;
                     "
+                    onclick="Toggle('YON')"
                   >
                     <span
                       class="material-symbols-outlined"
@@ -363,6 +278,7 @@
                       cursor: pointer;
                       margin-right: 30px;
                     "
+                    onclick="RenderEditClothe()"
                   >
                     <span
                       class="material-symbols-outlined"
@@ -380,6 +296,7 @@
                       cursor: pointer;
                       margin-left: 8px;
                     "
+                    onclick="Toggle('YON')"
                   >
                     <span
                       class="material-symbols-outlined"
@@ -412,6 +329,7 @@
                       cursor: pointer;
                       margin-right: 30px;
                     "
+                    onclick="RenderEditClothe()"
                   >
                     <span
                       class="material-symbols-outlined"
@@ -429,6 +347,7 @@
                       cursor: pointer;
                       margin-left: 8px;
                     "
+                    onclick="Toggle('YON')"
                   >
                     <span
                       class="material-symbols-outlined"
@@ -461,6 +380,7 @@
                       cursor: pointer;
                       margin-right: 30px;
                     "
+                    onclick="RenderEditClothe()"
                   >
                     <span
                       class="material-symbols-outlined"
@@ -478,6 +398,7 @@
                       cursor: pointer;
                       margin-left: 8px;
                     "
+                    onclick="Toggle('YON')"
                   >
                     <span
                       class="material-symbols-outlined"
@@ -491,38 +412,8 @@
             </tbody>
           </table>
         </div>
-
-        <!-- Pop-up Templates (fora da tabela para reutilizaÃ§Ã£o) -->
-        <div class="overlay" style="display: none"></div>
-
-        <div class="popup">
-          <button class="close-btn">
-            <span class="material-symbols-outlined"> close </span>
-          </button>
-          <span
-            class="material-symbols-outlined"
-            style="font-size: 150px; color: #bcbcbc"
-          >
-            check_circle
-          </span>
-          <h2>Modifications Done Successfully</h2>
-        </div>
-
-        <div class="overlayDelete" style="display: none"></div>
-
-        <div class="deletePopup" style="display: none">
-          <button class="close-btnn">
-            <span class="material-symbols-outlined"> close </span>
-          </button>
-          <h2>Do you want to delete this item?</h2>
-          <div style="margin-top: 20px">
-            <button class="confirm-btn">Yes</button>
-            <button class="cancel-btn">No</button>
-          </div>
-        </div>
       </div>
     </main>
-    <!-- Copyright desativado no design. -->
-    <!-- <p id="copyright">&copy; Group 5 PWDAM 2024/2026</p> -->
   </body>
+  <script src="/src/js/dashboard/clothes.js"></script>
 </html>

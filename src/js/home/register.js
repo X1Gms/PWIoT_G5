@@ -24,39 +24,51 @@ form.addEventListener("submit", function (e) {
   if (!validator.name(name)) {
     error.show("Invalid Name");
     return;
-  }
-
-  if (!validator.email(email)) {
+  } else if (!validator.email(email)) {
     error.show("Invalid Email");
     return;
-  }
-
-  if (!validator.required(password)) {
+  } else if (!validator.required(password)) {
     error.show("Password is required");
     return;
-  }
-
-  if (!validator.required(confirmPassword)) {
+  } else if (!validator.required(confirmPassword)) {
     error.show("Confirm Password is required");
     return;
-  }
-
-  if (!confirmTerms) {
+  } else if (!confirmTerms) {
     error.show("Please accept the terms!");
     return;
-  }
-
-  if (passwordHasError) {
+  } else if (passwordHasError) {
     error.show(passwordHasError);
     return;
-  }
-
-  if (password !== confirmPassword) {
+  } else if (password !== confirmPassword) {
     error.show("Confirm password must be equal to password");
     return;
+  } else {
+    // Prepare data for the request as a JavaScript object
+    const data = {
+      name: name,
+      email: email,
+      password: password,
+    };
+
+    // Send the form data as JSON
+    fetch("http://localhost/register.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json", // Send JSON data
+      },
+      body: JSON.stringify(data), // Convert the data object to a JSON string
+    })
+      .then((response) => response.json()) // Parse JSON response from PHP
+      .then((data) => {
+        if (data.success === "1") {
+          window.location.href = "/src/pages/home/login.html";
+        } else {
+          error.show(data.message || "An error occurred. Please try again.");
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        error.show("Something went wrong. Please try again later.");
+      });
   }
-
-  error.hide();
-
-  window.location.href = "/src/pages/home/welcome.html";
 });

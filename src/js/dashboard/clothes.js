@@ -1,152 +1,110 @@
-function showNavbar() {
-  /* DEFAULT BODY MARGIN AND PADDING
-            margin: 0 auto;
-            padding: 2rem; 
-        */
-  // If we don't have hidden class it's because there is navbar. Otherwise navbar it's closed.
-  // const bmw = true;
-  className =
-    document.querySelectorAll(".hidden").length == 0 ? "nav-context" : "hidden";
-  // If navbar is hidden keep margin/padding
-  const [myBody] = document.getElementsByTagName("body");
-  if (className === "hidden") {
-    document.getElementsByClassName("hidden")[0].className = "nav-context";
-    document.getElementsByClassName("night")[0].className = "night enable";
-  } else {
-    document.getElementsByClassName("nav-context")[0].className = "hidden";
-    document.getElementsByClassName("night")[0].className = "night";
-  }
-}
-document.addEventListener("DOMContentLoaded", () => {
-  // Seleciona todos os botões para abrir e fechar pop-ups
-  const openPopupBtns = document.querySelectorAll(".openPopup");
-  const openDeletePopupBtns = document.querySelectorAll(".openDeletePopup");
-  const overlay = document.querySelector(".overlay");
-  const popup = document.querySelector(".popup");
-  const closePopupBtn = document.querySelector(".close-btn");
+//Variables
 
-  const overlayDelete = document.querySelector(".overlayDelete");
-  const deletePopup = document.querySelector(".deletePopup");
-  const closeDeletePopupBtn = document.querySelector(".close-btnn");
-  const confirmDeleteBtn = document.querySelector(".confirm-btn");
-  const cancelDeleteBtn = document.querySelector(".cancel-btn");
+//This variable is to render the form.
+const clothes_attributes = [
+  {
+    name: "",
+    placeholder: "Name Your Clothes",
+    type: "search",
+    id: "Input",
+    from: "Create",
+  },
+  {
+    values: [
+      "Brand",
+      "Gucci",
+      "Chanel",
+      "Nike",
+      "Adidas",
+      "Puma",
+      "Reebok",
+      "Zara",
+      "H&H",
+      "Shein",
+      "Jordan",
+    ],
+    arrow: "br",
+    dropdown: "Brand",
+    name: "Brand",
+    type: "dropdown",
+  },
+  {
+    values: [
+      { name: "Sports", isChecked: false },
+      { name: "Walk", isChecked: false },
+      { name: "Beach", isChecked: false },
+      { name: "Business", isChecked: false },
+      { name: "Academic", isChecked: false },
+    ],
+    arrow: "e",
+    dropdown: "EventType",
+    name: "Event",
+    type: "mdropdown",
+  },
+  {
+    values: ["Weather", "Windy", "Rainy", "Sunny", "Cloudy", "Snowing"],
+    arrow: "wth",
+    dropdown: "Weather",
+    name: "Weather",
+    type: "dropdown",
+  },
+  {
+    values: [
+      "Temperature Range",
+      "-10 – 10ºC",
+      "10 – 20ºC",
+      "20 – 30ºC",
+      "30 – 40ºC",
+    ],
+    arrow: "temp",
+    dropdown: "TempRange",
+    name: "Temperature Range",
+    type: "dropdown",
+  },
+  {
+    values: [
+      "Type",
+      "Cotton",
+      "Linen",
+      "Silk",
+      "Wool",
+      "Hemp",
+      "Rayon",
+      "Polyester",
+    ],
+    arrow: "type",
+    dropdown: "Type",
+    name: "Type",
+    type: "dropdown",
+  },
+];
 
-  // Função para mostrar o pop-up de edição
-  openPopupBtns.forEach((button) => {
-    button.addEventListener("click", () => {
-      popup.style.display = "none";
-      overlay.style.display = "flex";
-    });
-  });
+//The values chosen in clothes_attributes
+const create_clothes = {
+  name: "",
+  brand: "",
+  events: [],
+  weather: "",
+  tempRange: "",
+  image: "",
+  type: "",
+};
 
-  // Função para fechar o pop-up de edição
-  closePopupBtn.addEventListener("click", () => {
-    popup.style.display = "none";
-    overlay.style.display = "none";
-  });
-
-  overlay.addEventListener("click", () => {
-    popup.style.display = "none";
-    // overlay.style.display = "none";
-  });
-
-  // Função para mostrar o pop-up de exclusão
-  openDeletePopupBtns.forEach((button) => {
-    button.addEventListener("click", () => {
-      deletePopup.style.display = "block";
-      overlayDelete.style.display = "block";
-    });
-  });
-
-  // Função para fechar o pop-up de exclusão
-  closeDeletePopupBtn.addEventListener("click", () => {
-    deletePopup.style.display = "none";
-    overlayDelete.style.display = "none";
-  });
-
-  cancelDeleteBtn.addEventListener("click", () => {
-    deletePopup.style.display = "none";
-    overlayDelete.style.display = "none";
-  });
-
-  // Ação ao clicar no botão "Sim" para deletar
-  confirmDeleteBtn.addEventListener("click", () => {
-    alert("Deleted Clothes Successfully");
-    deletePopup.style.display = "none";
-    overlayDelete.style.display = "none";
-  });
-
-  overlayDelete.addEventListener("click", () => {
-    deletePopup.style.display = "none";
-    overlayDelete.style.display = "none";
-  });
-});
-
-function ChangeClothes(){
-  let fileH = document.getElementById("fileH");
-  fileH.click();
-  const formimgcloth = document.getElementById("form-cloth-img");
-
-  fileH.addEventListener('change', function(event) {
-    const file = event.target.files[0];
-
-    if (file && (file.type === 'image/png' || file.type === 'image/jpeg')) {
-      const reader = new FileReader();
-
-      reader.onload = function(e) {
-        formimgcloth.src = e.target.result;
-      };
-
-      reader.readAsDataURL(file);
-    } else {
-      alert('Please select a valid image.');
-    }
-  });
+/*
 
 
+Renders
 
 
-}
+*/
 
-function isNameValid(someoneName) {
-  const regex = /^[A-Z].*/;
-  return regex.test(someoneName);
-}
+/*
+  Arrow Functions
 
-function ShowForm(){
-  const overlay = document.getElementById("overlay");
-  overlay.style.display = "flex";
-  
-}
-
-  const close_form = document.getElementById('close-form');
-  close_form.addEventListener('click', function (event) {
-    const x = document.getElementById('overlay');
-    x.style.display = 'none';
-  })
-
-/* Validate clothes Form */
-const clothesForm = document.querySelector("#clothForm");
-
-clothesForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-
-  const formData = new FormData(clothesForm)
-
-  const clothName = formData.get("jacket-name") 
-  const weather = formData.get("weather-type")
-
-   if (!isNameValid(clothName)) {
-    // Display Error
-    clothesForm.reset();
-    return;
-  }
-    // Display Success
-  document.querySelector("#clothForm").submit();
-})
-
-
-/* Code WoW */
+  Instead to use function Name(){} with ES6 update, became used to use
+  Arrow Functions
+*/
+//Render a Normal Dropdown
 const dropdown = ({ values, dropdown, name, arrow }) => `
   <div class="dropdown" id="${dropdown}">
     <div class="dropdown-box">
@@ -168,11 +126,12 @@ const dropdown = ({ values, dropdown, name, arrow }) => `
   </div>
 `;
 
+//Render a Dropdown with Multiple Choice
 const multipleDropdown = ({ values, dropdown, name, arrow }) => `
 <div class="dropdown" id="${dropdown}">
   <div class="mdropdown-box dropbox">
     <p>${name}</p>
-    <span class="material-symbols-outlined arrow multiple" id="${arrow}" onclick="arrow_click('${dropdown}','${arrow}');">
+    <span class="material-symbols-outlined arrow multiple" id="${arrow}"">
       keyboard_arrow_up
     </span>
   </div>
@@ -187,7 +146,9 @@ const multipleDropdown = ({ values, dropdown, name, arrow }) => `
           dropdown + "_check_" + index
         }', '${dropdown}')"
         />
-        <p>${item.name}</p>
+          <label for="${dropdown + "_check_" + index}"><p>${
+          item.name
+        }</p></label>
       </div>`
       )
       .join("")}
@@ -195,147 +156,99 @@ const multipleDropdown = ({ values, dropdown, name, arrow }) => `
 </div>
 `;
 
+//Renders a Normal Input Text
 const input = ({ placeholder, id, from, name }) => `
   <input type="text" placeholder="${placeholder}" id="${id}" oninput="syncInput('${id}', '${from}')" value="${name}" />
 `;
 
-/* DropDown codes */
+/*
+Detects the id AddClothe in the code and 
+then renders the following code between ``
+(this is done in JavaScript, in order to be a dynamic pop-up)
+*/
+const RenderShowClothe = (path) => {
+  const detectAddClothe = document.getElementById("AddClothe");
 
-const clothes_attributes = [
-{
-    name: "",
-    placeholder: "Name Your Clothes",
-    type: "search",
-    id: "TInput",
-    from: "Create",
-  },
-  {
-    values: [
-      "Business",
-      "Walking",
-      "Academic",
-      "Running"
-    ],
-    arrow: "t-br",
-    dropdown: "T-Events",
-    name: "Events",
-    type: "dropdown",
-  },
-  {
-    values: [
-      "Temperature Range",
-      "-10 - 10ºC",
-      "10 - 20ºC",
-      "20 - 30ºC",
-      "30 - 40ºC",
-    ],
-    arrow: "t_temp",
-    dropdown: "T-TempRange",
-    name: "Temperature Range",
-    type: "dropdown",
-  },
-];
+  //In order to make if statements in inline way, we use ? to say then and : to say else
+  detectAddClothe.innerHTML = `
+  <span class="material-symbols-outlined" id="close" onclick="Toggle('AddClothe');">
+  close
+</span>
+  <div style="width:100%; max-width:230px; display:flex; flex-direction:column; align-items:center;">
+    <div class="error" id="validation_all_clothes">
+      <span class="material-symbols-outlined"> cancel </span>
+      <div class="message">Lorem Ipsum</div>
+    </div>
+    <div class="img-clothe">
+        <img src="/public/imgs/clothes/coat.png" id="imagePreview" alt="Selected Image" />
+    </div>
 
-const generateDropdownHTML = (data) =>
-  data
-    .map((item) => {
-      switch (item.type) {
-        case "dropdown":
-          return dropdown(item);
-        case "search":
-          return input(item);
-
-        case "mdropdown":
-          return multipleDropdown(item);
-      }
-    })
-    .join("");
-// 
-
-const SelClothes = () => {
-  const selClothes = `
-   ${generateDropdownHTML(clothes_attributes)}`;
-  document.querySelector("#customDiv").innerHTML = selClothes;
+        ${clothes_attributes
+          .map((item) =>
+            item.type == "dropdown"
+              ? dropdown(item)
+              : item.type == "mdropdown"
+              ? multipleDropdown(item)
+              : input(item)
+          )
+          .join("")}
+    <input type="file" id="imageUpload" accept="image/*">
+    <label id="fileLabel" for="imageUpload">Select Image</label>
+    ${
+      path == "edit"
+        ? `<a onclick="submitClothe('edit');" class="submit">Edit Clothes</a>`
+        : `<a onclick="submitClothe();" class="submit">Submit Clothes</a>`
+    }
+  </div>`;
 };
 
-SelClothes();
+const RenderCreateClothe = () => {
+  Toggle("AddClothe");
+  resetNames(clothes_attributes);
+  RenderShowClothe();
+  uploadImage();
+};
 
-const search = [
-  {
-    name: "",
-    placeholder: "Search...",
-    type: "search",
-    id: "SInput",
-    from: "Search",
-  },
-  {
-    values: ["Event", "Sports", "Walk", "Beach", "Business", "Academic"],
-    arrow: "s_ear",
-    dropdown: "EventType",
-    name: "Event",
-    type: "dropdown",
-  },
-  {
-    values: ["Weather", "Windy", "Rainy", "Sunny", "Cloudy", "Snowing"],
-    arrow: "s_wth",
-    dropdown: "Weather",
-    name: "Weather",
-    type: "dropdown",
-  },
-  {
-    values: [
-      "Temperature Range",
-      "-10 - 10ºC",
-      "10 - 20ºC",
-      "20 - 30ºC",
-      "30 - 40ºC",
-    ],
-    arrow: "s_temp",
-    dropdown: "TempRange",
-    name: "Temperature Range",
-    type: "dropdown",
-  },
-];
+const RenderEditClothe = () => {
+  Toggle("AddClothe");
+  resetNames(clothes_attributes);
+  RenderShowClothe("edit");
+  uploadImage();
+};
 
+const RenderMessage = (checking, message) => {
+  const Message = document.getElementById("PopMessage");
+  Toggle("PopMessage");
 
+  Message.innerHTML = `
+  <span class="material-symbols-outlined" id="close"
+  onclick="Toggle('PopMessage');">
+    close
+  </span>
+  <span class="material-symbols-outlined pop">
+    ${checking ? "check_circle" : "cancel"}
+  </span>
+  <h1>${message}</h1>
+  `;
+};
+
+const RenderYN = () => {
+  document.getElementById("YON").innerHTML = `
+  <h2>Would you like to delete this item?</h2>
+  <div class="btns">
+  <div class="YON" onclick="Toggle('YON');RenderMessage(true,'Deleted Successfully')">Yes</div>
+  <div class="YON negative" onclick="Toggle('YON');">No</div>
+  </div>
+  `;
+};
 
 /*
 
-  {
-    values: [
-      { name: "Sports", isChecked: false },
-      { name: "Walk", isChecked: false },
-      { name: "Beach", isChecked: false },
-      { name: "Business", isChecked: false },
-      { name: "Academic", isChecked: false },
-    ],
-    arrow: "t-e",
-    dropdown: "T-EventType",
-    name: "Event",
-    type: "mdropdown",
-  },
+Functions
 
-*/
+ */
 
-const filters = {
-  name: "",
-  event: "",
-  temperature: "",
-  weather: "",
-};
-
-const created_clothes = [];
-
-const create_clothes = {
-  name: "",
-  brand: "",
-  events: [],
-  weather: "",
-  tempRange: "",
-  src: "",
-  type: "",
-};
-
+//Resets All Values From the Form
 const resetNames = (attributes) => {
   attributes.forEach((attr) => {
     if (attr.type === "search") {
@@ -358,43 +271,16 @@ const resetNames = (attributes) => {
   create_clothes.events = [];
   create_clothes.weather = "";
   create_clothes.tempRange = "";
-  create_clothes.src = "";
+  create_clothes.image = "";
   create_clothes.type = "";
 };
 
-const SelEditClothes = (id) => {
-  const selClothes = `
-<span class="material-symbols-outlined close" onclick="changeSchema();" >
-close
-</span><h2>Add Your Preferences</h2>
-  <div class="img_clothes">
-    <img src="/public/imgs/clothes/coat.png" alt="Coat Image"/>
-   
-  </div>
-   ${generateDropdownHTML(clothes_attributes)}
- 
-  <a onclick="submitClothe('edit',${id});" class="submit" style="margin-bottom:20px;">Submit Clothes</a>
-  <a onclick="submitClothe('delete',${id});" class="submit">Delete Clothes</a>`;
-
-  document.querySelector("#Set_Clothes").innerHTML = selClothes;
-};
-
-
-AllClothes();
-SelClothes();
-
-
-const arrow_click = (dropdownId, arrowId) => {
-  const dropdown = document.querySelector(`#${dropdownId} .dropbox`);
-  const arrow = document.querySelector(`#${dropdownId} .arrow`);
-  const dropdownList = document.querySelector(`#${dropdownId} .list`);
-
-  console.log(arrowId);
-  
-
-  arrow.classList.toggle("rotate");
-  dropdown.classList.toggle("enable");
-  dropdownList.classList.toggle("block");
+//Function to Toggle the Form
+const Toggle = (id) => {
+  const Container = document.getElementById(id);
+  const night = document.querySelector(".night");
+  Container.classList.toggle("enable");
+  night.classList.toggle("enable");
 };
 
 const setupDropdownListeners = () => {
@@ -402,13 +288,22 @@ const setupDropdownListeners = () => {
     const arrowElement = event.target.closest(".arrow");
     const dropdownItem = event.target.closest(".dl-item");
 
-    if (arrowElement && !arrowElement.classList.contains("multiple")) {
-      const dropdownBox = arrowElement.closest(".dropdown-box");
-      const dropdownList = dropdownBox.nextElementSibling;
+    if (arrowElement) {
+      if (!arrowElement.classList.contains("multiple")) {
+        const dropdownBox = arrowElement.closest(".dropdown-box");
+        const dropdownList = dropdownBox.nextElementSibling;
 
-      arrowElement.classList.toggle("rotate");
-      dropdownBox.classList.toggle("enable");
-      dropdownList.classList.toggle("block");
+        arrowElement.classList.toggle("rotate");
+        dropdownBox.classList.toggle("enable");
+        dropdownList.classList.toggle("block");
+      } else if (arrowElement.classList.contains("multiple")) {
+        const dropdownBox = arrowElement.closest(".dropbox");
+        const dropdownList = dropdownBox.nextElementSibling;
+
+        arrowElement.classList.toggle("rotate");
+        dropdownBox.classList.toggle("enable");
+        dropdownList.classList.toggle("block");
+      }
     }
 
     if (dropdownItem) {
@@ -425,20 +320,17 @@ const setupDropdownListeners = () => {
       dropdownList.classList.remove("block");
 
       DropdownName(dropdown, value);
-
-      if (id == "S_Dropdowns") {
-        generateClothes();
-      }
     }
   };
 
-  document.getElementById("S_Dropdowns").addEventListener("click", (event) => {
-    dropdown_function("S_Dropdowns", event);
+  document.getElementById("AddClothe").addEventListener("click", (event) => {
+    dropdown_function("AddClothe", event);
   });
+};
 
-  document.getElementById("Set_Clothes").addEventListener("click", (event) => {
-    dropdown_function("Set_Clothes", event);
-  });
+const refreshFilter = () => {
+  setupDropdownListeners();
+  RenderYN();
 };
 
 const DropdownName = (dropdown, value) => {
@@ -448,58 +340,33 @@ const DropdownName = (dropdown, value) => {
   dropdownElement.textContent = value;
   var searchItem;
 
-  if (dropdown.includes("T-")) {
-    searchItem = clothes_attributes.find((item) => item.dropdown === dropdown);
-  } else {
-    searchItem = search.find((item) => item.dropdown === dropdown);
-  }
+  searchItem = clothes_attributes.find((item) => item.dropdown === dropdown);
 
   if (searchItem) searchItem.name = value;
 
   switch (dropdown) {
-    case "EventType":
-      if (searchItem.name == "Event") {
-        filters.event = "";
-      } else {
-        filters.event = searchItem.name;
-      }
-      break;
-    case "Weather":
-      if (searchItem.name == "Weather") {
-        filters.weather = "";
-      } else {
-        filters.weather = searchItem.name;
-      }
-      break;
-    case "TempRange":
-      if (searchItem.name == "Temperature Range") {
-        filters.temperature = "";
-      } else {
-        filters.temperature = searchItem.name;
-      }
-      break;
-    case "T-Brand":
+    case "Brand":
       if (searchItem.name == "Brand") {
         create_clothes.brand = "";
       } else {
         create_clothes.brand = searchItem.name;
       }
       break;
-    case "T-Weather":
+    case "Weather":
       if (searchItem.name == "Weather") {
         create_clothes.weather = "";
       } else {
         create_clothes.weather = searchItem.name;
       }
       break;
-    case "T-TempRange":
+    case "TempRange":
       if (searchItem.name == "Temperature Range") {
         create_clothes.tempRange = "";
       } else {
         create_clothes.tempRange = searchItem.name;
       }
       break;
-    case "T-Type":
+    case "Type":
       if (searchItem.name == "Type") {
         create_clothes.type = "";
       } else {
@@ -524,7 +391,6 @@ const attribute_object = (object, attribute, id) => {
   attribute.name = searchInput.name;
 };
 
-
 const check = (index, checkboxId, dropdown) => {
   const checkbox = document.getElementById(checkboxId);
   const attribute = clothes_attributes.find(
@@ -540,3 +406,52 @@ const check = (index, checkboxId, dropdown) => {
     ? Array.from(new Set([...create_clothes.events, eventName])) // Ensure no duplicates using Set
     : create_clothes.events.filter((event) => event !== eventName);
 };
+
+const uploadImage = () => {
+  const imageUpload = document.getElementById("imageUpload");
+  const imagePreview = document.getElementById("imagePreview");
+
+  imageUpload.addEventListener("change", function (event) {
+    const selectedFile = event.target.files[0];
+
+    if (selectedFile) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        imagePreview.src = e.target.result;
+        create_clothes.image = e.target.result;
+      };
+      reader.readAsDataURL(selectedFile);
+    }
+  });
+};
+
+const submitClothe = (path, id) => {
+  const backup = { ...create_clothes };
+
+  const checkEmpty = Object.entries(create_clothes).find(([key, value]) => {
+    return value === "" || (Array.isArray(value) && value.length === 0);
+  });
+
+  if (checkEmpty?.length == 0 || checkEmpty == undefined) {
+    if (path == "edit") {
+      //edit
+      Toggle("AddClothe");
+      RenderMessage(true, "Successful Clothing Modifications");
+    } else if (path == "delete") {
+      //delete
+    } else {
+      //create
+      Toggle("AddClothe");
+      RenderMessage(true, "Successful Clothing Creation");
+    }
+    resetNames(clothes_attributes);
+  } else {
+    const error = document.querySelector("#validation_all_clothes");
+    const message = document.querySelector("#validation_all_clothes .message");
+
+    error.style.display = "flex";
+    message.textContent = `Field ${checkEmpty[0]} is not filled`;
+  }
+};
+
+refreshFilter();

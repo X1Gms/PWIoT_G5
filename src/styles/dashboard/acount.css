@@ -24,19 +24,18 @@ body {
   min-height: 100vh;
   margin: 0;
   max-width: none;
+  position: relative;
 }
 
 .content-main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 100vh;
 }
 
 .page {
   margin-top: 11em;
   max-width: 1400px;
-  padding-right: 30px;
 }
 
 header {
@@ -117,7 +116,7 @@ body > main > div > form > fieldset:nth-child(3) > div {
 .button-container {
   display: flex;
   gap: 30px;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
   margin-right: auto;
   padding-left: 30px;
   flex-wrap: wrap;
@@ -145,298 +144,49 @@ body > main > div > form > fieldset:nth-child(3) > div {
   border: 2px solid #bcbcbc; /* Borda cinzenta */
 }
 
-.popup {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-  padding: 20px;
-  width: 300px;
-  text-align: center;
-  z-index: 1000;
-  font-size: 14px;
-  font-weight: bold;
-}
-
-/* Botão de fechar maior */
-.popup .close-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 34px; /* Aumentar tamanho do botão de fechar */
-  font-weight: bold;
-}
-
-/* Estilo para o ícone de sucesso */
-.popup .success-icon {
-  font-size: 80px; /* Tamanho do ícone de certo */
-  color: gray;
-  margin-bottom: 10px;
-  border: 15px solid gray; /* Adicionar um círculo ao redor */
-  border-radius: 50%; /* Deixar o círculo perfeitamente arredondado */
-  width: 140px; /* Largura igual à altura */
-  height: 140px; /* Altura igual à largura */
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Estilos para o overlay (fundo escuro) */
-.overlay {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 999;
-}
-
-.deletePopup {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-  padding: 20px;
-  width: 300px;
-  text-align: center;
-  z-index: 1000;
-  font-size: 14px;
-  font-weight: bold;
-}
-
-/* Estilos para os botões "Sim" e "Não" */
-.confirm-btn {
-  background-color: red;
-  color: white;
-  border: none;
-  padding: 20px 30px;
-  margin-right: 10px;
-  cursor: pointer;
-  border-radius: 10px;
-  font-weight: bold;
-}
-.close-btnn {
-  display: none;
-}
-
-.cancel-btn {
-  background-color: gray;
-  color: white;
-  border: none;
-  padding: 20px 30px;
-  cursor: pointer;
-  border-radius: 10px;
-  font-weight: bold;
-}
-
-/* Estilos para o overlay (fundo escuro) */
-.overlayDelete {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 999;
-}
-
-/* .button-new-container button{
-  display: flex;
-  margin-left: 3rem;
-  margin-bottom: 30px;
+.add-button {
   background-color: #777575;
   color: #ffffff;
-} */
+}
 
 .button-new-container {
-  display: flex;
-  gap: 30px;
-  margin-bottom: 20px;
-  margin-right: auto;
   padding-left: 30px;
-  flex-wrap: wrap;
+  margin-bottom: 30px;
 }
 
-.add-button{
-  background-color: #777575;
-  color: #ffffff;
-}
-
-.overlay{
-  z-index: 2;
+#AddClothe {
   position: fixed;
-  display: none;
-  justify-content: center;
-  align-items: center;
+  max-width: 500px;
   width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.2)
-}
-
-
- #close-overlay{
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  cursor: pointer;
-}
-
-.form-holder {
-  padding: 5.9rem;
-  min-height: 600px;
-  display: flex;
-  flex-direction: column;
-  /* justify-content: center; */
-  align-items: center;
+  height: 90vh;
+  background: #fff;
+  z-index: 1001;
+  top: 50%;
+  bottom: 50%;
+  left: 50%;
+  right: 50%;
+  transform: translate(-50%, -50%);
   overflow-y: auto;
-  min-height: 90vh;
-  width: 60rem;
-  font-family: 'Inter',sans-serif;
-  background-color: #ffffff;
-  position: relative;
   border-radius: 15px;
-}
-.form-holder form label{
-  display: block;
-  font-family: 'Inter',sans-serif;
-  font-size: 1.7rem;
-}
-.form-cloth-img img{
-  height: 8rem;
-  width: 8rem;
-}
-
-.img-box{
-  display: flex;
-  margin: 0 auto;
-  align-items: center;
-  justify-content: center;
-  background-color: #E5E5E5;
-  border-radius: 50%;
-  height: 14rem;
-  width: 14rem;
-  margin-bottom:24px;
-}
-
-.img-box img{
-  /* border-radius: 50%; */
-  width: 9rem;
-  height: 9rem;
-
-}
-
-fieldset {
-  margin-inline-start: 0;
-  margin-inline-end: 0;
-  padding-block-start: 0;
-  padding-block-end: 0;
-  padding-inline-start: 0;
-  padding-inline-end: 0;
-  border: none;
-  min-inline-size: min-content;
-}
-
-.form-holder form input{
-  background-color: #E5E5E5;
-  font-family: 'Inter',sans-serif;
-  font-size: 2rem;
-  /* margin-bottom: 15px; */
-  height: 4.5rem;
-  width: 30rem;
-  border: none;
-  border-radius: 15px;
-  padding-left: 30px;
-  color: #000000;
-}
-
-.form-holder form select{
-  font-family: 'Mulish',sans-serif;
-  font-size: 2rem;
-  font-weight: bold;
-  margin-top: 15px;
-  padding-left: 3rem;
-  margin-bottom: 15px;
-  background-color: #E5E5E5;
-  width: 30rem;
-  border-radius: 15px;
-  border:none;
-  height: 4.5rem;
-
-}
-
-.wrap-center{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-}
-
-.form-holder form button{
-  margin-top: 15px;
-
-}
-
-.wrap-center button{
-  border-radius: 20px;
-  font-size: 3rem;
-  font-family: 'Inter',sans-serif;
-  color: #FFFFFF;
-  text-align: center;
-  height: 6rem;
-  border: none;
-  width: 30rem;
-}
-
-.light-background{
-  background-color: #BCBCBC;
-}
-
-.dark-background{
-  background-color: #444343;
-}
-
-
-.close-form{
-  font-family: 'Mulish',sans-serif;
-  font-size: 3rem;
-  margin: 5px;
-  position: absolute;
-  top: 40px;
-  right: 40px;
-  background-color:#BCBCBC;
-  padding: 3px 10px 3px 10px;
-  border-radius: 10px;
-}
-
-
-#Set_Clothes {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   display: none;
+  flex-direction: column;
+  align-items: center;
+  padding: calc(15px + 2vw);
 }
 
-.my_clothes {
-  width: 100%;
-  max-width: 260px;
+.img-clothe {
+  background: #e5e5e5;
+  height: 105px;
+  width: 105px;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.img-clothe > img {
+  height: 55px;
+  width: 55px;
 }
 
 .dropdown {
@@ -445,17 +195,12 @@ fieldset {
 }
 
 input[type="text"]::placeholder {
-  color: #777575;
+  color: #000;
   font-family: "Mulish", sans-serif;
 }
 
 input[type="text"]:focus {
-  outline: var(--button-hover) solid;
-}
-
-#S_Dropdowns {
-  width: 100%;
-  max-width: 230px;
+  outline: #444343 solid;
 }
 
 input[type="text"],
@@ -479,61 +224,9 @@ input[type="text"],
 .mdropdown-box {
   display: flex;
   align-items: center;
-  color: #777575;
+  color: #000;
   justify-content: space-between;
   border-radius: 10px;
-}
-
-.dpt_name {
-  background: #918f8f;
-  color: #fff;
-  margin-top: 0px;
-}
-
-.dpt {
-  margin-top: 0px;
-  margin-bottom: 30px;
-}
-
-.dropdown-box.enable,
-.dpt_name.enable,
-.mdropdown-box.enable {
-  border-radius: 10px 10px 0px 0px;
-}
-
-#Set_Clothes .mdropdown-box,
-#Set_Clothes .dropdown-box {
-  margin-top: 0;
-}
-
-#Set_Clothes .dropdown,
-#Set_Clothes input[type="text"] {
-  margin-top: 0;
-  margin-bottom: 30px;
-}
-
-.dpt_desc {
-  padding: 10px;
-  background: #e5e5e5;
-  font-size: 14px;
-  border-radius: 0px 0px 20px 20px;
-  color: #777575;
-  display: none;
-}
-
-.dpt_desc_edit {
-  display: flex;
-  justify-content: center;
-  font-size: 17px;
-  gap: 10px;
-  font-weight: 700;
-  color: #918f8f;
-  margin-top: 10px;
-  cursor: pointer;
-}
-
-.dpt_desc_edit > span {
-  font-size: 20px;
 }
 
 .dropdown-list {
@@ -580,29 +273,171 @@ input[type="text"],
   color: #fff;
 }
 
-.night {
-  display: none;
+.m-item > input[type="checkbox"] {
+  margin-right: 5px;
 }
 
-@media (max-width: 1200px) {
-  .night {
-    top: 0;
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    background: #00000036;
-    display: none;
-    z-index: 1000;
-  }
-
-  .night.enable {
-    display: block;
-  }
+.dropdown-box.enable,
+.dpt_name.enable,
+.mdropdown-box.enable {
+  border-radius: 10px 10px 0px 0px;
 }
 
-.customDiv{
+.arrow {
+  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 30px;
+  transform: rotate(-180deg);
+  transition: transform 0.5s ease;
+  user-select: none;
+}
+
+.arrow.rotate {
+  transform: rotate(0);
+}
+
+.error {
+  border-radius: 15px;
+  background: #918f8f;
+  padding: 10px;
+  font-size: 25px;
+  color: #fff;
+  margin-bottom: 15px;
+  width: 100%;
+  display: none;
+}
+
+.error > .material-symbols-outlined {
+  font-size: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+}
+
+.error > .message {
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.submit,
+#fileLabel {
+  width: 100%;
+  background: #444343;
+  height: 60px;
+  color: #fff;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 30px;
+}
+
+/* Hide the default file input button */
+#imageUpload {
+  display: none;
+}
+
+/* Custom label for file input button */
+#fileLabel {
+  background: #bcbcbc;
+}
+
+#PopMessage {
+  max-width: 400px;
+  width: 100%;
+  height: 400px;
+  background: #fff;
+  border-radius: 20px;
+  position: absolute;
+  z-index: 1001;
+  top: 50%;
+  bottom: 50%;
+  left: 50%;
+  right: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+#PopMessage > span.pop {
+  font-size: 175px;
+  color: #bcbcbc;
+}
+
+#PopMessage > h1 {
+  font-size: 30px;
+  max-width: 300px;
+  text-align: center;
+  margin-top: 30px;
+}
+
+#close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+#YON {
+  max-width: 350px;
+  width: 100%;
+  height: 260px;
+  background: #fff;
+  border-radius: 20px;
+  position: absolute;
+  z-index: 1001;
+  top: 50%;
+  bottom: 50%;
+  left: 50%;
+  right: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  text-align: center;
+}
+
+.btns {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-top: 50px;
+}
+
+.YON {
+  width: 100px;
+  height: 60px;
+  background: #f00;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.YON.negative {
+  background: #bcbcbc;
+}
+
+#AddClothe.enable,
+#PopMessage.enable,
+#YON.enable {
+  display: flex;
 }

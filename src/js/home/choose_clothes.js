@@ -85,7 +85,8 @@ const clothes_attributes = [
   {
     values: [
       "Temperature Range",
-      "-10 – 10ºC",
+      "-10 – 0ºC",
+      "0 – 10ºC",
       "10 – 20ºC",
       "20 – 30ºC",
       "30 – 40ºC",
@@ -129,7 +130,7 @@ const ChosenClothes = [
     properties: {
       event: ["Sports", "Walk"],
       weather: ["Windy", "Snowing", "Cloudy", "Rainy"],
-      tempRange: ["-10 - 0ºC", "10 - 20ºC"],
+      tempRange: ["-10 – 0ºC", "10 – 20ºC"],
     },
   },
   {
@@ -138,7 +139,7 @@ const ChosenClothes = [
     properties: {
       event: ["Walk"],
       weather: ["Snowing", "Windy"],
-      tempRange: ["-10 - 10ºC"],
+      tempRange: ["-10 – 10ºC"],
     },
   },
   {
@@ -147,7 +148,7 @@ const ChosenClothes = [
     properties: {
       event: ["Sports", "Walk"],
       weather: ["Snowing", "Windy"],
-      tempRange: ["-10 - 10ºC", "10 - 20ºC"],
+      tempRange: ["-10 – 10ºC", "10 – 20ºC"],
     },
   },
   {
@@ -156,7 +157,7 @@ const ChosenClothes = [
     properties: {
       event: ["Sports", "Walk"],
       weather: ["Snowing", "Windy"],
-      tempRange: ["-10 - 10ºC", "10 - 20ºC"],
+      tempRange: ["-10 – 10ºC", "10 – 20ºC"],
     },
   },
   {
@@ -165,7 +166,7 @@ const ChosenClothes = [
     properties: {
       event: ["Walk", "Business", "Academic"],
       weather: ["Snowing", "Windy", "Cloudy", "Rainy"],
-      tempRange: ["-10 - 10ºC", "10 - 20ºC", "20 - 30ºC"],
+      tempRange: ["-10 – 10ºC", "10 – 20ºC", "20 – 30ºC"],
     },
   },
   {
@@ -174,7 +175,7 @@ const ChosenClothes = [
     properties: {
       event: ["Sports", "Walk", "Beach", "Academic"],
       weather: ["Sunny", "Cloudy"],
-      tempRange: ["10 - 20ºC", "20 - 30ºC", "30 - 40ºC"],
+      tempRange: ["10 – 20ºC", "20 – 30ºC", "30 – 40ºC"],
     },
   },
   {
@@ -183,7 +184,7 @@ const ChosenClothes = [
     properties: {
       event: ["Sports", "Walk", "Academic"],
       weather: ["Snowing", "Windy", "Cloudy"],
-      tempRange: ["-10 - 10ºC", "10 - 20ºC"],
+      tempRange: ["-10 – 10ºC", "10 – 20ºC"],
     },
   },
   {
@@ -192,7 +193,7 @@ const ChosenClothes = [
     properties: {
       event: ["Walk", "Business", "Academic"],
       weather: ["Windy", "Rainy", "Sunny", "Cloudy", "Snowing"],
-      tempRange: ["-10 - 10ºC", "10 - 20ºC", "20 - 30ºC"],
+      tempRange: ["-10 – 10ºC", "10 – 20ºC", "20 – 30ºC"],
     },
   },
 ];
@@ -212,7 +213,6 @@ const create_clothes = {
   events: [],
   weather: "",
   tempRange: "",
-  src: "",
   type: "",
 };
 
@@ -269,7 +269,7 @@ const multipleDropdown = ({ values, dropdown, name, arrow }) => `
 <div class="dropdown" id="${dropdown}">
   <div class="mdropdown-box dropbox">
     <p>${name}</p>
-    <span class="material-symbols-outlined arrow multiple" id="${arrow}" onclick="arrow_click('${dropdown}','${arrow}');">
+    <span class="material-symbols-outlined arrow multiple" id="${arrow}">
       keyboard_arrow_up
     </span>
   </div>
@@ -308,16 +308,13 @@ const AllClothes = () => {
     .map(
       (item, index) => `
       <div class="dpt" id="${types.type + index}">
-        <div class="dpt_name dropbox">
+        <div class="dpt_name dropdown-box">
           <p>${
             item.name.length < 16 ? item.name : item.name.slice(0, 13) + "..."
           }</p>
           <span class="material-symbols-outlined arrow" id="${
             types.arrow + index
-          }" 
-          onclick="arrow_click('${types.type + index}', '${
-        types.arrow + index
-      }')">
+          }">
             keyboard_arrow_up
           </span>
         </div>
@@ -467,30 +464,28 @@ const refreshFilter = () => {
   setupDropdownListeners();
 };
 
-const arrow_click = (dropdownId, arrowId) => {
-  const dropdown = document.querySelector(`#${dropdownId} .dropbox`);
-  const arrow = document.querySelector(`#${dropdownId} .arrow`);
-  const dropdownList = document.querySelector(`#${dropdownId} .list`);
-
-  arrow.classList.toggle("rotate");
-  dropdown.classList.toggle("enable");
-  dropdownList.classList.toggle("block");
-};
-
 const setupDropdownListeners = () => {
   const dropdown_function = (id, event) => {
     const arrowElement = event.target.closest(".arrow");
     const dropdownItem = event.target.closest(".dl-item");
 
-    if (arrowElement && !arrowElement.classList.contains("multiple")) {
-      const dropdownBox = arrowElement.closest(".dropdown-box");
-      const dropdownList = dropdownBox.nextElementSibling;
+    if (arrowElement) {
+      if (!arrowElement.classList.contains("multiple")) {
+        const dropdownBox = arrowElement.closest(".dropdown-box");
+        const dropdownList = dropdownBox.nextElementSibling;
 
-      arrowElement.classList.toggle("rotate");
-      dropdownBox.classList.toggle("enable");
-      dropdownList.classList.toggle("block");
+        arrowElement.classList.toggle("rotate");
+        dropdownBox.classList.toggle("enable");
+        dropdownList.classList.toggle("block");
+      } else if (arrowElement.classList.contains("multiple")) {
+        const dropdownBox = arrowElement.closest(".dropbox");
+        const dropdownList = dropdownBox.nextElementSibling;
+
+        arrowElement.classList.toggle("rotate");
+        dropdownBox.classList.toggle("enable");
+        dropdownList.classList.toggle("block");
+      }
     }
-
     if (dropdownItem) {
       const { dropdown, value } = dropdownItem.dataset;
 
@@ -518,6 +513,10 @@ const setupDropdownListeners = () => {
 
   document.getElementById("Set_Clothes").addEventListener("click", (event) => {
     dropdown_function("Set_Clothes", event);
+  });
+
+  document.getElementById("All_Clothes").addEventListener("click", (event) => {
+    dropdown_function("All_Clothes", event);
   });
 };
 
@@ -798,7 +797,7 @@ const showAside = (aside) => {
 
 const SubmitAllClothes = () => {
   if (created_clothes.length > 3) {
-    window.location.href = "/src/pages/dashboard/home.html";
+    window.location.href = "/src/pages/home/get-started.html";
   } else {
     const error = document.querySelector("#validation_all_clothes.error");
     const message = document.querySelector("#validation_all_clothes .message");
