@@ -3,18 +3,19 @@
 > Alexandre
 
     Admin
-     - Edit/ Delete Button [Clothes Management] (Ver Figma)
+     - Teach Flavio and Guilherme about PHP
+     - Start with User Manual
 
 > Gonçalo
 
-    - Choose Clothes
+    - Teach Everyone PHP and JS interaction
+    - Comment Code
+    
 
 > Flávio
 
-    - Validate Login / Register
+    - Support Guilherme's Task
 
 > Guilherme
 
-    Admin
-     - Validate Edit Profile
-     - Add Clothes [Clothes Management]
+    - Start Adding PHP
