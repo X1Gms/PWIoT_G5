@@ -121,7 +121,7 @@ const ChosenClothes = [
     properties: {
       event: ["Sports", "Walk", "Academic", "Rainy"],
       weather: ["Snowing"],
-      tempRange: ["-10 - 0ºC"],
+      tempRange: ["-10 – 10ºC"],
     },
   },
   {
@@ -130,7 +130,7 @@ const ChosenClothes = [
     properties: {
       event: ["Sports", "Walk"],
       weather: ["Windy", "Snowing", "Cloudy", "Rainy"],
-      tempRange: ["-10 – 0ºC", "10 – 20ºC"],
+      tempRange: ["-10 – 10ºC", "10 – 20ºC"],
     },
   },
   {
@@ -205,7 +205,7 @@ const filters = {
   weather: "",
 };
 
-const created_clothes = [];
+var created_clothes = [];
 
 const create_clothes = {
   name: "",
@@ -213,7 +213,19 @@ const create_clothes = {
   events: [],
   weather: "",
   tempRange: "",
+  index: 0,
   type: "",
+};
+
+const CleanClothe = () => {
+  create_clothes.name = "";
+  create_clothes.brand = "";
+  create_clothes.events = [];
+  create_clothes.weather = "";
+  create_clothes.tempRange = "";
+  create_clothes.src = "";
+  create_clothes.index = 0;
+  create_clothes.type = "";
 };
 
 const resetNames = (attributes) => {
@@ -233,13 +245,7 @@ const resetNames = (attributes) => {
     }
   });
 
-  create_clothes.name = "";
-  create_clothes.brand = "";
-  create_clothes.events = [];
-  create_clothes.weather = "";
-  create_clothes.tempRange = "";
-  create_clothes.src = "";
-  create_clothes.type = "";
+  CleanClothe();
 };
 
 /*Search */
@@ -435,7 +441,9 @@ const generateClothesHTML = (clothes, filters) => {
         return `
                 <div class="clothes-item">
                   <div class="img-background" id="${name + "_" + index}"
-                   onclick="CreateClothe('${src}','${name + "_" + index}')">
+                   onclick="CreateClothe('${src}','${
+          name + "_" + index
+        }','${index}')">
                     <img src="${src}" alt="${name} Image" width="60" height="60" />
                   </div>
                   <h4>${name}</h4>
@@ -646,13 +654,7 @@ const submitClothe = (path, id) => {
       created_clothes.push(backup);
     }
 
-    create_clothes.name = "";
-    create_clothes.brand = "";
-    create_clothes.events = [];
-    create_clothes.weather = "";
-    create_clothes.tempRange = "";
-    create_clothes.src = "";
-    create_clothes.type = "";
+    CleanClothe();
 
     if (SelectedClothes != null) {
       SelectedClothes.classList.toggle("enable");
@@ -673,7 +675,7 @@ const submitClothe = (path, id) => {
 
 var show_class = "";
 
-const CreateClothe = (src, id) => {
+const CreateClothe = (src, id, index) => {
   resetNames(clothes_attributes);
   SelClothes();
 
@@ -701,6 +703,7 @@ const CreateClothe = (src, id) => {
   document.querySelector(".set_clothes").style.display = "flex";
 
   create_clothes.src = src;
+  create_clothes.index = index;
 
   document.querySelector(".img_clothes > img").src = src;
 };
@@ -738,13 +741,7 @@ const onEdit = (id) => {
 };
 
 const changeSchema = () => {
-  create_clothes.name = "";
-  create_clothes.brand = "";
-  create_clothes.events = [];
-  create_clothes.weather = "";
-  create_clothes.tempRange = "";
-  create_clothes.src = "";
-  create_clothes.type = "";
+  CleanClothe();
 
   if (SelectedClothes != null) {
     SelectedClothes.classList.toggle("enable");
@@ -796,12 +793,37 @@ const showAside = (aside) => {
 };
 
 const SubmitAllClothes = () => {
-  if (created_clothes.length > 3) {
-    window.location.href = "/src/pages/home/get-started.html";
-  } else {
-    const error = document.querySelector("#validation_all_clothes.error");
-    const message = document.querySelector("#validation_all_clothes .message");
-    error.style.display = "flex";
-    message.textContent = "Selecione pelo menos 4 roupas";
-  }
+  const maps = clothes_attributes.reduce((acc, attr) => {
+    if (attr.values)
+      acc[attr.name.toLowerCase()] = attr.values.map((v) => v.name || v);
+    return acc;
+  }, {});
+
+  // Transform objects using the maps
+  const mappedObjects = created_clothes.map((item) => ({
+    ...item,
+    brand: maps.brand.indexOf(item.brand),
+    events: item.events.map((event) => maps.event.indexOf(event)),
+    weather: maps.weather.indexOf(item.weather),
+    tempRange: maps["temperature range"].indexOf(item.tempRange),
+    type: maps.type.indexOf(item.type),
+  }));
+
+  console.log(mappedObjects);
+
+  // if (transformedClothes.length > 3) {
+  //   fetch("http://localhost/addUserPreferences.php", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(transformedClothes),
+  //   });
+  //   // window.location.href = "/src/pages/home/get-started.html";
+  // } else {
+  //   const error = document.querySelector("#validation_all_clothes.error");
+  //   const message = document.querySelector("#validation_all_clothes .message");
+  //   error.style.display = "flex";
+  //   message.textContent = "Select at least 4 clothes";
+  // }
 };

@@ -51,5 +51,5 @@ form.addEventListener("submit", function (e) {
 
   error.hide();
 
-  window.location.href = "/src/pages/home/welcome.html";
+  window.location.href = "/src/pages/dashboard/home.html";
 });

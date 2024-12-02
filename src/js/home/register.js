@@ -61,7 +61,7 @@ form.addEventListener("submit", function (e) {
       .then((response) => response.json()) // Parse JSON response from PHP
       .then((data) => {
         if (data.success === "1") {
-          window.location.href = "/src/pages/home/login.html";
+          window.location.href = "/src/pages/home/welcome.html";
         } else {
           error.show(data.message || "An error occurred. Please try again.");
         }

@@ -121,7 +121,7 @@ const ChosenClothes = [
     properties: {
       event: ["Sports", "Walk", "Academic", "Rainy"],
       weather: ["Snowing"],
-      tempRange: ["-10 - 0ºC"],
+      tempRange: ["-10 – 10ºC"],
     },
   },
   {
@@ -130,7 +130,7 @@ const ChosenClothes = [
     properties: {
       event: ["Sports", "Walk"],
       weather: ["Windy", "Snowing", "Cloudy", "Rainy"],
-      tempRange: ["-10 – 0ºC", "10 – 20ºC"],
+      tempRange: ["-10 – 10ºC", "10 – 20ºC"],
     },
   },
   {
@@ -802,6 +802,6 @@ const SubmitAllClothes = () => {
     const error = document.querySelector("#validation_all_clothes.error");
     const message = document.querySelector("#validation_all_clothes .message");
     error.style.display = "flex";
-    message.textContent = "Selecione pelo menos 4 roupas";
+    message.textContent = "Select at least 4 clothes";
   }
 };
