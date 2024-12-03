@@ -441,3 +441,13 @@ input[type="text"],
 #YON.enable {
   display: flex;
 }
+
+@media screen and (max-width: 1200px) {
+
+  .neo-nav{
+    position: fixed;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.05);
+    padding: 15px !important;
+    background-color: white;
+  }
+}
