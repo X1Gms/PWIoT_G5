@@ -14,13 +14,14 @@ const navbarArray = [
     icon: "apparel",
     url: "/src/pages/dashboard/settings/choose_clothes.html",
   },
-  {
-    name: "Settings",
-    icon: "settings",
-    url: "/src/pages/dashboard/settings/account.html",
-    alternate: "/src/pages/dashboard/settings/clothes.html",
-  },
 ];
+
+const Settings = {
+  name: "Settings",
+  icon: "settings",
+  url: "/src/pages/dashboard/settings/account.html",
+  alternate: "/src/pages/dashboard/settings/clothes.html",
+};
 
 function renderNavbar() {
   const navbar = document.getElementById("navbar");
@@ -73,6 +74,8 @@ function showNavbar() {
 }
 
 function RenderEverything() {
+  const isAdmin = true;
+  isAdmin && navbarArray.push(Settings);
   renderNavbar();
   console.log("Hi");
 }
