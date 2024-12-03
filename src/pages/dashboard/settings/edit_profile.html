@@ -39,11 +39,13 @@
           <p id="error-paragraph">Dados Inválidos, verifique-os</p>
         </div>
         <form action="javascript:void(0)" method="post">
+          <div class="validation-error"></div>
           <fieldset>
             <label for="name">Name</label>
             <input
               type="text"
               id="name"
+              name="name"
               placeholder="Insert Your Name"
               required
             />
@@ -53,13 +55,14 @@
             <input
               type="email"
               id="email"
+              name="email"
               placeholder="Insert Your E-mail"
               required
             />
           </fieldset>
           <fieldset>
-            <div>
-              <label for="password">New Password</label>
+            <div class="new-password">
+              <label for="new-password">New Password</label>
               <a
                 title="A new password is optional. If you wish to change, include at least 8 characters, 1 uppercase, 1 lowercase and 1 special character"
               >
@@ -88,6 +91,7 @@
             <input
               type="password"
               id="new-password"
+              name="new-password"
               placeholder="Fill for a new password"
             />
           </fieldset>
@@ -96,6 +100,7 @@
             <input
               type="password"
               id="password"
+              name="password"
               placeholder="Insert your password"
               required
             />

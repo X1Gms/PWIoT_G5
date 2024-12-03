@@ -143,3 +143,18 @@ a:hover {
 .arrow.rotate {
   transform: rotate(0);
 }
+
+@media screen and (max-width: 1200px) {
+
+  .neo-nav{
+    position: absolute;
+    bottom: 0;
+    position: fixed;
+  }
+  header{
+    position: fixed;
+    width: 100%;
+    background-color: white;
+  }
+  
+}

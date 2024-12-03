@@ -1,75 +1,44 @@
+import { validator } from "../utils/validation.js";
+import { FormError } from "../utils/errors.js";
 // Validate formulary based on user input and default criteria.
 const form = document.querySelector("body > main > div.login-form > form");
+const errorElement = document.querySelector(".validation-error");
+const error = FormError(errorElement);
 
 form?.addEventListener("submit", function (event) {
   event.preventDefault();
+  error.hide();
 
-  const name = document.getElementById("name").value;
-  const email = document.getElementById("email").value;
-  const passwd = document.getElementById("password").value;
-  const newpasswd = document.getElementById("new-password").value;
-
-  if (!isNameValid(name)) {
-    triggerError();
-  } else if (!isEmailValid(email)) {
-    triggerError();
-  } else if (!isPassowrdValid(passwd)) {
-    triggerError();
-  } else if (newpasswd) {
-    if (!isNewPasswordValid(passwd, newpasswd)) triggerError();
-    else {
-      let pessoa = {
-        name: name,
-        email: email,
-        passwd: passwd,
-        newpasswd: newpasswd,
-      };
-      triggerSuccess(pessoa, form);
-    }
-  } else if (!newpasswd) {
-    let pessoa = { name: name, email: email, passwd: passwd };
-    triggerSuccess(pessoa, form);
+  const formData = new FormData(form);
+  const name = formData.get("name");
+  const email = formData.get("email");
+  const passwd = formData.get("password");
+  const newpasswd = formData.get("new-password");
+  const newPwdHasError = validator.password(newpasswd);
+  let pessoa ={
+    name: name,
+    email: email,
+    password: passwd
   }
-});
-
-function isNameValid(someoneName) {
-  const regex = /^[A-Z].*/;
-  return regex.test(someoneName);
-}
-
-function isEmailValid(email) {
-  const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-  return regex.test(email);
-}
-
-function isPassowrdValid(password) {
-  const regex =
-    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
-  return regex.test(password);
-}
-
-function isNewPasswordValid(oldPassword, newPassword) {
-  if (!isPassowrdValid(newPassword)) return false;
-  if (!isPassowrdValid(oldPassword)) return false;
-  if (oldPassword === newPassword) return false;
-  return true;
-}
-
-function triggerError() {
-  let k = document.getElementById("error");
-  k.style.display = "flex";
-  k.className = "red";
-}
-
-function triggerSuccess(pessoa, form) {
-  let k = document.getElementById("error");
-  k.style.display = "flex";
-  k.className = "green";
-  let l = document.getElementById("error-paragraph");
-  l.innerHTML = "Dados válidos, atualizações feitas";
+  if (!validator.name(name)) {
+    error.show("Invalid Name");
+    return;
+  }
+  if (!validator.email(email)) {
+    error.show("Invalid Email");
+    return;
+  }
+  if (!validator.required(passwd)) {
+    error.show("Password is required");
+    return;
+  }
+  if (newpasswd && newPwdHasError) {
+      error.show("New password doesnt meet the criteria");
+      return;
+  }
+  if(newpasswd) pessoa.new_password = newpasswd;
   console.log(pessoa);
-  form.submit();
-}
+});
 
 function showError(isError = false) {
   const svg = document.getElementById("error-context");
@@ -89,15 +58,10 @@ function showError(isError = false) {
   svg.setAttribute("src", isError === false ? svgSuccess : svgError);
 }
 
-function ShowForm() {
-  const overlay = document.getElementById("overlay");
-  overlay.style.display = "flex";
-}
-
 /* Validate clothes Form */
 const clothesForm = document.querySelector("#clothForm");
 
-clothesForm.addEventListener("submit", (e) => {
+clothesForm?.addEventListener("submit", (e) => {
   e.preventDefault();
 
   const formData = new FormData(clothesForm);
@@ -114,26 +78,6 @@ clothesForm.addEventListener("submit", (e) => {
   showError();
   document.querySelector("#clothForm").submit();
 });
-// clothesForm.addEventListener('submit', function(event) {
-//   event.preventDefault();
-
-//   console.log(clothesForm)
-
-//   const formData = new FormData(clothesForm)
-
-//   const clothName = formData.get("jacket_name")
-
-//   console.log(clothName)
-
-//   if (!isNameValid(clothName)) {
-//     showError(true);
-//     event.reset();
-//     return;
-//   }
-
-//   showError();
-//   event.submit();
-// });
 
 function ChangeClothes() {
   let fileH = document.getElementById("fileH");
