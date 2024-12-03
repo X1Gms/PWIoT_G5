@@ -496,9 +496,9 @@ input[type="text"],
   aside.all_clothes.enable,
   aside.filter.enable {
     display: flex;
-    max-height: 770px;
+    max-height: 75vh;
     height: 100%;
-    top: 20px;
+    position: fixed;
   }
 
   main {
@@ -516,7 +516,7 @@ input[type="text"],
     justify-content: center;
     padding: 1em;
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.05);
-    z-index: 1001;
+    z-index: 1002;
     background: #fff;
   }
 
