@@ -186,17 +186,19 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: aqua;
 }
 
-.list-bar > svg {
+.list-bar > span {
   fill: #9f9f9f;
+  color: #9f9f9f;
+  font-size: 37px;
 }
 
 .list-bar.enable {
   background: linear-gradient(to bottom right, #dfdbdb, #9f9f9f);
 }
 
-.list-bar.enable > svg {
+.list-bar.enable > span {
   fill: #fff;
+  color: #fff;
 }
