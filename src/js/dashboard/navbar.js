@@ -74,6 +74,7 @@ function showNavbar() {
 
 function RenderEverything() {
   renderNavbar();
+  console.log("Hi");
 }
 
 RenderEverything();
