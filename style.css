@@ -99,11 +99,17 @@ a:hover {
   text-decoration: none;
 }
 
-#content-right {
+#content-right {  
   max-width: 30em;
   align-self: center;
   width: 100%;
   height: 100%;
+}
+
+@media (max-width:1040px) {
+  #content-right{
+    display:none;
+  }
 }
 
 @media (max-width: 992px) {
