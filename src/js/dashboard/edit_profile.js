@@ -1,44 +1,23 @@
-import { validator } from "../utils/validation.js";
-import { FormError } from "../utils/errors.js";
-// Validate formulary based on user input and default criteria.
-const form = document.querySelector("body > main > div.login-form > form");
-const errorElement = document.querySelector(".validation-error");
-const error = FormError(errorElement);
+function showNavbar() {
+  /* DEFAULT BODY MARGIN AND PADDING
+        margin: 0 auto;
+        padding: 2rem; 
+    */
+  // If we don't have hidden class it's because there is navbar. Otherwise navbar it's closed.
+  className =
+    document.querySelectorAll(".hidden").length == 0 ? "nav-context" : "hidden";
+  // If navbar is hidden keep margin/padding
+  const [myBody] = document.getElementsByTagName("body");
+  if (className === "hidden") {
+    document.getElementsByClassName("hidden")[0].className = "nav-context";
+    document.getElementsByClassName("night")[0].className = "night enable";
+  } else {
+    document.getElementsByClassName("nav-context")[0].className = "hidden";
+    document.getElementsByClassName("night")[0].className = "night";
+  }
+}
 
-form?.addEventListener("submit", function (event) {
-  event.preventDefault();
-  error.hide();
 
-  const formData = new FormData(form);
-  const name = formData.get("name");
-  const email = formData.get("email");
-  const passwd = formData.get("password");
-  const newpasswd = formData.get("new-password");
-  const newPwdHasError = validator.password(newpasswd);
-  let pessoa ={
-    name: name,
-    email: email,
-    password: passwd
-  }
-  if (!validator.name(name)) {
-    error.show("Invalid Name");
-    return;
-  }
-  if (!validator.email(email)) {
-    error.show("Invalid Email");
-    return;
-  }
-  if (!validator.required(passwd)) {
-    error.show("Password is required");
-    return;
-  }
-  if (newpasswd && newPwdHasError) {
-      error.show("New password doesnt meet the criteria");
-      return;
-  }
-  if(newpasswd) pessoa.new_password = newpasswd;
-  console.log(pessoa);
-});
 
 function showError(isError = false) {
   const svg = document.getElementById("error-context");
