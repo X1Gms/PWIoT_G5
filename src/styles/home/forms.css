@@ -38,7 +38,11 @@ body {
   gap: 0.4rem;
   justify-content: flex-start;
 }
-
+.circlepassword {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 .login-form label {
   font-size: 20px;
   display: block;
@@ -94,7 +98,7 @@ body {
   background-color: var(--button-hover);
 }
 
-.login-form a {
+.login-form a.anchor {
   font-size: 2rem;
   display: inline-block;
   margin-top: 0.8rem;

@@ -143,3 +143,30 @@ a:hover {
 .arrow.rotate {
   transform: rotate(0);
 }
+
+.pass-info {
+  width: 23px;
+  height: 23px;
+  border-radius: 100%;
+  border: 2px solid #69b29a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+@media (max-width: 992px) {
+  ::-webkit-scrollbar.clothe-type {
+    width: initial;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: initial;
+    background: initial;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: initial;
+  }
+}

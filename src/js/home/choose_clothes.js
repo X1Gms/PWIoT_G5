@@ -809,8 +809,6 @@ const SubmitAllClothes = () => {
     type: maps.type.indexOf(item.type),
   }));
 
-  console.log(mappedObjects);
-
   // if (transformedClothes.length > 3) {
   //   fetch("http://localhost/addUserPreferences.php", {
   //     method: "POST",

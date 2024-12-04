@@ -45,7 +45,14 @@
             </fieldset>
 
             <fieldset>
-              <label for="password">Password</label>
+              <div class="circlepassword">
+                <label for="password">Password</label>
+                <a
+                  title="Your password must include at least 8 characters, 1 uppercase, 1 lowercase and 1 special character"
+                >
+                  <div class="pass-info">i</div>
+                </a>
+              </div>
               <input
                 type="password"
                 id="password"
@@ -77,7 +84,7 @@
 
             <div id="align-helper">
               <input class="button" type="submit" value="Create an Account" />
-              <a href="login.html">You have an Account?</a>
+              <a href="login.html" class="anchor">You have an Account?</a>
             </div>
           </form>
         </div>
