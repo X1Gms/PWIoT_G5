@@ -77,7 +77,6 @@ function RenderEverything() {
   const isAdmin = true;
   isAdmin && navbarArray.push(Settings);
   renderNavbar();
-  console.log("Hi");
 }
 
 RenderEverything();

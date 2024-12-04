@@ -98,7 +98,7 @@ body {
   background-color: var(--button-hover);
 }
 
-.login-form a {
+.login-form a.anchor {
   font-size: 2rem;
   display: inline-block;
   margin-top: 0.8rem;
