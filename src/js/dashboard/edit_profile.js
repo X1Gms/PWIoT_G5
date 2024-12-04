@@ -17,7 +17,10 @@ function showNavbar() {
   }
 }
 
-
+function isNameValid(name) {
+  const regex = /^[A-Z].*/;
+  return regex.test(name);
+}
 
 function showError(isError = false) {
   const svg = document.getElementById("error-context");
