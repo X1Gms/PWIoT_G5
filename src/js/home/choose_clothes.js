@@ -45,25 +45,6 @@ const clothes_attributes = [
   },
   {
     values: [
-      "Brand",
-      "Gucci",
-      "Chanel",
-      "Nike",
-      "Adidas",
-      "Puma",
-      "Reebok",
-      "Zara",
-      "H&H",
-      "Shein",
-      "Jordan",
-    ],
-    arrow: "t-br",
-    dropdown: "T-Brand",
-    name: "Brand",
-    type: "dropdown",
-  },
-  {
-    values: [
       { name: "Sports", isChecked: false },
       { name: "Walk", isChecked: false },
       { name: "Beach", isChecked: false },
@@ -97,19 +78,10 @@ const clothes_attributes = [
     type: "dropdown",
   },
   {
-    values: [
-      "Type",
-      "Cotton",
-      "Linen",
-      "Silk",
-      "Wool",
-      "Hemp",
-      "Rayon",
-      "Polyester",
-    ],
-    arrow: "t_type",
-    dropdown: "T-Type",
-    name: "Type",
+    values: ["Material", "Cotton", "Linen", "Wool", "Polyester"],
+    arrow: "t_mat",
+    dropdown: "T-Material",
+    name: "Material",
     type: "dropdown",
   },
 ];
@@ -209,23 +181,21 @@ var created_clothes = [];
 
 const create_clothes = {
   name: "",
-  brand: "",
   events: [],
   weather: "",
   tempRange: "",
   index: 0,
-  type: "",
+  material: "",
 };
 
 const CleanClothe = () => {
   create_clothes.name = "";
-  create_clothes.brand = "";
   create_clothes.events = [];
   create_clothes.weather = "";
   create_clothes.tempRange = "";
   create_clothes.src = "";
   create_clothes.index = 0;
-  create_clothes.type = "";
+  create_clothes.material = "";
 };
 
 const resetNames = (attributes) => {
@@ -328,9 +298,9 @@ const AllClothes = () => {
           <p>
             Name: ${item.name}<br/>
             Event: ${item.events.join(", ")}<br/>
+            Weather: ${item.weather}<br/>
             Temperature Range: ${item.tempRange}<br/>
-            Brand: ${item.brand}<br/>
-            Type: ${item.type}
+            Material: ${item.material}
           </p>
           <div class="dpt_desc_edit" onclick="onEdit(${index})">        
             <span class="material-symbols-outlined">border_color</span>
@@ -441,9 +411,9 @@ const generateClothesHTML = (clothes, filters) => {
         return `
                 <div class="clothes-item">
                   <div class="img-background" id="${name + "_" + index}"
-                   onclick="CreateClothe('${src}','${
-          name + "_" + index
-        }','${index}')">
+                   onclick="CreateClothe('${src}','${name + "_" + index}',${
+          index + 1
+        })">
                     <img src="${src}" alt="${name} Image" width="60" height="60" />
                   </div>
                   <h4>${name}</h4>
@@ -529,70 +499,36 @@ const setupDropdownListeners = () => {
 };
 
 const DropdownName = (dropdown, value) => {
-  const dropdownElement = document
+  document
     .getElementById(dropdown)
-    .querySelector(".dropdown-box p");
-  dropdownElement.textContent = value;
-  var searchItem;
+    .querySelector(".dropdown-box p").textContent = value;
 
-  if (dropdown.includes("T-")) {
-    searchItem = clothes_attributes.find((item) => item.dropdown === dropdown);
-  } else {
-    searchItem = search.find((item) => item.dropdown === dropdown);
-  }
+  const searchItem = (
+    dropdown.includes("T-") ? clothes_attributes : search
+  ).find((item) => item.dropdown === dropdown);
 
   if (searchItem) searchItem.name = value;
 
-  switch (dropdown) {
-    case "EventType":
-      if (searchItem.name == "Event") {
-        filters.event = "";
-      } else {
-        filters.event = searchItem.name;
-      }
-      break;
-    case "Weather":
-      if (searchItem.name == "Weather") {
-        filters.weather = "";
-      } else {
-        filters.weather = searchItem.name;
-      }
-      break;
-    case "TempRange":
-      if (searchItem.name == "Temperature Range") {
-        filters.temperature = "";
-      } else {
-        filters.temperature = searchItem.name;
-      }
-      break;
-    case "T-Brand":
-      if (searchItem.name == "Brand") {
-        create_clothes.brand = "";
-      } else {
-        create_clothes.brand = searchItem.name;
-      }
-      break;
-    case "T-Weather":
-      if (searchItem.name == "Weather") {
-        create_clothes.weather = "";
-      } else {
-        create_clothes.weather = searchItem.name;
-      }
-      break;
-    case "T-TempRange":
-      if (searchItem.name == "Temperature Range") {
-        create_clothes.tempRange = "";
-      } else {
-        create_clothes.tempRange = searchItem.name;
-      }
-      break;
-    case "T-Type":
-      if (searchItem.name == "Type") {
-        create_clothes.type = "";
-      } else {
-        create_clothes.type = searchItem.name;
-      }
-      break;
+  const filterMappings = {
+    EventType: { filterKey: "event", defaultValue: "Event" },
+    Weather: { filterKey: "weather", defaultValue: "Weather" },
+    TempRange: { filterKey: "temperature", defaultValue: "Temperature Range" },
+    "T-Weather": { createKey: "weather", defaultValue: "Weather" },
+    "T-TempRange": {
+      createKey: "tempRange",
+      defaultValue: "Temperature Range",
+    },
+    "T-Material": { createKey: "material", defaultValue: "Material" },
+  };
+
+  const { filterKey, createKey, defaultValue } = filterMappings[dropdown] || {};
+
+  if (filterKey) {
+    filters[filterKey] =
+      searchItem.name === defaultValue ? "" : searchItem.name;
+  } else if (createKey) {
+    create_clothes[createKey] =
+      searchItem.name === defaultValue ? "" : searchItem.name;
   }
 };
 
@@ -712,19 +648,17 @@ const onEdit = (id) => {
   const item = created_clothes[id];
 
   create_clothes.name = item.name;
-  create_clothes.brand = item.brand;
   create_clothes.events = item.events;
   create_clothes.weather = item.weather;
   create_clothes.tempRange = item.tempRange;
   create_clothes.src = item.src;
-  create_clothes.type = item.type;
+  create_clothes.material = item.material;
 
   const lookup = {
     "": item.name,
-    Brand: item.brand,
     Weather: item.weather,
     "Temperature Range": item.tempRange,
-    Type: item.type,
+    Material: item.material,
   };
 
   // Update the existing clothes_attributes array
@@ -793,21 +727,18 @@ const showAside = (aside) => {
 };
 
 const SubmitAllClothes = () => {
-  const maps = clothes_attributes.reduce((acc, attr) => {
-    if (attr.values)
-      acc[attr.name.toLowerCase()] = attr.values.map((v) => v.name || v);
-    return acc;
-  }, {});
-
-  // Transform objects using the maps
-  const mappedObjects = created_clothes.map((item) => ({
-    ...item,
-    brand: maps.brand.indexOf(item.brand),
-    events: item.events.map((event) => maps.event.indexOf(event)),
-    weather: maps.weather.indexOf(item.weather),
-    tempRange: maps["temperature range"].indexOf(item.tempRange),
-    type: maps.type.indexOf(item.type),
+  const transformed_clothes = created_clothes.map((cloth) => ({
+    ...cloth,
+    events: cloth.events.map(
+      (event) =>
+        clothes_attributes[1].values.findIndex((e) => e.name === event) + 1
+    ),
+    weather: clothes_attributes[2].values.indexOf(cloth.weather),
+    tempRange: clothes_attributes[3].values.indexOf(cloth.tempRange), // Skip "Temperature Range" label
+    material: clothes_attributes[4].values.indexOf(cloth.material), // Skip "Material" label
   }));
+
+  console.log(transformed_clothes);
 
   // if (transformedClothes.length > 3) {
   //   fetch("http://localhost/addUserPreferences.php", {
