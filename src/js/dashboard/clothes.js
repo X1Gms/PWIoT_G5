@@ -6,27 +6,8 @@ const clothes_attributes = [
     name: "",
     placeholder: "Name Your Clothes",
     type: "search",
-    id: "Input",
+    id: "TInput",
     from: "Create",
-  },
-  {
-    values: [
-      "Brand",
-      "Gucci",
-      "Chanel",
-      "Nike",
-      "Adidas",
-      "Puma",
-      "Reebok",
-      "Zara",
-      "H&H",
-      "Shein",
-      "Jordan",
-    ],
-    arrow: "br",
-    dropdown: "Brand",
-    name: "Brand",
-    type: "dropdown",
   },
   {
     values: [
@@ -42,52 +23,56 @@ const clothes_attributes = [
     type: "mdropdown",
   },
   {
-    values: ["Weather", "Windy", "Rainy", "Sunny", "Cloudy", "Snowing"],
+    values: [
+      { name: "Windy", isChecked: false },
+      { name: "Rainy", isChecked: false },
+      { name: "Sunny", isChecked: false },
+      { name: "Cloudy", isChecked: false },
+      { name: "Snowing", isChecked: false },
+    ],
     arrow: "wth",
     dropdown: "Weather",
     name: "Weather",
-    type: "dropdown",
+    type: "mdropdown",
   },
   {
     values: [
-      "Temperature Range",
-      "-10 – 10ºC",
-      "10 – 20ºC",
-      "20 – 30ºC",
-      "30 – 40ºC",
+      { name: "-40 – -30ºC", isChecked: false },
+      { name: "-29 – -20ºC", isChecked: false },
+      { name: "-19 – -10ºC", isChecked: false },
+      { name: "-9 – 0ºC", isChecked: false },
+      { name: "1 – 10ºC", isChecked: false },
+      { name: "11 – 20ºC", isChecked: false },
+      { name: "21 – 30ºC", isChecked: false },
+      { name: "31 – 40ºC", isChecked: false },
+      { name: "41 – 50ºC", isChecked: false },
+      { name: "51 – 60ºC", isChecked: false },
+      { name: "61 – 70ºC", isChecked: false },
     ],
     arrow: "temp",
     dropdown: "TempRange",
     name: "Temperature Range",
-    type: "dropdown",
+    type: "mdropdown",
   },
   {
-    values: [
-      "Type",
-      "Cotton",
-      "Linen",
-      "Silk",
-      "Wool",
-      "Hemp",
-      "Rayon",
-      "Polyester",
-    ],
-    arrow: "type",
+    values: ["Type", "Top", "Bottom", "Shoes", "Outerwear"],
+    arrow: "ty",
     dropdown: "Type",
     name: "Type",
     type: "dropdown",
   },
 ];
 
+const clothesBackup = [...clothes_attributes];
+
 //The values chosen in clothes_attributes
 const create_clothes = {
   name: "",
-  brand: "",
-  events: [],
-  weather: "",
-  tempRange: "",
-  image: "",
+  EventType: [],
+  Weather: [],
+  TempRange: [],
   type: "",
+  image: "",
 };
 
 /*
@@ -250,13 +235,13 @@ Functions
 
 //Resets All Values From the Form
 const resetNames = (attributes) => {
-  attributes.forEach((attr) => {
+  attributes.forEach((attr, index) => {
     if (attr.type === "search") {
       attr.name = "";
     } else if (attr.type === "dropdown") {
       attr.name = attr.values[0];
     } else if (attr.type === "mdropdown") {
-      attr.name = "Event";
+      attr.name = clothesBackup[index].name;
 
       attr.values.forEach((item) => {
         if (item.isChecked !== undefined) {
@@ -267,10 +252,9 @@ const resetNames = (attributes) => {
   });
 
   create_clothes.name = "";
-  create_clothes.brand = "";
-  create_clothes.events = [];
-  create_clothes.weather = "";
-  create_clothes.tempRange = "";
+  create_clothes.EventType = [];
+  create_clothes.Weather = [];
+  create_clothes.TempRange = [];
   create_clothes.image = "";
   create_clothes.type = "";
 };
@@ -334,46 +318,24 @@ const refreshFilter = () => {
 };
 
 const DropdownName = (dropdown, value) => {
-  const dropdownElement = document
+  document
     .getElementById(dropdown)
-    .querySelector(".dropdown-box p");
-  dropdownElement.textContent = value;
-  var searchItem;
+    .querySelector(".dropdown-box p").textContent = value;
 
-  searchItem = clothes_attributes.find((item) => item.dropdown === dropdown);
+  const searchItem = clothes_attributes.find(
+    (item) => item.dropdown === dropdown
+  );
 
   if (searchItem) searchItem.name = value;
 
-  switch (dropdown) {
-    case "Brand":
-      if (searchItem.name == "Brand") {
-        create_clothes.brand = "";
-      } else {
-        create_clothes.brand = searchItem.name;
-      }
-      break;
-    case "Weather":
-      if (searchItem.name == "Weather") {
-        create_clothes.weather = "";
-      } else {
-        create_clothes.weather = searchItem.name;
-      }
-      break;
-    case "TempRange":
-      if (searchItem.name == "Temperature Range") {
-        create_clothes.tempRange = "";
-      } else {
-        create_clothes.tempRange = searchItem.name;
-      }
-      break;
-    case "Type":
-      if (searchItem.name == "Type") {
-        create_clothes.type = "";
-      } else {
-        create_clothes.type = searchItem.name;
-      }
-      break;
-  }
+  const filterMappings = {
+    Type: { createKey: "type", defaultValue: "Type" },
+  };
+
+  const { createKey, defaultValue } = filterMappings[dropdown] || {};
+
+  create_clothes[createKey] =
+    searchItem.name === defaultValue ? "" : searchItem.name;
 };
 
 const syncInput = (id, from) => {
@@ -402,9 +364,9 @@ const check = (index, checkboxId, dropdown) => {
   const { name: eventName } = attribute.values[index];
   attribute.values[index].isChecked = checkbox.checked;
 
-  create_clothes.events = checkbox.checked
-    ? Array.from(new Set([...create_clothes.events, eventName])) // Ensure no duplicates using Set
-    : create_clothes.events.filter((event) => event !== eventName);
+  create_clothes[dropdown] = checkbox.checked
+    ? Array.from(new Set([...create_clothes[dropdown], eventName])) // Ensure no duplicates using Set
+    : create_clothes[dropdown].filter((event) => event !== eventName);
 };
 
 const uploadImage = () => {
@@ -432,6 +394,25 @@ const submitClothe = (path, id) => {
     return value === "" || (Array.isArray(value) && value.length === 0);
   });
 
+  const ClothesToSend = {
+    ...backup,
+    EventType: backup.EventType.map(
+      (event) =>
+        clothes_attributes[1].values.findIndex((e) => e.name === event) + 1
+    ),
+    Weather: backup.Weather.map(
+      (item) =>
+        clothes_attributes[2].values.findIndex((e) => e.name === item) + 1
+    ),
+    TempRange: backup.TempRange.map(
+      (item) =>
+        clothes_attributes[3].values.findIndex((e) => e.name === item) + 1
+    ),
+    type: clothes_attributes[4].values.indexOf(backup.type),
+  };
+
+  console.log(ClothesToSend);
+
   if (checkEmpty?.length == 0 || checkEmpty == undefined) {
     if (path == "edit") {
       //edit
@@ -440,18 +421,35 @@ const submitClothe = (path, id) => {
     } else if (path == "delete") {
       //delete
     } else {
-      //create
+      AddClothes(ClothesToSend);
       Toggle("AddClothe");
       RenderMessage(true, "Successful Clothing Creation");
     }
     resetNames(clothes_attributes);
   } else {
-    const error = document.querySelector("#validation_all_clothes");
-    const message = document.querySelector("#validation_all_clothes .message");
-
-    error.style.display = "flex";
-    message.textContent = `Field ${checkEmpty[0]} is not filled`;
+    displayError(`Field ${checkEmpty[0]} is not filled`);
   }
 };
 
+const displayError = (message) => {
+  const error = document.querySelector("#validation_all_clothes");
+  const message_el = document.querySelector("#validation_all_clothes .message");
+
+  error.style.display = "flex";
+  message_el.textContent = message;
+};
+
 refreshFilter();
+
+const AddClothes = (obj) => {
+  fetch("http://localhost/addUserPreferences.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(obj),
+  })
+    .then((response) => response.json()) // Parse JSON response from PHP
+    .then((data) => {})
+    .catch((error) => {});
+};
