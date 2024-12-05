@@ -106,7 +106,10 @@ a:hover {
   height: 100%;
 }
 
-@media (max-width: 992px) {
+@media (max-width: 1040px) {
+  #content-right {
+    display: none;
+  }
   #homepage {
     justify-content: center;
   }

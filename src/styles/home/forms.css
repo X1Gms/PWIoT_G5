@@ -3,7 +3,7 @@
 */
 
 body {
-  padding: 0 3em;
+  padding: 0 calc(1em + 2vw);
 }
 
 .login-form {
@@ -124,3 +124,5 @@ input[type="checkbox"] {
 .textcheck {
   font-family: var(--main-font), sans-serif;
 }
+
+
