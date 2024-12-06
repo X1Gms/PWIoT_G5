@@ -9,16 +9,17 @@
       type="image/x-icon"
     />
     <title>WearWeather</title>
+    <script type="module" src="../../../js/dashboard/clothes.js" defer></script>
     <script src="/src/js/dashboard/navbar.js" defer></script>
     <link rel="stylesheet" href="../../../styles/dashboard/acount.css" />
     <link rel="stylesheet" href="../../../styles/dashboard/navbar.css" />
   </head>
 
   <body>
+    <div class="hidden" id="navbar"></div>
     <div id="AddClothe"></div>
     <div id="PopMessage"></div>
     <div id="YON"></div>
-    <div class="hidden" id="navbar"></div>
 
     <div class="neo-nav">
       <div class="logo">
@@ -63,215 +64,10 @@
                 <th>Actions</th>
               </tr>
             </thead>
-            <tbody>
-              <!-- Item 1 -->
-              <tr class="linha-clara">
-                <td style="font-weight: 800">1</td>
-                <td style="background-color: transparent">
-                  <img
-                    src="/public/imgs/clothes/jacket.png"
-                    alt="Casaco Aleatório"
-                    style="width: 50px; height: 50px"
-                  />
-                </td>
-                <td>Lorem ipsum dolor sit.</td>
-                <td>07/11/2024</td>
-                <td>
-                  <button
-                    class="openPopup"
-                    style="
-                      background: none;
-                      border: none;
-                      cursor: pointer;
-                      margin-right: 30px;
-                    "
-                    onclick="RenderEditClothe()"
-                  >
-                    <span
-                      class="material-symbols-outlined"
-                      style="color: #979797; font-size: 20px"
-                    >
-                      border_color
-                    </span>
-                  </button>
-
-                  <button
-                    class="openDeletePopup"
-                    style="
-                      background: none;
-                      border: none;
-                      cursor: pointer;
-                      margin-left: 8px;
-                    "
-                    onclick="Toggle('YON')"
-                  >
-                    <span
-                      class="material-symbols-outlined"
-                      style="font-size: 20px; color: #960202"
-                    >
-                      delete
-                    </span>
-                  </button>
-                </td>
-              </tr>
-
-              <!-- Item 2 -->
-              <tr class="linha-clara">
-                <td style="font-weight: 800">2</td>
-                <td style="background-color: transparent">
-                  <img
-                    src="/public/imgs/clothes/pants.png"
-                    alt="Random Clothes"
-                    style="width: 50px; height: 50px"
-                  />
-                </td>
-                <td>Lorem ipsum dolor sit.</td>
-                <td>22/12/2002</td>
-                <td>
-                  <button
-                    class="openPopup"
-                    style="
-                      background: none;
-                      border: none;
-                      cursor: pointer;
-                      margin-right: 30px;
-                    "
-                    onclick="RenderEditClothe()"
-                  >
-                    <span
-                      class="material-symbols-outlined"
-                      style="color: #979797; font-size: 20px"
-                    >
-                      border_color
-                    </span>
-                  </button>
-
-                  <button
-                    class="openDeletePopup"
-                    style="
-                      background: none;
-                      border: none;
-                      cursor: pointer;
-                      margin-left: 8px;
-                    "
-                    onclick="Toggle('YON')"
-                  >
-                    <span
-                      class="material-symbols-outlined"
-                      style="font-size: 20px; color: #960202"
-                    >
-                      delete
-                    </span>
-                  </button>
-                </td>
-              </tr>
-
-              <!-- Item 3 -->
-              <tr class="linha-clara">
-                <td style="font-weight: 800">3</td>
-                <td style="background-color: transparent">
-                  <img
-                    src="/public/imgs/clothes/t-shirt.png"
-                    alt="Random Clothes"
-                    style="width: 50px; height: 50px"
-                  />
-                </td>
-                <td>Lorem ipsum dolor sit.</td>
-                <td>13/09/2020</td>
-                <td>
-                  <button
-                    class="openPopup"
-                    style="
-                      background: none;
-                      border: none;
-                      cursor: pointer;
-                      margin-right: 30px;
-                    "
-                    onclick="RenderEditClothe()"
-                  >
-                    <span
-                      class="material-symbols-outlined"
-                      style="color: #979797; font-size: 20px"
-                    >
-                      border_color
-                    </span>
-                  </button>
-
-                  <button
-                    class="openDeletePopup"
-                    style="
-                      background: none;
-                      border: none;
-                      cursor: pointer;
-                      margin-left: 8px;
-                    "
-                    onclick="Toggle('YON')"
-                  >
-                    <span
-                      class="material-symbols-outlined"
-                      style="font-size: 20px; color: #960202"
-                    >
-                      delete
-                    </span>
-                  </button>
-                </td>
-              </tr>
-
-              <!-- Item 4 -->
-              <tr class="linha-clara">
-                <td style="font-weight: 800">4</td>
-                <td style="background-color: transparent">
-                  <img
-                    src="/public/imgs/clothes/shorts.png"
-                    alt="Roupa Aleatória"
-                    style="width: 50px; height: 50px"
-                  />
-                </td>
-                <td>Lorem ipsum dolor sit.</td>
-                <td>11/12/2011</td>
-                <td>
-                  <button
-                    class="openPopup"
-                    style="
-                      background: none;
-                      border: none;
-                      cursor: pointer;
-                      margin-right: 30px;
-                    "
-                    onclick="RenderEditClothe()"
-                  >
-                    <span
-                      class="material-symbols-outlined"
-                      style="color: #979797; font-size: 20px"
-                    >
-                      border_color
-                    </span>
-                  </button>
-
-                  <button
-                    class="openDeletePopup"
-                    style="
-                      background: none;
-                      border: none;
-                      cursor: pointer;
-                      margin-left: 8px;
-                    "
-                    onclick="Toggle('YON')"
-                  >
-                    <span
-                      class="material-symbols-outlined"
-                      style="font-size: 20px; color: #960202"
-                    >
-                      delete
-                    </span>
-                  </button>
-                </td>
-              </tr>
-            </tbody>
+            <tbody></tbody>
           </table>
         </div>
       </div>
     </main>
   </body>
-  <script src="/src/js/dashboard/clothes.js"></script>
 </html>
