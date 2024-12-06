@@ -1,25 +1,74 @@
-function showNavbar() {
-  /* DEFAULT BODY MARGIN AND PADDING
-        margin: 0 auto;
-        padding: 2rem; 
-    */
-  // If we don't have hidden class it's because there is navbar. Otherwise navbar it's closed.
-  className =
-    document.querySelectorAll(".hidden").length == 0 ? "nav-context" : "hidden";
-  // If navbar is hidden keep margin/padding
-  const [myBody] = document.getElementsByTagName("body");
-  if (className === "hidden") {
-    document.getElementsByClassName("hidden")[0].className = "nav-context";
-    document.getElementsByClassName("night")[0].className = "night enable";
-  } else {
-    document.getElementsByClassName("nav-context")[0].className = "hidden";
-    document.getElementsByClassName("night")[0].className = "night";
+// Validate formulary based on user input and default criteria.
+const form = document.querySelector("body > main > div.login-form > form");
+
+form?.addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const passwd = document.getElementById("password").value;
+  const newpasswd = document.getElementById("new-password").value;
+
+  if (!isNameValid(name)) {
+    triggerError();
+  } else if (!isEmailValid(email)) {
+    triggerError();
+  } else if (!isPassowrdValid(passwd)) {
+    triggerError();
+  } else if (newpasswd) {
+    if (!isNewPasswordValid(passwd, newpasswd)) triggerError();
+    else {
+      let pessoa = {
+        name: name,
+        email: email,
+        passwd: passwd,
+        newpasswd: newpasswd,
+      };
+      triggerSuccess(pessoa, form);
+    }
+  } else if (!newpasswd) {
+    let pessoa = { name: name, email: email, passwd: passwd };
+    triggerSuccess(pessoa, form);
   }
+});
+
+function isNameValid(someoneName) {
+  const regex = /^[A-Z].*/;
+  return regex.test(someoneName);
 }
 
-function isNameValid(name) {
-  const regex = /^[A-Z].*/;
-  return regex.test(name);
+function isEmailValid(email) {
+  const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+  return regex.test(email);
+}
+
+function isPassowrdValid(password) {
+  const regex =
+    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+  return regex.test(password);
+}
+
+function isNewPasswordValid(oldPassword, newPassword) {
+  if (!isPassowrdValid(newPassword)) return false;
+  if (!isPassowrdValid(oldPassword)) return false;
+  if (oldPassword === newPassword) return false;
+  return true;
+}
+
+function triggerError() {
+  let k = document.getElementById("error");
+  k.style.display = "flex";
+  k.className = "red";
+}
+
+function triggerSuccess(pessoa, form) {
+  let k = document.getElementById("error");
+  k.style.display = "flex";
+  k.className = "green";
+  let l = document.getElementById("error-paragraph");
+  l.innerHTML = "Dados válidos, atualizações feitas";
+  console.log(pessoa);
+  form.submit();
 }
 
 function showError(isError = false) {
@@ -40,10 +89,15 @@ function showError(isError = false) {
   svg.setAttribute("src", isError === false ? svgSuccess : svgError);
 }
 
+function ShowForm() {
+  const overlay = document.getElementById("overlay");
+  overlay.style.display = "flex";
+}
+
 /* Validate clothes Form */
 const clothesForm = document.querySelector("#clothForm");
 
-clothesForm?.addEventListener("submit", (e) => {
+clothesForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
   const formData = new FormData(clothesForm);
@@ -60,6 +114,64 @@ clothesForm?.addEventListener("submit", (e) => {
   showError();
   document.querySelector("#clothForm").submit();
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+  fetch("localhostsession_data.php")
+    .then((response) => response.json())
+    .then((data) => {
+      document.getElementById("name").value = data.username || "";
+      document.getElementById("email").value = data.email || "";
+      document.getElementById("password").value = ""; // Não preencher password por segurança
+    })
+    .catch((error) => {
+      console.error("Erro ao obter dados de sessão:", error);
+    });
+});
+
+// Enviar os dados atualizados ao servidor via fetch
+document
+  .getElementById("edit-user-form")
+  .addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const newPassword = document.getElementById("new-password").value;
+    const currentPassword = document.getElementById("password").value;
+
+    const formData = {
+      id: data.id, // ID do utilizador da sessão
+      username: name,
+      email: email,
+      newpassword: newPassword,
+      password: currentPassword,
+    };
+
+    fetch("update_user.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        const message = document.getElementById("response-message");
+        message.style.display = "block";
+        if (data.success) {
+          message.innerHTML = "Update successful!";
+          message.style.color = "green";
+        } else {
+          message.innerHTML = data.message || "Update failed!";
+          message.style.color = "red";
+        }
+      })
+      .catch((error) => {
+        console.error("Erro ao atualizar:", error);
+        document.getElementById("response-message").innerHTML =
+          "Ocorreu um erro!";
+      });
+  });
 
 function ChangeClothes() {
   let fileH = document.getElementById("fileH");

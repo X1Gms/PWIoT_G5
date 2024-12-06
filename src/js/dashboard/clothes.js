@@ -1,3 +1,15 @@
+import { G5Fetch } from "../../../index.js";
+
+const get_Clothes = async () => {
+  try {
+    const data = await G5Fetch("http://localhost:80/getClothes.php");
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return null;
+  }
+};
+
 //Variables
 
 //This variable is to render the form.
@@ -55,7 +67,7 @@ const clothes_attributes = [
     type: "mdropdown",
   },
   {
-    values: ["Type", "Top", "Bottom", "Shoes", "Outerwear"],
+    values: ["Type", "Top", "Bottom", "Shoes", "Outerwear", "Accessory"],
     arrow: "ty",
     dropdown: "Type",
     name: "Type",
@@ -151,7 +163,7 @@ Detects the id AddClothe in the code and
 then renders the following code between ``
 (this is done in JavaScript, in order to be a dynamic pop-up)
 */
-const RenderShowClothe = (path) => {
+const RenderShowClothe = (path, id) => {
   const detectAddClothe = document.getElementById("AddClothe");
 
   //In order to make if statements in inline way, we use ? to say then and : to say else
@@ -165,7 +177,11 @@ const RenderShowClothe = (path) => {
       <div class="message">Lorem Ipsum</div>
     </div>
     <div class="img-clothe">
-        <img src="/public/imgs/clothes/coat.png" id="imagePreview" alt="Selected Image" />
+        <img src="${
+          create_clothes.image.length > 0
+            ? create_clothes.image
+            : "/public/imgs/clothes/coat.png"
+        }" id="imagePreview" alt="Selected Image" />
     </div>
 
         ${clothes_attributes
@@ -181,10 +197,62 @@ const RenderShowClothe = (path) => {
     <label id="fileLabel" for="imageUpload">Select Image</label>
     ${
       path == "edit"
-        ? `<a onclick="submitClothe('edit');" class="submit">Edit Clothes</a>`
+        ? `<a onclick="submitClothe('edit', ${id});" class="submit">Edit Clothes</a>`
         : `<a onclick="submitClothe();" class="submit">Submit Clothes</a>`
     }
   </div>`;
+};
+
+let clothesData = []; // Declare a global array to hold the data
+
+const RenderTable = async () => {
+  const table = document.getElementsByTagName("tbody")[0];
+  clothesData = await get_Clothes(); // Store fetched data globally
+
+  table.innerHTML = "";
+
+  if (!clothesData || clothesData.length === 0) {
+    table.innerHTML = "<tr><td colspan='5'>No data available</td></tr>";
+    return;
+  }
+
+  table.innerHTML = clothesData
+    .map((item, index) => {
+      return `
+      <tr class="linha-clara">
+        <td style="font-weight: 800">${index + 1}</td>
+        <td style="background-color: transparent">
+          <img
+            src="${item.image}"
+            alt="${item.name} Image"
+            style="width: 50px; height: 50px"
+          />
+        </td>
+        <td>${item.name}</td>
+        <td>${item.created_date}</td>
+        <td>
+          <button
+            class="openPopup"
+            style="background: none; border: none; cursor: pointer; margin-right: 30px;"
+            onclick="RenderEditClothe(${index + 1})"
+          >
+            <span class="material-symbols-outlined" style="color: #979797; font-size: 20px">
+              border_color
+            </span>
+          </button>
+          <button
+            class="openDeletePopup"
+            style="background: none; border: none; cursor: pointer; margin-left: 8px;"
+            onclick="Toggle('YON', ${index + 1})"
+          >
+            <span class="material-symbols-outlined" style="font-size: 20px; color: #960202">
+              delete
+            </span>
+          </button>
+        </td>
+      </tr>`;
+    })
+    .join("");
 };
 
 const RenderCreateClothe = () => {
@@ -194,10 +262,10 @@ const RenderCreateClothe = () => {
   uploadImage();
 };
 
-const RenderEditClothe = () => {
+const RenderEditClothe = (id) => {
   Toggle("AddClothe");
-  resetNames(clothes_attributes);
-  RenderShowClothe("edit");
+  attributeNames(clothes_attributes, clothesData[id - 1]);
+  RenderShowClothe("edit", id);
   uploadImage();
 };
 
@@ -221,7 +289,9 @@ const RenderYN = () => {
   document.getElementById("YON").innerHTML = `
   <h2>Would you like to delete this item?</h2>
   <div class="btns">
-  <div class="YON" onclick="Toggle('YON');RenderMessage(true,'Deleted Successfully')">Yes</div>
+  <div class="YON" onclick="DeleteClothe();">
+    Yes
+  </div>
   <div class="YON negative" onclick="Toggle('YON');">No</div>
   </div>
   `;
@@ -259,6 +329,43 @@ const resetNames = (attributes) => {
   create_clothes.type = "";
 };
 
+const attributeNames = (attributes, item) => {
+  attributes.forEach((attr) => {
+    // Handle search input for item name
+    if (attr.type === "search") {
+      attr.name = item.name;
+    }
+    // Handle multiple dropdowns (mdropdown)
+    else if (attr.type === "mdropdown") {
+      // Determine which field to match based on the attribute's dropdown name
+      const itemField = item[attr.dropdown];
+      attr.values.forEach((value) => {
+        value.isChecked = itemField.includes(
+          attr.values.findIndex((v) => v.name === value.name) + 1 // Adjust index for TempRange matching
+        );
+      });
+    }
+    // Handle single dropdown fields like Type
+    else if (attr.type === "dropdown") {
+      attr.name = attr.values[item.type];
+    }
+  });
+
+  create_clothes.name = item.name;
+  create_clothes.EventType = item.EventType.map(
+    (i) => clothes_attributes[1].values[i - 1].name
+  );
+  create_clothes.Weather = item.Weather.map(
+    (i) => clothes_attributes[2].values[i - 1].name
+  );
+  create_clothes.TempRange = item.TempRange.map(
+    (i) => clothes_attributes[3].values[i - 1].name
+  );
+  create_clothes.image = item.image;
+  create_clothes.type = clothes_attributes[4].values[item.type];
+
+  console.log(create_clothes);
+};
 //Function to Toggle the Form
 const Toggle = (id) => {
   const Container = document.getElementById(id);
@@ -313,6 +420,7 @@ const setupDropdownListeners = () => {
 };
 
 const refreshFilter = () => {
+  RenderTable();
   setupDropdownListeners();
   RenderYN();
 };
@@ -415,15 +523,10 @@ const submitClothe = (path, id) => {
 
   if (checkEmpty?.length == 0 || checkEmpty == undefined) {
     if (path == "edit") {
-      //edit
-      Toggle("AddClothe");
-      RenderMessage(true, "Successful Clothing Modifications");
-    } else if (path == "delete") {
-      //delete
+      EditClothes(ClothesToSend, id);
+      console.log({ ClothesToSend, id });
     } else {
       AddClothes(ClothesToSend);
-      Toggle("AddClothe");
-      RenderMessage(true, "Successful Clothing Creation");
     }
     resetNames(clothes_attributes);
   } else {
@@ -439,17 +542,54 @@ const displayError = (message) => {
   message_el.textContent = message;
 };
 
-refreshFilter();
+const DeleteClothe = () => {
+  Toggle("YON");
+  RenderMessage(true, "Clothing Successfully Deleted");
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+  refreshFilter();
+});
 
 const AddClothes = (obj) => {
-  fetch("http://localhost/addUserPreferences.php", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(obj),
-  })
-    .then((response) => response.json()) // Parse JSON response from PHP
-    .then((data) => {})
-    .catch((error) => {});
+  G5Fetch(
+    "http://localhost:80/addClothe.php",
+    "POST",
+    { "Content-Type": "application/json" },
+    obj
+  )
+    .then((data) => {
+      Toggle("AddClothe");
+      RenderMessage(true, data.message);
+      RenderTable();
+    })
+    .catch((error) => {
+      console.error("Error:", error); // Handle errors
+    });
 };
+
+const EditClothes = (obj, id) => {
+  G5Fetch(
+    "http://localhost:80/EditClothe.php",
+    "POST",
+    { "Content-Type": "application/json" },
+    { obj, id }
+  )
+    .then((data) => {
+      Toggle("AddClothe");
+      RenderMessage(true, data.message);
+      RenderTable();
+    })
+    .catch((error) => {
+      console.error("Error:", error); // Handle errors
+    });
+};
+
+window.check = check;
+window.submitClothe = submitClothe;
+window.syncInput = syncInput;
+window.Toggle = Toggle;
+window.RenderCreateClothe = RenderCreateClothe;
+window.RenderEditClothe = RenderEditClothe;
+window.RenderTable = RenderTable;
+window.DeleteClothe = DeleteClothe;

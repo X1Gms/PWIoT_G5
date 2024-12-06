@@ -1,3 +1,5 @@
+import { G5Fetch } from "../../../index.js";
+
 const search = [
   {
     name: "",
@@ -23,10 +25,18 @@ const search = [
   {
     values: [
       "Temperature Range",
-      "-10 – 10ºC",
-      "10 – 20ºC",
-      "20 – 30ºC",
-      "30 – 40ºC",
+      "-40 – -30ºC",
+      "-29 – -20ºC",
+      "-10 – 0ºC",
+      "-19 – -10ºC",
+      "-9 – 0ºC",
+      "1 – 10ºC",
+      "11 – 20ºC",
+      "21 – 30ºC",
+      "31 – 40ºC",
+      "41 – 50ºC",
+      "51 – 60ºC",
+      "61 – 70ºC",
     ],
     arrow: "s_temp",
     dropdown: "TempRange",
@@ -66,11 +76,18 @@ const clothes_attributes = [
   {
     values: [
       "Temperature Range",
+      "-40 – -30ºC",
+      "-29 – -20ºC",
       "-10 – 0ºC",
-      "0 – 10ºC",
-      "10 – 20ºC",
-      "20 – 30ºC",
-      "30 – 40ºC",
+      "-19 – -10ºC",
+      "-9 – 0ºC",
+      "1 – 10ºC",
+      "11 – 20ºC",
+      "21 – 30ºC",
+      "31 – 40ºC",
+      "41 – 50ºC",
+      "51 – 60ºC",
+      "61 – 70ºC",
     ],
     arrow: "t_temp",
     dropdown: "T-TempRange",
@@ -86,89 +103,16 @@ const clothes_attributes = [
   },
 ];
 
-const ChosenClothes = [
-  {
-    name: "Coat",
-    src: "/public/imgs/clothes/coat.png",
-    properties: {
-      event: ["Sports", "Walk", "Academic", "Rainy"],
-      weather: ["Snowing"],
-      tempRange: ["-10 – 10ºC"],
-    },
-  },
-  {
-    name: "Jacket",
-    src: "/public/imgs/clothes/jacket.png",
-    properties: {
-      event: ["Sports", "Walk"],
-      weather: ["Windy", "Snowing", "Cloudy", "Rainy"],
-      tempRange: ["-10 – 10ºC", "10 – 20ºC"],
-    },
-  },
-  {
-    name: "Scarf",
-    src: "/public/imgs/clothes/scarf.png",
-    properties: {
-      event: ["Walk"],
-      weather: ["Snowing", "Windy"],
-      tempRange: ["-10 – 10ºC"],
-    },
-  },
-  {
-    name: "Beanie",
-    src: "/public/imgs/clothes/beanie.png",
-    properties: {
-      event: ["Sports", "Walk"],
-      weather: ["Snowing", "Windy"],
-      tempRange: ["-10 – 10ºC", "10 – 20ºC"],
-    },
-  },
-  {
-    name: "Gloves",
-    src: "/public/imgs/clothes/gloves.png",
-    properties: {
-      event: ["Sports", "Walk"],
-      weather: ["Snowing", "Windy"],
-      tempRange: ["-10 – 10ºC", "10 – 20ºC"],
-    },
-  },
-  {
-    name: "Boots",
-    src: "/public/imgs/clothes/boots.png",
-    properties: {
-      event: ["Walk", "Business", "Academic"],
-      weather: ["Snowing", "Windy", "Cloudy", "Rainy"],
-      tempRange: ["-10 – 10ºC", "10 – 20ºC", "20 – 30ºC"],
-    },
-  },
-  {
-    name: "T-Shirt",
-    src: "/public/imgs/clothes/t-shirt.png",
-    properties: {
-      event: ["Sports", "Walk", "Beach", "Academic"],
-      weather: ["Sunny", "Cloudy"],
-      tempRange: ["10 – 20ºC", "20 – 30ºC", "30 – 40ºC"],
-    },
-  },
-  {
-    name: "Ear Muffs",
-    src: "/public/imgs/clothes/ear_murfs.png",
-    properties: {
-      event: ["Sports", "Walk", "Academic"],
-      weather: ["Snowing", "Windy", "Cloudy"],
-      tempRange: ["-10 – 10ºC", "10 – 20ºC"],
-    },
-  },
-  {
-    name: "Long Sleeve Shirt",
-    src: "/public/imgs/clothes/long_sleeve_shirt.png",
-    properties: {
-      event: ["Walk", "Business", "Academic"],
-      weather: ["Windy", "Rainy", "Sunny", "Cloudy", "Snowing"],
-      tempRange: ["-10 – 10ºC", "10 – 20ºC", "20 – 30ºC"],
-    },
-  },
+const TypeOfClothes = [
+  "Type",
+  "Top",
+  "Bottom",
+  "Shoes",
+  "Outerwear",
+  "Accessory",
 ];
+
+let ChosenClothes = [];
 
 const filters = {
   name: "",
@@ -186,6 +130,7 @@ const create_clothes = {
   tempRange: "",
   index: 0,
   material: "",
+  type: "",
 };
 
 const CleanClothe = () => {
@@ -196,6 +141,7 @@ const CleanClothe = () => {
   create_clothes.src = "";
   create_clothes.index = 0;
   create_clothes.material = "";
+  create_clothes.type = "";
 };
 
 const resetNames = (attributes) => {
@@ -300,7 +246,8 @@ const AllClothes = () => {
             Event: ${item.events.join(", ")}<br/>
             Weather: ${item.weather}<br/>
             Temperature Range: ${item.tempRange}<br/>
-            Material: ${item.material}
+            Material: ${item.material}<br/>
+            Type: ${item.type}
           </p>
           <div class="dpt_desc_edit" onclick="onEdit(${index})">        
             <span class="material-symbols-outlined">border_color</span>
@@ -387,12 +334,10 @@ const generateDropdownHTML = (data) =>
 const generateClothesHTML = (clothes, filters) => {
   const Clothes = clothes
     .filter(({ properties }) => {
-      // Ensure that the 'properties' object exists
       if (!properties) return false;
 
       const { event, tempRange, weather } = properties;
 
-      // Check if the clothing matches the event, weather, and temperature filter
       const matchesEvent = !filters.event || event.includes(filters.event);
       const matchesWeather =
         !filters.weather || weather.includes(filters.weather);
@@ -401,7 +346,7 @@ const generateClothesHTML = (clothes, filters) => {
 
       return matchesEvent && matchesWeather && matchesTemperature;
     })
-    .map(({ name, src }, index) => {
+    .map(({ name, src, type }, index) => {
       const matchesFilter =
         !filters.name ||
         (filters.name !== "" &&
@@ -413,7 +358,7 @@ const generateClothesHTML = (clothes, filters) => {
                   <div class="img-background" id="${name + "_" + index}"
                    onclick="CreateClothe('${src}','${name + "_" + index}',${
           index + 1
-        })">
+        },'${type}')">
                     <img src="${src}" alt="${name} Image" width="60" height="60" />
                   </div>
                   <h4>${name}</h4>
@@ -434,7 +379,39 @@ const generateClothesHTML = (clothes, filters) => {
 AllClothes();
 SelClothes();
 
-const refreshFilter = () => {
+const refreshFilter = async () => {
+  const retrieveClothes = async () => {
+    try {
+      const data = await G5Fetch("http://localhost:80/getClothes.php");
+      return data;
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      return null;
+    }
+  };
+
+  const chosenClothes = await retrieveClothes();
+  if (!chosenClothes) return;
+
+  const indexClothes = () => {
+    return chosenClothes.map((item) => {
+      return {
+        name: item.name,
+        src: item.image,
+        properties: {
+          event: item.EventType.map(
+            (i) => clothes_attributes[1].values[i - 1].name
+          ),
+          weather: item.Weather.map((i) => clothes_attributes[2].values[i]),
+          tempRange: item.TempRange.map((i) => clothes_attributes[3].values[i]),
+        },
+        type: TypeOfClothes[item.type],
+      };
+    });
+  };
+
+  ChosenClothes = indexClothes();
+
   document.getElementById("S_Dropdowns").innerHTML =
     generateDropdownHTML(search);
   generateClothes();
@@ -611,7 +588,7 @@ const submitClothe = (path, id) => {
 
 var show_class = "";
 
-const CreateClothe = (src, id, index) => {
+const CreateClothe = (src, id, index, type) => {
   resetNames(clothes_attributes);
   SelClothes();
 
@@ -640,6 +617,7 @@ const CreateClothe = (src, id, index) => {
 
   create_clothes.src = src;
   create_clothes.index = index;
+  create_clothes.type = type;
 
   document.querySelector(".img_clothes > img").src = src;
 };
@@ -756,3 +734,15 @@ const SubmitAllClothes = () => {
   //   message.textContent = "Select at least 4 clothes";
   // }
 };
+
+// At the end of your file:
+window.refreshFilter = refreshFilter;
+window.check = check;
+window.CreateClothe = CreateClothe;
+window.submitClothe = submitClothe;
+window.onEdit = onEdit;
+window.changeSchema = changeSchema;
+window.showNavbar = showNavbar;
+window.showAside = showAside;
+window.SubmitAllClothes = SubmitAllClothes;
+window.syncInput = syncInput;
