@@ -43,14 +43,13 @@
         <div id="error" class="">
           <p id="error-paragraph">Dados Inválidos, verifique-os</p>
         </div>
-        <form action="edit_profile.php" method="post">
-          <div class="validation-error"></div>
+        <form id="edit-user-form" action="javascript:void(0)" method="post">
           <fieldset>
             <label for="name">Name</label>
             <input
               type="text"
               id="name"
-              name="name"
+              name="username"
               placeholder="Insert Your Name"
               required
             />
@@ -62,22 +61,15 @@
               id="email"
               name="email"
               placeholder="Insert Your E-mail"
-              required
+              required7
             />
           </fieldset>
           <fieldset>
-            <div class="new-password">
-              <label for="new-password">New Password</label>
-              <a
-                title="A new password is optional. If you wish to change, include at least 8 characters, 1 uppercase, 1 lowercase and 1 special character"
-              >
-                <div class="pass-info">i</div>
-              </a>
-            </div>
+            <label for="password">New Password</label>
             <input
               type="password"
               id="new-password"
-              name="new-password"
+              name="newpassword"
               placeholder="Fill for a new password"
             />
           </fieldset>

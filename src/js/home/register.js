@@ -51,7 +51,7 @@ form.addEventListener("submit", function (e) {
     };
 
     // Send the form data as JSON
-    fetch("http://localhost/register.php", {
+    fetch("http://localhost:80/register.php", {
       method: "POST",
       headers: {
         "Content-Type": "application/json", // Send JSON data
