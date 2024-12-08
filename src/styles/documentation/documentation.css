@@ -1,0 +1,230 @@
+/*style for nav bar on the top of the page*/
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lobster&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names: keyboard_arrow_up,border_color,cancel,close,check_circle,clear_day,person,apparel,settings,search,delete");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.material-symbols-outlined {
+  font-family: "Material Symbols Outlined";
+  font-variation-settings: "FILL" 0, "wght" 600, "GRAD" 0, "opsz" 48;
+}
+
+.material-symbols-filled {
+  font-family: "Material Symbols Outlined";
+  font-variation-settings: "FILL" 1, "wght" 600, "GRAD" 0, "opsz" 48;
+}
+
+:root {
+  --primary-color: #c4ebdf;
+  --button-color: #05b780;
+  --text-color: #032e20;
+  --button-hover: #00825a;
+  scroll-behavior: smooth;
+}
+
+#firstoption {
+margin-top: 50px;
+}
+
+aside ul li div  a {
+  font-size: 20px;
+}
+
+aside  ul li  ul li {
+  margin-left: 20px;
+  font-size: 18px;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+li {
+  list-style-position: inside;
+}
+
+li > ul {
+  list-style-position: inside;
+}
+
+aside ul {
+  list-style: none;
+}
+body {
+  height: 100vh;
+  font-family: "Mulish", sans-serif;
+}
+
+.main-header nav {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 100px;
+  padding-right: 50px;
+}
+
+.main-header nav a {
+  text-decoration: none;
+  color: black;
+  align-self: center;
+}
+
+.docstitle p {
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.docstitle {
+  height: 9.4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background-color: #fff;
+  align-self: center;
+}
+
+header {
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.logo {
+  height: 5.8rem;
+  width: 5.8rem;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 5px solid var(--primary-color);
+  cursor: pointer;
+  background-color: #fff;
+}
+
+.logo p {
+  font-size: 2.8rem;
+  font-family: "Lobster", sans-serif;
+}
+
+aside {
+  display: flex;
+  background-color: var(--button-color);
+  max-width: 300px;
+  width: 100%;
+}
+
+.content {
+  display: flex;
+  width: 100vw;
+  height: calc(100vh - 150.4px);
+}
+
+.content aside {
+  height: 100%;
+}
+
+.content main {
+  height: 100%;
+  flex: 1;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+
+.content aside ul,
+.content aside li,
+.content aside li .button,
+.content aside li a {
+  width: 100%;
+}
+
+.content aside .collapse .button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s;
+}
+
+.content aside .collapse .button.active {
+  transition: all 0.3s;
+  background-color: #00e59f;
+}
+
+.content aside .sublist {
+  max-height: 0px;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.content aside .sublist.open {
+  max-height: 0px;
+  transition: max-height 0.3s ease;
+}
+
+.content aside .collapse a {
+  display: block;
+  color: white;
+  padding: 12px 24px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.content aside .collapse i {
+  font-size: 1.2rem;
+  color: white;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.3s;
+  margin-right: 12px;
+}
+
+.content aside .collapse:has(.sublist.open) i {
+  rotate: 90deg;
+}
+
+main h1 {
+  font-family: Inter;
+  padding-top: 50px;
+  padding-left: 50px;
+  font-size: 50px;
+}
+
+main p {
+  font-size: 20px;
+  padding-top: 10px;
+  padding-left: 120px;
+  padding-right: 120px;
+}
+
+main h2 {
+  font-size: 35px;
+  padding-left: 100px;
+  padding-top: 35px;
+}
+
+main h3 {
+  padding-left: 110px;
+  font-size: 25px;
+  padding-top: 20px;
+}
+
+/*List Style*/
+main ul {
+  padding-left: 150px;
+  font-size: 20px;
+}
+
+/* SubList Style*/
+main ul li ul {
+  padding-left: 2%;
+}
+
+div #listasseparador {
+  padding-top: 20px;
+}
+
+div #listasseparadorlast {
+  padding-top: 20px;
+  padding-bottom: 50px;
+}
+
