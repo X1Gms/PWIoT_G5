@@ -4,15 +4,21 @@
 // const api_url = "https://api.open-meteo.com/v1/forecast?latitude=38.5244&longitude=-8.8882&current=temperature_2m,precipitation" // Setubal
 const api_url =
   "https://api.open-meteo.com/v1/forecast?latitude=38.5244&longitude=-8.8882&current=precipitation,rain,snowfall,cloud_cover,wind_speed_10m,temperature_2m";
-
+let gtemperature = null;
+let myW = null;
 getWeather(api_url).then((data) => {
-  const status = filterConditions(data);
+  const wstatus = filterConditions(data);
+  myW = serveProperNames(wstatus);
+  gtemperature = formatTemperature(data["temperature"].toString());
+  gtemperature = Number(gtemperature);
   const temperature = formatTemperature(data["temperature"].toString());
   const el = document.getElementById("myTemperature");
   el.innerHTML = temperature.toString() + "ºC";
+  document.getElementById("weather-name").innerHTML =
+    serveProperNames(wstatus);
   document
-    .querySelector("div.weather-status_image > img")
-    .setAttribute("src", `/public/imgs/weather/${status}.png`);
+    .getElementById("tempIcon")
+    .setAttribute("src", `/public/imgs/weather/${wstatus}.png`);
 });
 
 function getWeather(url) {
@@ -43,6 +49,11 @@ function getWeather(url) {
     });
 }
 
+function formatTemperature(temperature) {
+  if (!temperature.includes(".")) return temperature;
+  return temperature.split(".")[0];
+}
+
 function filterConditions(weather) {
   if (weather.snowfall > 0) return "snow";
   if (weather.rain > 0 || weather.precipitation > 0) return "rain";
@@ -51,20 +62,24 @@ function filterConditions(weather) {
   return "sunny";
 }
 
-function formatTemperature(temperature) {
-  if (!temperature.includes(".")) return temperature;
-  return temperature.split(".")[0];
+
+
+function serveProperNames(weatherName) {
+  if (weatherName === "snow") return "Snowy";
+  if (weatherName === "rain") return "Rainy";
+  if (weatherName === "windy_cloud") return "Windy with Clouds";
+  if (weatherName === "clouds") return "Cloudy";
+  if (weatherName === "sunny") return "Sunny";
+  throw new Error("The Weather Name is not defined!");
 }
 
 //#endregion
 
 //#region Recomendations
-myclothes((clothes) => {
-  // console.log(clothes);
-  Clothes(clothes);
-});
 activaRequest((event) => {
-  console.log(event);
+
+
+
 });
 
 function activaRequest(callback) {
@@ -81,14 +96,16 @@ function activaRequest(callback) {
   });
 }
 
-function myclothes(callback) {
+
+function getClothes() {
   fetch("http://127.0.0.1/recommendation.php", {
     method: "post",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      userID: 1, // some user info to select on db :)
+      temperature: gtemperature,
+      weather: myW,
     }),
   })
     .then((response) => {
@@ -96,7 +113,7 @@ function myclothes(callback) {
       // console.log(response);
       return response.json();
     })
-    .then((data) => callback(data))
+    .then((data) => console.log("WORK HERE"))
     .catch((error) => console.error(error));
 }
 
@@ -122,7 +139,7 @@ function runningClothes() {
   return;
 }
 
-function Clothes(CEvent, ClothesArray) {
+function Clothes(CEvent) {
   switch (CEvent.toString().toLowerCase()) {
     case "any":
       return anyClothes();
