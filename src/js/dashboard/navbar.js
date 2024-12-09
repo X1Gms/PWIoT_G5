@@ -74,7 +74,10 @@ function showNavbar() {
 }
 
 function RenderEverything() {
-  const isAdmin = true;
+  const role = [true, false];
+
+  const isAdmin =
+    role[JSON.parse(sessionStorage.getItem("session")).value.role - 1];
   isAdmin && navbarArray.push(Settings);
   renderNavbar();
 }

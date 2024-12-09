@@ -72,7 +72,7 @@ main {
 }
 
 aside.filter {
-  height: 650px;
+  height: 682px;
   overflow-y: auto;
   max-width: 300px;
   width: 100%;
@@ -83,6 +83,7 @@ aside.filter {
   align-items: center;
   padding: 30px 15px 30px 15px;
   background: #fff;
+  align-self: flex-end;
 }
 
 aside.all_clothes {
@@ -180,6 +181,7 @@ h1 {
   padding: 1.5rem;
   margin-left: auto;
   margin-right: auto;
+  min-height: 190px;
 }
 .clothes-item img {
   width: 7.5rem;
@@ -213,10 +215,9 @@ section > h1 {
 
 .holder {
   max-width: 80rem;
-  height: 574px;
+  height: 592px;
   overflow-y: auto;
   display: flex;
-  align-items: center;
 }
 
 section {
@@ -496,9 +497,9 @@ input[type="text"],
   aside.all_clothes.enable,
   aside.filter.enable {
     display: flex;
-    max-height: 75vh;
+    max-height: 770px;
     height: 100%;
-    position: fixed;
+    top: 20px;
   }
 
   main {

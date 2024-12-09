@@ -130,7 +130,6 @@ const create_clothes = {
   tempRange: "",
   index: 0,
   material: "",
-  type: "",
 };
 
 const CleanClothe = () => {
@@ -300,7 +299,7 @@ const SelEditClothes = (id) => {
 <span class="material-symbols-outlined close" onclick="changeSchema();" >
 close
 </span><h2>Add Your Preferences</h2>
-  <div class="error">
+  <div class="error" id="validation-clothe">
       <span class="material-symbols-outlined"> cancel </span>
       <div class="message">Lorem Ipsum</div>
   </div>
@@ -554,6 +553,8 @@ var SelectedClothes = null;
 const submitClothe = (path, id) => {
   const backup = { ...create_clothes };
 
+  console.log(backup);
+
   const checkEmpty = Object.entries(create_clothes).find(([key, value]) => {
     return value === "" || (Array.isArray(value) && value.length === 0);
   });
@@ -569,9 +570,14 @@ const submitClothe = (path, id) => {
 
     CleanClothe();
 
+    console.log(SelectedClothes);
+
     if (SelectedClothes != null) {
       SelectedClothes.classList.toggle("enable");
     }
+
+    const clothes = ConvetFieldsToIndex();
+    console.log(clothes);
 
     SelectedClothes = null;
     document.querySelector(".set_clothes").style.display = "none";
@@ -631,6 +637,7 @@ const onEdit = (id) => {
   create_clothes.tempRange = item.tempRange;
   create_clothes.src = item.src;
   create_clothes.material = item.material;
+  create_clothes.type = item.type;
 
   const lookup = {
     "": item.name,
@@ -704,8 +711,8 @@ const showAside = (aside) => {
   }
 };
 
-const SubmitAllClothes = () => {
-  const transformed_clothes = created_clothes.map((cloth) => ({
+const ConvetFieldsToIndex = () => {
+  return created_clothes.map((cloth) => ({
     ...cloth,
     events: cloth.events.map(
       (event) =>
@@ -714,25 +721,41 @@ const SubmitAllClothes = () => {
     weather: clothes_attributes[2].values.indexOf(cloth.weather),
     tempRange: clothes_attributes[3].values.indexOf(cloth.tempRange), // Skip "Temperature Range" label
     material: clothes_attributes[4].values.indexOf(cloth.material), // Skip "Material" label
+    type: TypeOfClothes.indexOf(cloth.type),
   }));
+};
 
-  console.log(transformed_clothes);
+const SubmitAllClothes = () => {
+  const transformed_clothes = ConvetFieldsToIndex();
 
-  // if (transformedClothes.length > 3) {
-  //   fetch("http://localhost/addUserPreferences.php", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(transformedClothes),
-  //   });
-  //   // window.location.href = "/src/pages/home/get-started.html";
-  // } else {
-  //   const error = document.querySelector("#validation_all_clothes.error");
-  //   const message = document.querySelector("#validation_all_clothes .message");
-  //   error.style.display = "flex";
-  //   message.textContent = "Select at least 4 clothes";
-  // }
+  if (transformed_clothes.length > 3) {
+    G5Fetch(
+      "http://localhost:80/addUserPreferences.php",
+      "POST",
+      {
+        "Content-Type": "application/json",
+      },
+      {
+        transformed_clothes,
+        id: JSON.parse(sessionStorage.getItem("session")).value.id,
+      }
+    )
+      .then((data) => {
+        if (data.success == "1") {
+          window.location.href = "/src/pages/home/get-started.html";
+        } else {
+          console.error(data.message);
+        }
+      })
+      .catch((e) => {
+        console.error("Error:", e);
+      });
+  } else {
+    const error = document.querySelector("#validation_all_clothes.error");
+    const message = document.querySelector("#validation_all_clothes .message");
+    error.style.display = "flex";
+    message.textContent = "Select at least 4 clothes";
+  }
 };
 
 // At the end of your file:
@@ -746,3 +769,4 @@ window.showNavbar = showNavbar;
 window.showAside = showAside;
 window.SubmitAllClothes = SubmitAllClothes;
 window.syncInput = syncInput;
+window.ConvetFieldsToIndex = ConvetFieldsToIndex;

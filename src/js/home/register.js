@@ -1,5 +1,6 @@
 import { validator } from "../utils/validation.js";
 import { FormError } from "../utils/errors.js";
+import { G5Fetch, setSessionWithExpiry } from "../../../index.js";
 
 const form = document.querySelector("#register-form");
 
@@ -44,23 +45,28 @@ form.addEventListener("submit", function (e) {
     return;
   } else {
     // Prepare data for the request as a JavaScript object
-    const data = {
+    const obj = {
       name: name,
       email: email,
       password: password,
     };
 
-    // Send the form data as JSON
-    fetch("http://localhost:80/register.php", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json", // Send JSON data
+    G5Fetch(
+      "http://localhost:80/register.php",
+      "POST",
+      {
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(data), // Convert the data object to a JSON string
-    })
-      .then((response) => response.json()) // Parse JSON response from PHP
+      obj
+    )
       .then((data) => {
         if (data.success === "1") {
+          setSessionWithExpiry({
+            email: obj.email,
+            password: obj.password,
+            role: data.role,
+            id: data.id,
+          });
           window.location.href = "/src/pages/home/welcome.html";
         } else {
           error.show(data.message || "An error occurred. Please try again.");
