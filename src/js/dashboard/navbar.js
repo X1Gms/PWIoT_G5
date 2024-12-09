@@ -33,25 +33,29 @@ function renderNavbar() {
     </span>
     <h2>WearWeather</h2>
     <hr />
-    <ul>
-      ${navbarArray
-        .map(({ name, icon, url, alternate }) => {
-          // Check if the current item's URL matches the current path
-          const isActive = currentPath === url || currentPath === alternate;
-          return `
-            <li>
-              <a href="${url}">
-                <div class="list-bar ${isActive ? "enable" : ""}">
-                  <span class="material-symbols-filled">${icon}</span>
-                </div>
-                ${name}
-              </a>
-            </li>`;
-        })
-        .join("")}
-    </ul>
-    <a href="/index.html">Sign Out</a>
-    <p class="nav-copyright">&copy; Group 5 PWDAM 2024/2026</p>`;
+    <div class="list-container">
+      <ul>
+        ${navbarArray
+          .map(({ name, icon, url, alternate }) => {
+            // Check if the current item's URL matches the current path
+            const isActive = currentPath === url || currentPath === alternate;
+            return `
+              <li>
+                <a href="${url}">
+                  <div class="list-bar ${isActive ? "enable" : ""}">
+                    <span class="material-symbols-filled">${icon}</span>
+                  </div>
+                  ${name}
+                </a>
+              </li>`;
+          })
+          .join("")}
+      </ul>
+      <div>
+        <a href="/index.html">Sign Out</a>
+        <p class="nav-copyright">&copy; Group 5 PWDAM 2024/2026</p>
+      </div>
+    </div>`;
 }
 
 function showNavbar() {

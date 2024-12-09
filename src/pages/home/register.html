@@ -45,13 +45,22 @@
             </fieldset>
 
             <fieldset>
-              <div class="circlepassword">
+              <!-- title="Your password must include at least 8 characters, 1 uppercase, 1 lowercase and 1 special character" -->
+              <div class="circlepassword" style="position: relative">
                 <label for="password">Password</label>
-                <a
-                  title="Your password must include at least 8 characters, 1 uppercase, 1 lowercase and 1 special character"
+                <button
+                  class="pass-info"
+                  type="button"
+                  popovertarget="pass_requirements"
+                  id="info"
+                  popovertarget="pass_requirements"
                 >
-                  <div class="pass-info">i</div>
-                </a>
+                  i
+                </button>
+                <div id="pass_requirements" popover>
+                  Your password must include at least 8 characters, 1 uppercase,
+                  1 lowercase and 1 special character
+                </div>
               </div>
               <input
                 type="password"
