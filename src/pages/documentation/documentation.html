@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="./../../styles/documentation/documentation.css"
+    />
+  </head>
+  <body>
+    <header class="main-header">
+      <nav>
+        <a href="./../../pages/home/welcome.html">
+          <div class="logo">
+            <p>G5</p>
+          </div>
+        </a>
+        <div class="docstitle">
+          <p>WearWeather Docs</p>
+        </div>
+      </nav>
+    </header>
+    <div class="content">
+      <aside>
+        <ul>
+          <div id="firstoption">
+          <li class="collapse list">
+            <div class="button">
+              <a href="#Introduction">Introduction</a>
+            </div>
+            <ul class="sublist open"></ul>
+          </li>
+          </div>
+
+          <li class="collapse list">
+            <div class="button">
+              <a href="#Home">Home</a>
+              <i class="material-symbols-outlined">arrow_forward_ios</i>
+            </div>
+            <ul class="sublist">
+              <li><a href="#Register">2.1 Register</a></li>
+              <li><a href="#Login">2.2 Login</a></li>
+              <li><a href="#Choose Clothes">2.3 Choose Clothes</a></li>
+            </ul>
+          </li>
+          <li class="collapse list">
+            <div class="button">
+              <a href="#Dashboard">Dashboard</a>
+              <i class="material-symbols-outlined">arrow_forward_ios</i>
+            </div>
+            <ul class="sublist">
+              <li><a href="#DashboardHome">3.1 Home</a></li>
+              <li><a href="#SideBar">3.2. SideBar</a></li>
+              <li><a href="#EditProfile">3.3. Edit Profile</a></li>
+              <li><a href="#DashboardChooseClothes">3.4. Choose Clothes</a></li>
+              <li><a href="#Settings">3.5. Settings</a></li>
+            </ul>
+          </li>
+        </ul>
+      </aside>
+      <main>
+        <section id="Introduction">
+          <!-- Main Title -->
+          <h1>1. Introduction</h1>
+
+          <!-- First Paragraph -->
+          <p>
+            Welcome to WearWeather, your personal assistant for organizing your
+            wardrobe in a virtual closet and receiving smart outfit
+            recommendations based on the weather. With WearWeather, you can
+            customize your wardrobe, set preferences, and plan your daily
+            outfits effortlessly. This manual is designed to guide you through
+            every feature of the application, ensuring you can make the most out
+            of WearWeather.
+          </p>
+        </section>
+
+        <section id="Home">
+          <h1>2. Home</h1>
+          <p>
+            The home section is where you begin your journey with WearWeather.
+            Here, you will set up your profile and preferences, allowing the
+            application to provide personalized recommendations tailored to your
+            lifestyle and local weather conditions.
+          </p>
+        </section>
+
+        <section id="Register">
+          <h2>2.1 Register</h2>
+          <div id="listasseparador">
+            <ul>
+              <li>
+                Enter your Name: Ensure your name does not include numbers or
+                special characters.
+              </li>
+              <li>
+                Provide a Valid Email Address: This will be used for account
+                access and notifications.
+              </li>
+              <li>
+                Create a Secure Password: Your password must include:
+                <ul>
+                  <li>At least 1 uppercase letter.</li>
+                  <li>At least 1 lowercase letter.</li>
+                  <li>At least 1 number.</li>
+                  <li>At least 1 special character (e.g., @, !, #).</li>
+                </ul>
+              </li>
+              <li>
+                Agree to the Terms of Use: Read and accept the terms and
+                conditions.
+              </li>
+              <li>Click Register to complete the setup.</li>
+            </ul>
+          </div>
+        </section>
+        <section id="Login">
+          <h2>2.2 Login</h2>
+          <p>
+            The login page is used to access your account. Enter your email and
+            password to enjoy personalized recommendations and access your
+            virtual closet.
+          </p>
+        </section>
+
+        <section id="Choose Clothes">
+          <h2>2.3 Choose Clothes</h2>
+          <p>
+            The Choose Clothes page allows you to define the clothing you have
+            in your virtual closet and set preferences for each item.
+          </p>
+
+          <h3>Searching for Clothes</h3>
+          <p>You can search for specific items in your wardrobe by:</p>
+          <div id="listasseparador">
+            <ul>
+              <li>Name: Search for clothing like a "coat" or "shirt".</li>
+              <li>
+                Event Type: Filter by event type, such as "business," "sports,"
+                or "casual".
+              </li>
+              <li>
+                Weather Conditions: Find clothes suited for "sunny," "rainy," or
+                "cloudy" weather.
+              </li>
+              <li>
+                Temperature Range: Specify the temperature range where the
+                clothing is typically worn (e.g., 10-20°C).
+              </li>
+            </ul>
+          </div>
+          <h3>Adding Preferences</h3>
+          <p>For each clothing item, you can set preferences:</p>
+          <div id="listasseparador">
+            <ul>
+              <li>
+                Name: Give the clothing a unique name for easy identification.
+              </li>
+              <li>
+                Event Type: Choose the event(s) where the item is typically worn
+                (e.g., sports, business, casual).
+              </li>
+              <li>
+                Weather Conditions: Select the weather conditions that suit the
+                item, such as "rainy," "sunny," or "cloudy."
+              </li>
+              <li>
+                Temperature Range: Define the range of temperatures suitable for
+                that piece of clothing.
+              </li>
+              <li>
+                Material: Specify the material of the clothing item for easy
+                identification.
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="Dashboard">
+          <h1>3. Dasbhoard</h1>
+          <p>
+            The Dashboard is your main hub for managing and viewing
+            recommendations:
+          </p>
+          <div id="listasseparador">
+            <ul>
+              <li>
+                View daily outfit suggestions based on the weather and your
+                preferences.
+              </li>
+              <li>
+                Specify activities (e.g., walking, business) for more accurate
+                recommendations.
+              </li>
+              <li>Access the SideBar for easy navigation.</li>
+            </ul>
+          </div>
+        </section>
+        <section id="DashboardHome">
+          <h2>3.1 Home</h2>
+          <p>
+            In the Home section, the user will receive clothing recommendations
+            for the day based on the current weather and their preferences. The
+            user can also select an activity for the day, such as a walk or
+            business, to receive more tailored outfit suggestions.
+          </p>
+        </section>
+
+        <section id="SideBar">
+          <h2>3.2 SideBar</h2>
+          <p>
+            In the SideBar, the user will have quick access to several important
+            features:
+          </p>
+          <div id="listasseparador">
+            <ul>
+              <li>Home: Access daily clothing recommendations.</li>
+              <li>
+                Edit Profile: Edit personal information, such as the user's
+                name, email, and password.
+              </li>
+              <li>
+                Check Clothes: View and manage the items in the virtual
+                wardrobe.
+              </li>
+              <li>
+                Settings: Manage clothing preferences, such as adding, editing,
+                or deleting clothing items.
+              </li>
+              <li>Sign Out: Log out of the account securely.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="EditProfile">
+          <h2>3.3 Edit Profile</h2>
+          <p>
+            In the Edit Profile page, the user has the option to update their
+            account details:
+          </p>
+          <div id="listasseparador">
+            <ul>
+              <li>Name: Change the displayed name.</li>
+              <li>
+                Email: Update the email address associated with the account.
+              </li>
+              <li>
+                Password: Create a new password for the account if desired.
+              </li>
+            </ul>
+          </div>
+        </section>
+        <section id="DashboardChooseClothes">
+          <h2>3.4 Choose Clothes</h2>
+          <p>
+            The Choose Clothes page allows you to define the clothing you have
+            in your virtual closet and set preferences for each item.
+          </p>
+
+          <h3>Searching for Clothes</h3>
+          <p>You can search for specific items in your wardrobe by:</p>
+          <div id="listasseparador">
+            <ul>
+              <li>Name: Search for clothing like a "coat" or "shirt".</li>
+              <li>
+                Event Type: Filter by event type, such as "business," "sports,"
+                or "casual".
+              </li>
+              <li>
+                Weather Conditions: Find clothes suited for "sunny," "rainy," or
+                "cloudy" weather.
+              </li>
+              <li>
+                Temperature Range: Specify the temperature range where the
+                clothing is typically worn (e.g., 10-20°C).
+              </li>
+            </ul>
+          </div>
+          <h3>Select Clothes</h3>
+          <p>
+            The user can browse and select clothing items from a menu in the
+            middle of the page.
+          </p>
+
+          <h3>Adding Preferences</h3>
+          <p>For each clothing item, you can set preferences:</p>
+          <div id="listasseparador">
+            <ul>
+              <li>
+                Name: Give the clothing a unique name for easy identification.
+              </li>
+              <li>
+                Event Type: Choose the event(s) where the item is typically worn
+                (e.g., sports, business, casual).
+              </li>
+              <li>
+                Weather Conditions: Select the weather conditions that suit the
+                item, such as "rainy," "sunny," or "cloudy."
+              </li>
+              <li>
+                Temperature Range: Define the range of temperatures suitable for
+                that piece of clothing.
+              </li>
+              <li>
+                Material: Specify the material of the clothing item for easy
+                identification.
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="Settings">
+          <h2>3.5 Settings</h2>
+          <p>
+            In the Settings page, users can manage their wardrobe and
+            preferences.
+          </p>
+
+          <h3>Admin Settings</h3>
+          <p>Admins have additional options, such as:</p>
+          <div id="listasseparador">
+            <ul>
+              <li>
+                Manage Accounts: The ability to add, edit, or delete user
+                accounts.
+              </li>
+            </ul>
+          </div>
+          <h3>User Settings</h3>
+          <p>For regular users, they can manage their wardrobe by:</p>
+          <div id="listasseparadorlast">
+            <ul>
+              <li>
+                Edit Clothing: Update the properties of any clothing items in
+                their virtual closet.
+              </li>
+              <li>Delete Clothing: Remove clothing items no longer in use.</li>
+              <li>
+                Add More Clothes: Add new clothing items to their wardrobe.
+              </li>
+            </ul>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script>
+      // Select all collapsible list items
+      const collapsibleLists = document.querySelectorAll(".collapse.list");
+
+      collapsibleLists.forEach((list) => {
+        list.addEventListener("click", (event) => {
+          // Check if the click is on the main button (not on sublist items)
+          if (!event.target.closest(".button")) return;
+
+          // Prevent the click from affecting subelements unnecessarily
+          event.stopPropagation();
+
+          // Select the corresponding sublist
+          const sublist = list.querySelector(".sublist");
+
+          // Close all other open sublists except the current one
+          document.querySelectorAll(".sublist.open").forEach((openSublist) => {
+            if (openSublist !== sublist) {
+              openSublist.style.maxHeight = null; // Reset max-height to close the sublist
+              openSublist.classList.remove("open"); // Remove the "open" class
+            }
+          });
+
+          // Toggle the clicked sublist
+          if (sublist.classList.contains("open")) {
+            sublist.style.maxHeight = null; // Close the sublist
+            sublist.classList.remove("open"); // Remove the "open" class
+          } else {
+            sublist.style.maxHeight = sublist.scrollHeight + "px"; // Open the sublist by setting its max-height
+            sublist.classList.add("open"); // Add the "open" class
+          }
+        });
+      });
+
+      // Select all buttons
+      const buttons = document.querySelectorAll(".button");
+
+      buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+          // Removes class "active" of the others buttons
+          buttons.forEach((btn) => btn.classList.remove("active"));
+
+          // Add class "active" to the clicked button
+          button.classList.add("active");
+        });
+      });
+    </script>
+  </body>
+</html>
