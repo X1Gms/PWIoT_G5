@@ -175,13 +175,11 @@ h1 {
 
 .clothes-item {
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
   width: 200px;
   padding: 1.5rem;
   margin-left: auto;
   margin-right: auto;
-  min-height: 190px;
 }
 .clothes-item img {
   width: 7.5rem;
