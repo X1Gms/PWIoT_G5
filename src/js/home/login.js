@@ -1,5 +1,6 @@
 import { validator } from "../utils/validation.js";
 import { FormError } from "../utils/errors.js";
+import { G5Fetch, setSessionWithExpiry } from "../../../index.js";
 
 const form = document.querySelector("#login-form");
 const errorElement = document.querySelector(".validation-error");
@@ -25,23 +26,29 @@ form.addEventListener("submit", function (e) {
   }
 
   // Enviar os dados para o servidor para verificação
-  const data = {
+  const obj = {
     email: email,
     password: password,
   };
 
-  fetch("http://localhost/login.php", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json", // Enviar dados como JSON
+  G5Fetch(
+    "http://localhost:80/login.php",
+    "POST",
+    {
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify(data), // Converter objeto para JSON string
-  })
-    .then((response) => response.json()) // Parse JSON da resposta do servidor
+    obj
+  )
     .then((data) => {
       if (data.success === "1") {
+        setSessionWithExpiry({
+          email: obj.email,
+          password: obj.password,
+          role: data.role,
+          id: data.id,
+        });
         // Login bem-sucedido, redireciona para a página apropriada
-        window.location.href = data.redirect;
+        window.location.href = "/src/pages/dashboard/home.html";
       } else {
         // Mostrar mensagem de erro retornada pelo servidor
         error.show(data.message || "Invalid Credentials");

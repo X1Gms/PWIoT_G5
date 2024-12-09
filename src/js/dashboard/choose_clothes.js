@@ -1,3 +1,5 @@
+import { G5Fetch } from "../../../index.js";
+
 const search = [
   {
     name: "",
@@ -23,10 +25,18 @@ const search = [
   {
     values: [
       "Temperature Range",
-      "-10 – 10ºC",
-      "10 – 20ºC",
-      "20 – 30ºC",
-      "30 – 40ºC",
+      "-40 – -30ºC",
+      "-29 – -20ºC",
+      "-10 – 0ºC",
+      "-19 – -10ºC",
+      "-9 – 0ºC",
+      "1 – 10ºC",
+      "11 – 20ºC",
+      "21 – 30ºC",
+      "31 – 40ºC",
+      "41 – 50ºC",
+      "51 – 60ºC",
+      "61 – 70ºC",
     ],
     arrow: "s_temp",
     dropdown: "TempRange",
@@ -66,11 +76,18 @@ const clothes_attributes = [
   {
     values: [
       "Temperature Range",
+      "-40 – -30ºC",
+      "-29 – -20ºC",
       "-10 – 0ºC",
-      "0 – 10ºC",
-      "10 – 20ºC",
-      "20 – 30ºC",
-      "30 – 40ºC",
+      "-19 – -10ºC",
+      "-9 – 0ºC",
+      "1 – 10ºC",
+      "11 – 20ºC",
+      "21 – 30ºC",
+      "31 – 40ºC",
+      "41 – 50ºC",
+      "51 – 60ºC",
+      "61 – 70ºC",
     ],
     arrow: "t_temp",
     dropdown: "T-TempRange",
@@ -86,89 +103,16 @@ const clothes_attributes = [
   },
 ];
 
-const ChosenClothes = [
-  {
-    name: "Coat",
-    src: "/public/imgs/clothes/coat.png",
-    properties: {
-      event: ["Sports", "Walk", "Academic"],
-      weather: ["Snowing", "Rainy"],
-      tempRange: ["-10 – 10ºC"],
-    },
-  },
-  {
-    name: "Jacket",
-    src: "/public/imgs/clothes/jacket.png",
-    properties: {
-      event: ["Sports", "Walk"],
-      weather: ["Windy", "Snowing", "Cloudy", "Rainy"],
-      tempRange: ["-10 – 10ºC", "10 – 20ºC"],
-    },
-  },
-  {
-    name: "Scarf",
-    src: "/public/imgs/clothes/scarf.png",
-    properties: {
-      event: ["Walk"],
-      weather: ["Snowing", "Windy"],
-      tempRange: ["-10 – 10ºC"],
-    },
-  },
-  {
-    name: "Beanie",
-    src: "/public/imgs/clothes/beanie.png",
-    properties: {
-      event: ["Sports", "Walk"],
-      weather: ["Snowing", "Windy"],
-      tempRange: ["-10 – 10ºC", "10 – 20ºC"],
-    },
-  },
-  {
-    name: "Gloves",
-    src: "/public/imgs/clothes/gloves.png",
-    properties: {
-      event: ["Sports", "Walk"],
-      weather: ["Snowing", "Windy"],
-      tempRange: ["-10 – 10ºC", "10 – 20ºC"],
-    },
-  },
-  {
-    name: "Boots",
-    src: "/public/imgs/clothes/boots.png",
-    properties: {
-      event: ["Walk", "Business", "Academic"],
-      weather: ["Snowing", "Windy", "Cloudy", "Rainy"],
-      tempRange: ["-10 – 10ºC", "10 – 20ºC", "20 – 30ºC"],
-    },
-  },
-  {
-    name: "T-Shirt",
-    src: "/public/imgs/clothes/t-shirt.png",
-    properties: {
-      event: ["Sports", "Walk", "Beach", "Academic"],
-      weather: ["Sunny", "Cloudy"],
-      tempRange: ["10 – 20ºC", "20 – 30ºC", "30 – 40ºC"],
-    },
-  },
-  {
-    name: "Ear Muffs",
-    src: "/public/imgs/clothes/ear_murfs.png",
-    properties: {
-      event: ["Sports", "Walk", "Academic"],
-      weather: ["Snowing", "Windy", "Cloudy"],
-      tempRange: ["-10 – 10ºC", "10 – 20ºC"],
-    },
-  },
-  {
-    name: "Long Sleeve Shirt",
-    src: "/public/imgs/clothes/long_sleeve_shirt.png",
-    properties: {
-      event: ["Walk", "Business", "Academic"],
-      weather: ["Windy", "Rainy", "Sunny", "Cloudy", "Snowing"],
-      tempRange: ["-10 – 10ºC", "10 – 20ºC", "20 – 30ºC"],
-    },
-  },
+const TypeOfClothes = [
+  "Type",
+  "Top",
+  "Bottom",
+  "Shoes",
+  "Outerwear",
+  "Accessory",
 ];
+
+let ChosenClothes = [];
 
 const filters = {
   name: "",
@@ -186,6 +130,7 @@ const create_clothes = {
   tempRange: "",
   index: 0,
   material: "",
+  type: "",
 };
 
 const CleanClothe = () => {
@@ -196,6 +141,7 @@ const CleanClothe = () => {
   create_clothes.src = "";
   create_clothes.index = 0;
   create_clothes.material = "";
+  create_clothes.type = "";
 };
 
 const resetNames = (attributes) => {
@@ -241,7 +187,8 @@ const dropdown = ({ values, dropdown, name, arrow }) => `
   </div>
 `;
 
-const multipleDropdown = ({ values, dropdown, name, arrow }) => `
+const multipleDropdown = ({ values, dropdown, name, arrow }) => {
+  return `
 <div class="dropdown" id="${dropdown}">
   <div class="mdropdown-box dropbox">
     <p>${name}</p>
@@ -269,6 +216,7 @@ const multipleDropdown = ({ values, dropdown, name, arrow }) => `
   </div>
 </div>
 `;
+};
 
 const input = ({ placeholder, id, from, name }) => `
   <input type="text" placeholder="${placeholder}" id="${id}" oninput="syncInput('${id}', '${from}')" value="${name}" />
@@ -300,7 +248,8 @@ const AllClothes = () => {
             Event: ${item.events.join(", ")}<br/>
             Weather: ${item.weather}<br/>
             Temperature Range: ${item.tempRange}<br/>
-            Material: ${item.material}
+            Material: ${item.material}<br/>
+            Type: ${item.type}
           </p>
           <div class="dpt_desc_edit" onclick="onEdit(${index})">        
             <span class="material-symbols-outlined">border_color</span>
@@ -353,7 +302,7 @@ const SelEditClothes = (id) => {
 <span class="material-symbols-outlined close" onclick="changeSchema();" >
 close
 </span><h2>Add Your Preferences</h2>
-  <div class="error">
+  <div class="error" id="validation-clothe">
       <span class="material-symbols-outlined"> cancel </span>
       <div class="message">Lorem Ipsum</div>
   </div>
@@ -387,12 +336,10 @@ const generateDropdownHTML = (data) =>
 const generateClothesHTML = (clothes, filters) => {
   const Clothes = clothes
     .filter(({ properties }) => {
-      // Ensure that the 'properties' object exists
       if (!properties) return false;
 
       const { event, tempRange, weather } = properties;
 
-      // Check if the clothing matches the event, weather, and temperature filter
       const matchesEvent = !filters.event || event.includes(filters.event);
       const matchesWeather =
         !filters.weather || weather.includes(filters.weather);
@@ -401,7 +348,7 @@ const generateClothesHTML = (clothes, filters) => {
 
       return matchesEvent && matchesWeather && matchesTemperature;
     })
-    .map(({ name, src }, index) => {
+    .map(({ name, src, type }, index) => {
       const matchesFilter =
         !filters.name ||
         (filters.name !== "" &&
@@ -413,7 +360,7 @@ const generateClothesHTML = (clothes, filters) => {
                   <div class="img-background" id="${name + "_" + index}"
                    onclick="CreateClothe('${src}','${name + "_" + index}',${
           index + 1
-        })">
+        },'${type}')">
                     <img src="${src}" alt="${name} Image" width="60" height="60" />
                   </div>
                   <h4>${name}</h4>
@@ -434,10 +381,80 @@ const generateClothesHTML = (clothes, filters) => {
 AllClothes();
 SelClothes();
 
-const refreshFilter = () => {
+const refreshFilter = async () => {
+  const retrieveClothes = async () => {
+    try {
+      const data = await G5Fetch("http://localhost:80/getClothes.php");
+      return data;
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      return null;
+    }
+  };
+
+  const retrieveUserClothes = async () => {
+    try {
+      const data = await G5Fetch(
+        "http://localhost:80/getUsrClothes.php",
+        "POST",
+        {
+          "Content-Type": "application/json",
+        },
+        { id: JSON.parse(sessionStorage.getItem("session")).value.id }
+      );
+      return data;
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      return null;
+    }
+  };
+
+  const chosenClothes = await retrieveClothes();
+  const UsrClothes = await retrieveUserClothes();
+
+  if (!chosenClothes && !UsrClothes) return;
+
+  const indexClothes = () => {
+    return chosenClothes.map((item) => {
+      return {
+        name: item.name,
+        src: item.image,
+        properties: {
+          event: item.EventType.map(
+            (i) => clothes_attributes[1].values[i - 1].name
+          ),
+          weather: item.Weather.map((i) => clothes_attributes[2].values[i]),
+          tempRange: item.TempRange.map((i) => clothes_attributes[3].values[i]),
+        },
+        type: TypeOfClothes[item.type],
+      };
+    });
+  };
+
+  const indexUsrClothes = () => {
+    return UsrClothes.map((item) => {
+      return {
+        name: item.name,
+        src: item.src,
+        events: item.events.map(
+          (i) => clothes_attributes[1].values[i - 1].name
+        ),
+        weather: clothes_attributes[2].values[item.weather],
+        tempRange: clothes_attributes[3].values[item.tempRange],
+        material: clothes_attributes[4].values[item.material],
+        type: TypeOfClothes[item.type],
+      };
+    });
+  };
+
+  created_clothes = indexUsrClothes();
+
+  ChosenClothes = indexClothes();
+
   document.getElementById("S_Dropdowns").innerHTML =
     generateDropdownHTML(search);
   generateClothes();
+  AllClothes();
 
   setupDropdownListeners();
 };
@@ -611,7 +628,7 @@ const submitClothe = (path, id) => {
 
 var show_class = "";
 
-const CreateClothe = (src, id, index) => {
+const CreateClothe = (src, id, index, type) => {
   resetNames(clothes_attributes);
   SelClothes();
 
@@ -640,6 +657,7 @@ const CreateClothe = (src, id, index) => {
 
   create_clothes.src = src;
   create_clothes.index = index;
+  create_clothes.type = type;
 
   document.querySelector(".img_clothes > img").src = src;
 };
@@ -653,17 +671,22 @@ const onEdit = (id) => {
   create_clothes.tempRange = item.tempRange;
   create_clothes.src = item.src;
   create_clothes.material = item.material;
+  create_clothes.type = item.type;
 
   const lookup = {
     "": item.name,
+    Event: item.events,
     Weather: item.weather,
     "Temperature Range": item.tempRange,
     Material: item.material,
   };
 
-  // Update the existing clothes_attributes array
   clothes_attributes.forEach((attr) => {
-    if (lookup[attr.name] !== undefined) {
+    if (attr.name === "Event" && Array.isArray(attr.values)) {
+      attr.values.forEach((event) => {
+        event.isChecked = item.events.includes(event.name);
+      });
+    } else if (lookup[attr.name] !== undefined) {
       attr.name = lookup[attr.name];
     }
   });
@@ -736,23 +759,52 @@ const SubmitAllClothes = () => {
     weather: clothes_attributes[2].values.indexOf(cloth.weather),
     tempRange: clothes_attributes[3].values.indexOf(cloth.tempRange), // Skip "Temperature Range" label
     material: clothes_attributes[4].values.indexOf(cloth.material), // Skip "Material" label
+    type: TypeOfClothes.indexOf(cloth.type),
   }));
 
-  console.log(transformed_clothes);
+  if (transformed_clothes.length > 3) {
+    console.log({
+      transformed_clothes,
+      id: JSON.parse(sessionStorage.getItem("session")).value.id,
+    });
 
-  // if (transformedClothes.length > 3) {
-  //   fetch("http://localhost/addUserPreferences.php", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(transformedClothes),
-  //   });
-  //   // window.location.href = "/src/pages/home/get-started.html";
-  // } else {
-  //   const error = document.querySelector("#validation_all_clothes.error");
-  //   const message = document.querySelector("#validation_all_clothes .message");
-  //   error.style.display = "flex";
-  //   message.textContent = "Select at least 4 clothes";
-  // }
+    G5Fetch(
+      "http://localhost:80/editUserPreferences.php",
+      "POST",
+      {
+        "Content-Type": "application/json",
+      },
+      {
+        transformed_clothes,
+        id: JSON.parse(sessionStorage.getItem("session")).value.id,
+      }
+    )
+      .then((data) => {
+        if (data.success == "1") {
+          window.location.href = "/src/pages/dashboard/home.html";
+        } else {
+          console.error(data.message);
+        }
+      })
+      .catch((e) => {
+        console.error("Error:", e);
+      });
+  } else {
+    const error = document.querySelector("#validation_all_clothes.error");
+    const message = document.querySelector("#validation_all_clothes .message");
+    error.style.display = "flex";
+    message.textContent = "Select at least 4 clothes";
+  }
 };
+
+// At the end of your file:
+window.refreshFilter = refreshFilter;
+window.check = check;
+window.CreateClothe = CreateClothe;
+window.submitClothe = submitClothe;
+window.onEdit = onEdit;
+window.changeSchema = changeSchema;
+window.showNavbar = showNavbar;
+window.showAside = showAside;
+window.SubmitAllClothes = SubmitAllClothes;
+window.syncInput = syncInput;
