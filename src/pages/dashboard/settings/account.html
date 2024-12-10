@@ -10,9 +10,10 @@
     />
     <title>WearWeather</title>
     <script src="/src/js/dashboard/navbar.js" defer></script>
+    <script src="/src/js/home/account.js" defer></script>
     <link rel="stylesheet" href="../../../styles/dashboard/acount.css" />
     <link rel="stylesheet" href="../../../styles/dashboard/navbar.css" />
-    <script type="module" src="../../../js/utils/sessionValidate.js"></script>
+
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
       rel="stylesheet"
@@ -46,62 +47,14 @@
             <thead>
               <tr>
                 <th>#</th>
-                <th>Icon</th>
                 <th>Name</th>
                 <th>Date Created</th>
                 <th>Roles</th>
               </tr>
             </thead>
-            <tbody>
-              <tr class="linha-clara">
-                <td style="font-weight: 800">1</td>
-                <td style="background-color: transparent">
-                  <i
-                    class="fas fa-user"
-                    style="color: black; font-size: 30px"
-                  ></i>
-                </td>
-                <td>Lorem ipsum dolor sit.</td>
-                <td>07/11/2024</td>
-                <td>Admin</td>
-              </tr>
-              <tr class="linha-clara">
-                <td style="font-weight: 800">2</td>
-                <td style="background-color: transparent">
-                  <i
-                    class="fas fa-user"
-                    style="color: black; font-size: 30px"
-                  ></i>
-                </td>
-                <td>Lorem ipsum dolor sit.</td>
-                <td>22/12/2002</td>
-                <td>User</td>
-              </tr>
-              <tr class="linha-clara">
-                <td style="font-weight: 800">3</td>
-                <td style="background-color: transparent">
-                  <i
-                    class="fas fa-user"
-                    style="color: black; font-size: 30px"
-                  ></i>
-                </td>
 
-                <td>Lorem ipsum dolor sit.</td>
-                <td>13/09/2020</td>
-                <td>User</td>
-              </tr>
-              <tr class="linha-clara">
-                <td style="font-weight: 800">4</td>
-                <td style="background-color: transparent">
-                  <i
-                    class="fas fa-user"
-                    style="color: black; font-size: 30px"
-                  ></i>
-                </td>
-                <td>Lorem ipsum dolor sit.</td>
-                <td>11/12/2011</td>
-                <td>User</td>
-              </tr>
+            <tbody id="users-table-body">
+              <!-- Dados serão carregados aqui -->
             </tbody>
           </table>
         </div>
