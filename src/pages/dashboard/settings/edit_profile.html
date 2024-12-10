@@ -10,23 +10,14 @@
     />
     <title>WearWeather</title>
     <link rel="stylesheet" href="/style.css" />
-    <script src="/src/js/dashboard/edit_profile.js" defer></script>
     <script src="/src/js/dashboard/navbar.js" defer></script>
-    <script
-      type="module"
-      src="/src/js/dashboard/edit_profile_valiations.js"
-      defer
-    ></script>
     <link rel="stylesheet" href="/src/styles/dashboard/edit_profile.css" />
     <link rel="stylesheet" href="../../../styles/dashboard/navbar.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
-      rel="stylesheet"
-    />
     <script type="module" src="../../../js/utils/sessionValidate.js"></script>
   </head>
 
   <body>
+    <div class="night"></div>
     <div class="hidden" id="navbar"></div>
     <div class="neo-nav">
       <div class="logo">
@@ -38,13 +29,10 @@
       </div>
     </div>
     <main class="content-main">
-      <div class="night"></div>
       <div class="login-form">
         <h2>Edit Profile</h2>
-        <div id="error" class="">
-          <p id="error-paragraph">Dados Inválidos, verifique-os</p>
-        </div>
-        <form id="edit-user-form" action="javascript:void(0)" method="post">
+        <div id="message">Lorem Ipsum</div>
+        <form id="edit-user-form">
           <fieldset>
             <label for="name">Name</label>
             <input
@@ -66,7 +54,22 @@
             />
           </fieldset>
           <fieldset>
-            <label for="password">New Password</label>
+            <div class="circlepassword">
+              <label for="password">Password</label>
+              <button
+                class="pass-info"
+                type="button"
+                popovertarget="pass_requirements"
+                id="info"
+                popovertarget="pass_requirements"
+              >
+                i
+              </button>
+              <div id="pass_requirements" popover>
+                Your password must include at least 8 characters, 1 uppercase, 1
+                lowercase and 1 special character
+              </div>
+            </div>
             <input
               type="password"
               id="new-password"
@@ -91,4 +94,5 @@
     <!-- Copyright desativado no design. -->
     <!-- <p id="copyright">&copy; Group 5 PWDAM 2024/2026</p> -->
   </body>
+  <script type="module" src="/src/js/dashboard/edit_profile.js"></script>
 </html>

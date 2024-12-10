@@ -13,6 +13,7 @@ export function FormError(element) {
   }
 
   return {
-    show, hide
+    show,
+    hide,
   };
 }

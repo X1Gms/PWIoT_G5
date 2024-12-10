@@ -40,7 +40,7 @@ header {
   align-self: center;
   width: 100%;
   max-width: 60rem;
-  height: 70rem;
+  min-height: 70rem;
   padding: calc(10px + 3vw);
   border-radius: 3.2rem;
   display: flex;
@@ -101,7 +101,7 @@ button {
   border: none;
 }
 
-.login-form button {
+.login-form button:not(.pass-info) {
   max-width: 28rem;
   width: 100%;
   margin-top: 4.2rem;
@@ -113,7 +113,7 @@ button {
   transition: 0.3s ease-in-out;
 }
 
-.login-form button:hover {
+.login-form button:not(.pass-info):hover {
   filter: brightness(0.8);
 }
 
@@ -128,6 +128,13 @@ button {
   text-decoration: underline;
 }
 
+.circlepassword {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
 /* Css for (i) icon on current password */
 .new-password {
   display: flex;
@@ -135,34 +142,47 @@ button {
   align-items: center;
 }
 
-#error {
+#message {
+  max-width: 350px;
+  width: 100%;
+  align-self: center;
+  padding: 15px 30px;
+  border-radius: 15px;
+  font-size: 20px;
+  margin-bottom: 15px;
+  text-align: center;
   display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-  margin: 1rem 3rem;
-  font-family: "Mulish", sans-serif;
-  font-size: 2.4rem;
 }
 
-.red {
-  background-color: #ae809a;
-  color: #f0d8e8;
+#message.error {
+  display: block;
+  background: #918f8f;
+  color: #fff;
 }
 
-.green {
-  color: #69b29a;
-  background-color: #d8f0e0;
+#message.success {
+  display: block;
+  background: #ebebeb;
+  color: var(--gray-box-text);
+  font-weight: 600;
 }
 
-.validation-error {
-  display: none;
-  border-radius: 1.4rem;
-  padding: 1.2rem;
-  width: 75%;
-  justify-content: center;
-  color: white;
-  background-color: rgba(255, 0, 0, 0.7);
+#info {
+  anchor-name: --anchor-el;
+}
+
+#pass_requirements {
+  position: absolute;
+  top: anchor(--anchor-el bottom);
+  left: anchor(--anchor-el right);
+  translate: -100%;
+  width: 100%;
+  max-width: 250px;
+  background: #fff;
+  padding: 15px;
+  border: 0;
+  box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
 }
 
 @media screen and (max-width: 1200px) {
