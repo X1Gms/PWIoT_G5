@@ -50,9 +50,10 @@ function renderNavbar() {
         })
         .join("")}
     </ul>
-    <a href="/index.html">Sign Out</a>
+    <a id="logout" href="/index.html">Sign Out</a>
     <p class="nav-copyright">&copy; Group 5 PWDAM 2024/2026</p>`;
 }
+
 
 function showNavbar() {
   /* DEFAULT BODY MARGIN AND PADDING
@@ -83,3 +84,11 @@ function RenderEverything() {
 }
 
 RenderEverything();
+
+
+document.getElementById("logout").addEventListener('click', function(e) {
+
+  sessionStorage.removeItem("session");
+  window.location.replace("http://127.0.0.1:3000/")
+
+});

@@ -157,6 +157,14 @@ hr {
   text-align: center;
 }
 
+[src=''] {
+  display: none;
+}
+
+.hidden{
+  display: none;
+}
+
 @media screen and (max-width: 1200px) {
 
   .neo-nav{
