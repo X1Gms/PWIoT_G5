@@ -58,6 +58,7 @@ function renderNavbar() {
     </div>`;
 }
 
+
 function showNavbar() {
   /* DEFAULT BODY MARGIN AND PADDING
           margin: 0 auto;
@@ -87,3 +88,11 @@ function RenderEverything() {
 }
 
 RenderEverything();
+
+
+document.getElementById("logout").addEventListener('click', function(e) {
+
+  sessionStorage.removeItem("session");
+  window.location.replace("http://127.0.0.1:3000/")
+
+});
