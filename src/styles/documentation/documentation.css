@@ -56,7 +56,6 @@ aside ul {
 }
 body {
   height: 100vh;
-  font-family: "Mulish", sans-serif;
 }
 
 .main-header nav {
@@ -73,6 +72,7 @@ body {
 }
 
 .docstitle p {
+  font-family: "Mulish", sans-serif;
   font-size: 30px;
   font-weight: 700;
 }
@@ -109,6 +109,7 @@ header {
 }
 
 aside {
+  font-family: "Mulish", sans-serif;
   display: flex;
   background-color: var(--button-color);
   max-width: 300px;
@@ -185,7 +186,6 @@ aside {
 }
 
 main h1 {
-  font-family: Inter;
   padding-top: 50px;
   padding-left: 50px;
   font-size: 50px;
