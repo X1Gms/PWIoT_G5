@@ -1,36 +1,36 @@
-const url = "http://localhost:80/getusers.php"; // URL para o PHP que retorna os usuários
-
-const tableBody = document.getElementById("users-table-body");
+import { G5Fetch } from "../../../index.js";
 
 async function loadUsers() {
-  try {
-    const response = await fetch(url);
-    if (!response.ok) throw new Error("Error fetching data!");
+  const users = await getUsers();
+  console.log(users);
 
-    const users = await response.json();
-
-    if (users.length === 0) {
-      tableBody.innerHTML = "<tr><td colspan='5'>No users found</td></tr>";
-      return;
-    }
-
-    users.forEach((user) => {
-      const row = document.createElement("tr");
-      row.className = "linha-clara";
-
-      row.innerHTML = `
-        <td style="font-weight: 800">${user.id_user}</td>
-        <td>${user.username}</td>
-        <td>${user.created_at}</td>
-        <td>${user.role_name ? user.role_name : "Unknown Role"}</td>
-      `;
-
-      tableBody.appendChild(row);
-    });
-  } catch (error) {
-    console.error(error);
-    tableBody.innerHTML = "<tr><td colspan='5'>Error loading data</td></tr>";
+  const tbody = document.getElementById("users-table-body");
+  if (users.length > 0) {
+    tbody.innerHTML = users
+      .map((item, index) => {
+        return `<tr class="linha-clara">  
+        <td style="font-weight: 800">${index + 1}</td>
+        <td>${item.username}</td>
+        <td>${item.created_date}</td>
+        <td>${item.name_role ? item.name_role : "Unknown Role"}</td>
+      
+      </tr>`;
+      })
+      .join("");
+  } else {
+    tbody.innerHTML = "<tr><td colspan='5'>No users found</td></tr>";
+    return;
   }
 }
 
-document.addEventListener("DOMContentLoaded", loadUsers);
+async function getUsers() {
+  try {
+    const users = await G5Fetch("http://localhost:80/getusers.php");
+    return users;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return null;
+  }
+}
+
+window.loadUsers = loadUsers();
