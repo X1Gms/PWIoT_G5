@@ -217,7 +217,7 @@ const RenderTable = async () => {
   }
 
   table.innerHTML = clothesData
-    .map((item, index) => {
+    .map((item, index, id) => {
       return `
       <tr class="linha-clara">
         <td style="font-weight: 800">${index + 1}</td>
@@ -243,8 +243,9 @@ const RenderTable = async () => {
           <button
             class="openDeletePopup"
             style="background: none; border: none; cursor: pointer; margin-left: 8px;"
-            onclick="Toggle('YON', ${index + 1})"
+            onclick="Toggle('YON', ${index + 1});"
           >
+          
             <span class="material-symbols-outlined" style="font-size: 20px; color: #960202">
               delete
             </span>
@@ -285,11 +286,11 @@ const RenderMessage = (checking, message) => {
   `;
 };
 
-const RenderYN = () => {
+const RenderYN = (id) => {
   document.getElementById("YON").innerHTML = `
   <h2>Would you like to delete this item?</h2>
   <div class="btns">
-  <div class="YON" onclick="DeleteClothe();">
+  <div class="YON" onclick="DeleteClothe(${id});">
     Yes
   </div>
   <div class="YON negative" onclick="Toggle('YON');">No</div>
@@ -367,7 +368,12 @@ const attributeNames = (attributes, item) => {
   console.log(create_clothes);
 };
 //Function to Toggle the Form
-const Toggle = (id) => {
+const Toggle = (id, idObj) => {
+  console.log(idObj);
+
+  if (id == "YON" && idObj) {
+    RenderYN(idObj);
+  }
   const Container = document.getElementById(id);
   const night = document.querySelector(".night");
   Container.classList.toggle("enable");
@@ -542,9 +548,26 @@ const displayError = (message) => {
   message_el.textContent = message;
 };
 
-const DeleteClothe = () => {
-  Toggle("YON");
-  RenderMessage(true, "Clothing Successfully Deleted");
+const DeleteClothe = (id) => {
+  G5Fetch(
+    "http://localhost:80/delete_clothe.php",
+    "POST",
+    { "Content-Type": "application/json" },
+    { id }
+  )
+    .then((data) => {
+      if (data.success) {
+        Toggle("YON");
+        RenderMessage(true, "Clothing successfully deleted");
+        RenderTable();
+      } else {
+        RenderMessage(false, data.message || "Failed to delete clothing");
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      RenderMessage(false, "An error occurred while deleting clothing");
+    });
 };
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -570,18 +593,23 @@ const AddClothes = (obj) => {
 
 const EditClothes = (obj, id) => {
   G5Fetch(
-    "http://localhost:80/EditClothe.php",
+    "http://localhost:80/edit_clothes.php",
     "POST",
     { "Content-Type": "application/json" },
-    { obj, id }
+    { ...obj, id } // Enviar dados da roupa e o ID para o PHP
   )
     .then((data) => {
-      Toggle("AddClothe");
-      RenderMessage(true, data.message);
-      RenderTable();
+      if (data.success) {
+        Toggle("AddClothe");
+        RenderMessage(true, "Clothing successfully updated!");
+        RenderTable(); // Atualiza a tabela após a edição
+      } else {
+        RenderMessage(false, data.message || "Failed to update clothing.");
+      }
     })
     .catch((error) => {
       console.error("Error:", error); // Handle errors
+      RenderMessage(false, "An error occurred while updating clothing.");
     });
 };
 
@@ -593,3 +621,4 @@ window.RenderCreateClothe = RenderCreateClothe;
 window.RenderEditClothe = RenderEditClothe;
 window.RenderTable = RenderTable;
 window.DeleteClothe = DeleteClothe;
+window.RenderYN = RenderYN;
