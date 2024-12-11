@@ -2,6 +2,33 @@
 //#region Temperatures
 
 // const api_url = "https://api.open-meteo.com/v1/forecast?latitude=38.5244&longitude=-8.8882&current=temperature_2m,precipitation" // Setubal
+
+const plusCloth = [
+  document.getElementById("plus1"),
+  document.getElementById("plus2"),
+  document.getElementById("plus3"),
+  document.getElementById("plus4"),
+];
+const roupa = [
+  document.getElementById("roupa1"),
+  document.getElementById("roupa2"),
+  document.getElementById("roupa3"),
+  document.getElementById("roupa4"),
+  document.getElementById("roupa5"),
+  document.getElementById("roupa6"),
+  document.getElementById("roupa7"),
+];
+
+const roupatitle = [
+  document.getElementById("roupa1title"),
+  document.getElementById("roupa2title"),
+  document.getElementById("roupa3title"),
+  document.getElementById("roupa4title"),
+  document.getElementById("roupa5title"),
+  document.getElementById("roupa6title"),
+  document.getElementById("roupa7title"),
+];
+
 const api_url =
   "https://api.open-meteo.com/v1/forecast?latitude=38.5244&longitude=-8.8882&current=precipitation,rain,snowfall,cloud_cover,wind_speed_10m,temperature_2m,is_day,cloud_cover,relative_humidity_2m,weather_code";
 let gtemperature = null;
@@ -147,6 +174,10 @@ function serveProperNames(weatherName) {
 
 //#region Recomendations
 activaRequest((event) => {
+  document.getElementsByClassName("recommendations")[1].style.display = "";
+  document.getElementsByClassName("recommendations-error")[0].style.display =
+    "none";
+  resetDisplayClothes();
   // Clothes showing goes here
   console.log(event);
   clothes_filtered = ClothesFilter(clothes, event.toLowerCase());
@@ -160,28 +191,21 @@ activaRequest((event) => {
   let outerwearClothes = clothes_filtered.filter(
     (clothing) => clothing.name_type.toLowerCase() === "outerwear"
   );
-  let accesoryClothes = clothes_filtered.filter(
+  let accessoryClothes = clothes_filtered.filter(
     (clothing) => clothing.name_type.toLowerCase() === "accessory"
   );
   let shoesClothes = clothes_filtered.filter(
     (clothing) => clothing.name_type.toLowerCase() === "shoes"
   );
-  let top1 = null;
-  let top2 = null;
-  let top3 = null;
-  let bottom1 = null;
-  let bottom2 = null;
-  let extra = [];
-  let extra1 = null;
-  let extra2 = null;
 
+  let extra = [];
   if (outerwearClothes) {
     outerwearClothes.forEach((element) => {
       extra.push(element);
     });
   }
-  if (accesoryClothes) {
-    accesoryClothes.forEach((element) => {
+  if (accessoryClothes) {
+    accessoryClothes.forEach((element) => {
       extra.push(element);
     });
   }
@@ -196,123 +220,191 @@ activaRequest((event) => {
     });
   }
 
-  if (topClothes) {
-    top1 = topClothes.splice(
-      [Math.floor(Math.random() * topClothes.length)],
-      1
-    )[0];
-    top2 = topClothes.splice(
-      [Math.floor(Math.random() * topClothes.length)],
-      1
-    )[0];
-    top3 = topClothes.splice(
-      [Math.floor(Math.random() * topClothes.length)],
-      1
-    )[0];
+  recommendations = [[], [], []];
+  if (topClothes.length > 0) {
+    let x = 0;
+    let l = parseInt(topClothes.length);
+    while (x < 3 && x < l) {
+      recommendations[x].push(
+        topClothes.splice([Math.floor(Math.random() * topClothes.length)], 1)[0]
+      );
+      x++;
+    }
   }
-  if (bottomClothes) {
-    bottom1 = bottomClothes.splice(
-      [Math.floor(Math.random() * bottomClothes.length)],
-      1
-    )[0];
-    bottom2 = bottomClothes.splice(
-      [Math.floor(Math.random() * bottomClothes.length)],
-      1
-    )[0];
+  if (bottomClothes > 0) {
+    let x = 0;
+    let l = parseInt(bottomClothes.length);
+    while (x < 3 && x < l) {
+      recommendations[x].push(
+        bottomClothes.splice(
+          [Math.floor(Math.random() * bottomClothes.length)],
+          1
+        )[0]
+      );
+      x++;
+    }
   }
   if (extra) {
-    extra1 = extra.splice([Math.floor(Math.random() * extra.length)], 1)[0];
-    extra2 = extra.splice([Math.floor(Math.random() * extra.length)], 1)[0];
-  }
-
-  if (top1) {
-    document.getElementById("roupa1").setAttribute("src", top1.clothes_image);
-    document.getElementById("roupa1title").innerHTML = top1.clothes_name;
-  } else {
-    document.getElementById("roupa1").setAttribute("src", "");
-    document.getElementById("roupa1title").innerHTML = ""
-  }
-  if (top2) {
-    document.getElementById("roupa3").setAttribute("src", top2.clothes_image);
-    document.getElementById("roupa3title").innerHTML = top2.clothes_name;
-  } else {
-    document.getElementById("roupa3").setAttribute("src", "");
-    document.getElementById("roupa3title").innerHTML = "";
-  }
-  if (top3) {
-    document.getElementById("roupa5").setAttribute("src", top3.clothes_image);
-    document.getElementById("roupa5title").innerHTML = top3.clothes_name;
-  } else {
-    document.getElementById("roupa5").setAttribute("src", "");
-    document.getElementById("roupa5title").innerHTML = "";
-    document.getElementById("plus3").style.display = 'none'
-  }
-  if (bottom1) {
-    document.getElementById("plus1").style.display = ''
-    document.getElementById("roupa2title").innerHTML = bottom1.clothes_name;
-    document
-      .getElementById("roupa2")
-      .setAttribute("src", bottom1.clothes_image);
-  } else {
-    document.getElementById("plus1").style.display = 'none'
-    document.getElementById("roupa2").setAttribute("src", "");
-    document.getElementById("roupa2title").innerHTML = "";
-
-  }
-  if (bottom2) {
-    document.getElementById("plus2").style.display = ''
-    document
-      .getElementById("roupa4")
-      .setAttribute("src", bottom2.clothes_image);
-  } else {
-    document.getElementById("plus2").style.display = 'none'
-    document.getElementById("roupa4").setAttribute("src", "");
-    document.getElementById("roupa4title").innerHTML = "";
-
-  }
-  if (extra) {
-    if (extra1) {
-      document.getElementById("roupa6title").innerHTML =
-        extra1.clothes_name + " " + extra1.id_usr_clothes;
-      document
-        .getElementById("roupa6")
-        .setAttribute("src", extra1.clothes_image);
-    } else {
-      document.getElementById("plus3").style.display = 'none'
-      document.getElementById("roupa6title").innerHTML = "";
-      document.getElementById("roupa6").setAttribute("src", "");
+    let x = 0;
+    let l = parseInt(extra.length);
+    while (x < 2 && x < l) {
+      recommendations[2].push(
+        extra.splice([Math.floor(Math.random() * extra.length)], 1)[0]
+      );
+      x++;
     }
-    if (extra2) {
-      document.getElementById("plus4").style.display = ''
-      document.getElementById("roupa7title").innerHTML =
-        extra2.clothes_name + " " + extra2.id_usr_clothes;
-      document
-        .getElementById("roupa7")
-        .setAttribute("src", extra2.clothes_image);
-    } else {
-      document.getElementById("plus4").style.display = 'none'
-      document.getElementById("roupa7title").innerHTML = "";
-      document.getElementById("roupa7").setAttribute("src", "");
-    }
-  } else {
-    document.getElementById("plus4").style.display = 'none'
-    document.getElementById("roupa7").setAttribute("src", "");
-    document.getElementById("roupa7title").innerHTML = "";
-
-    document.getElementById("plus3").style.display = 'none'
-    document.getElementById("roupa6").setAttribute("src", "");
-    document.getElementById("roupa6title").innerHTML = "";
-
   }
+  console.log(recommendations);
+  console.log("FIM RECO ");
+  ValidateR(recommendations);
 
-  if(top3 && extra1 && extra2){
-    document.getElementById("plus3").style.display = ''
-  }
-
-  // 1st: Top + bottom/outwear/any except top and accesory
+  // 1st: Top + bottom/outwear/any except top and accessory
   // 2st: Top + other bottom/outwear/any except top and accesory
-  // 3st: Top + other bottom/outwear/any + accesory (if available, else make top+any except top+any except top)
+  // 3st: Top + other bottom/outwear/any + accessory (if available, else make top+any except top+any except top)
 });
+
+function ValidateR(myR) {
+  let counts = {
+    top: 0,
+    bottom: 0,
+    shoes: 0,
+    outerwear: 0,
+    accessory: 0,
+  };
+  if (!(myR[0].length === 0)) {
+    for (let k = 0; k < myR[0].length; k++) {
+      console.log(myR[0]);
+      if (myR[0][k].name_type === "Top") {
+        counts.top++;
+        roupa[0].setAttribute("src", myR[0][k].clothes_image);
+        roupatitle[0].innerHTML = myR[0][k].clothes_name;
+      }
+      if (myR[0][k].name_type === "Bottom") {
+        counts.bottom++;
+        roupa[1].setAttribute("src", myR[0][k].clothes_image);
+        roupatitle[1].innerHTML = myR[0][k].clothes_name;
+      }
+    }
+  }
+  // console.log(counts.top);
+  if (!(myR[1].length === 0)) {
+    for (let k = 0; k < myR[1].length; k++) {
+      if (myR[1][k].name_type === "Top") {
+        counts.top++;
+        roupa[2].setAttribute("src", myR[1][k].clothes_image);
+        roupatitle[2].innerHTML = myR[1][k].clothes_name;
+      }
+      if (myR[1][k].name_type === "Bottom") {
+        counts.bottom++;
+        roupa[3].setAttribute("src", myR[1][k].clothes_image);
+        roupatitle[3].innerHTML = myR[1][k].clothes_name;
+      }
+    }
+
+    // myR[1].forEach((el) => {
+    //   if (el.name_type === "Top"){
+    //     roupa[2].setAttribute("src",myR[1][k].clothes_image)
+    //     counts.top = counts.top++;
+    //   }
+    //   if (el.name_type === "Bottom"){
+    //     roupa[3].setAttribute("src",myR[1][k].clothes_image)
+    //     counts.top = counts.bottom++
+    //   };
+    // });
+  }
+  if (!(myR[2].length === 0)) {
+    let yy = [];
+    for (let k = 0; k < myR[2].length; k++) {
+      if (myR[2][k].name_type === "Top") {
+        counts.top++;
+        roupa[4].setAttribute("src", myR[2][k].clothes_image);
+        roupatitle[4].innerHTML = myR[2][k].clothes_name;
+      }
+      if (myR[2][k].name_type === "Bottom") {
+        counts.bottom++;
+      }
+      if (myR[2][k].name_type === "Shoes") {
+        counts.shoes++;
+      }
+      if (myR[2][k].name_type === "Outerwear") {
+        counts.outerwear++;
+      }
+      if (myR[2][k].name_type === "Accessory") {
+        counts.accessory++;
+      }
+      if (
+        myR[2][k].name_type === "Bottom" ||
+        myR[2][k].name_type === "Accessory" ||
+        myR[2][k].name_type === "Outerwear" ||
+        myR[2][k].name_type === "Shoes"
+      ) {
+        yy.push(k);
+      }
+    }
+    if (yy.length > 0) {
+      roupa[5].setAttribute("src", myR[2][yy[0]].clothes_image);
+      roupatitle[5].innerHTML = myR[2][yy[0]].clothes_name;
+    }
+
+    if (yy.length > 1) {
+      roupa[6].setAttribute("src", myR[2][yy[1]].clothes_image);
+      roupatitle[6].innerHTML = myR[2][yy[1]].clothes_name;
+    }
+  }
+  if (!counts.top >= 1 && !counts.bottom >= 1) return ShowError();
+  if (counts.bottom < 1) {
+    plusCloth[0].style.display = "none";
+    plusCloth[1].style.display = "none";
+    // roupa[2].style.display = "none";
+    roupa[3].style.display = "none";
+  }
+
+  if (counts.bottom < 2) {
+    roupa[3].style.display = "none";
+    plusCloth[1].style.display = "none";
+  }
+
+  if (
+    !counts.top > 2 &&
+    !counts.outerwear > 0 &&
+    !counts.bottom > 2 &&
+    !counts.shoes > 0 &&
+    !counts.accessory > 0
+  ) {
+    document.getElementById("3rdopt").style.display = "none";
+    document.getElementById("hr2").style.display = "none";
+    plusCloth[2].style.display = "none";
+    plusCloth[3].style.display = "none";
+  }
+  if (
+    counts.top > 2 &&
+    !(
+      counts.outerwear > 1 ||
+      counts.bottom > 2 ||
+      counts.shoes > 1 ||
+      counts.accessory > 1
+    )
+  ) {
+    plusCloth[3].style.display = "none";
+  }
+  if (
+    counts.top > 2 &&
+    !(
+      counts.outerwear > 0 ||
+      counts.bottom > 2 ||
+      counts.shoes > 0 ||
+      counts.accessory > 0
+    )
+  ) {
+    plusCloth[2].style.display = "none";
+  }
+}
+
+function ShowError() {
+  document.getElementsByClassName("recommendations")[1].style.display = "none";
+  document.getElementsByClassName("recommendations-error")[0].style.display =
+    "";
+}
 
 function activaRequest(callback) {
   document.addEventListener("DOMContentLoaded", () => {
@@ -328,6 +420,7 @@ function activaRequest(callback) {
   });
 }
 
+// Function to get clothes based on user ID.
 function getClothes(id) {
   fetch("http://127.0.0.1/recommendation.php", {
     method: "post",
@@ -335,27 +428,28 @@ function getClothes(id) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      temperature: gtemperature.toString(),
+      temperature: gtemperature.toString(), // Send the current temperature, gotten by the API
       id: id,
     }),
   })
     .then((response) => {
-      if (!response.ok) throw new Error("Failed getting clothes");
+      if (!response.ok) throw new Error("Failed getting clothes"); // Print error on console if it gets errors.
       // console.log(response);
-      return response.json();
+      return response.json(); // Parse response to Json
     })
     .then((data) => {
-      if (!data.success === 1); // No clothes!
+      if (!data.success === 1) throw new Error("No clothes");
       clothes = data.content;
       document.querySelectorAll(".event-type")[0].click();
+      // Simulate click on "any" to trigger callback function
+      // The function activarequest visually filters clothes to display to the user.
     })
     .catch((error) => console.error(error));
 }
 
 //#endregion
 
-//#region Algorithm To Recommend
-
+// Function to filter the array of clothes based on their "Event"
 function ClothesFilter(clothes, eventFilter) {
   if (eventFilter === "walk")
     return clothes.filter((clothing) => clothing.Event.includes(eventFilter));
@@ -368,4 +462,13 @@ function ClothesFilter(clothes, eventFilter) {
   return clothes;
 }
 
-//#endregion
+function resetDisplayClothes() {
+  document.getElementById("1stopt").style.display = "";
+  document.getElementById("2ndopt").style.display = "";
+  document.getElementById("3rdopt").style.display = "";
+  document.getElementById("hr1").style.display = "";
+  document.getElementById("hr1").style.display = "";
+  for (let v = 0; v < plusCloth.length; v++) plusCloth[v].style.display = "";
+  for (let v = 0; v < roupa.length; v++) roupa[v].style.display = "";
+  for (let v = 0; v < roupatitle.length; v++) roupatitle[v].style.display = "";
+}
