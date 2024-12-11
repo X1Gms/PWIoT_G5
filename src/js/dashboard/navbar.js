@@ -52,7 +52,7 @@ function renderNavbar() {
           .join("")}
       </ul>
       <div>
-        <a href="/index.html">Sign Out</a>
+        <a  id="logout" href="/index.html">Sign Out</a>
         <p class="nav-copyright">&copy; Group 5 PWDAM 2024/2026</p>
       </div>
     </div>`;
