@@ -17,6 +17,10 @@ nav {
   align-items: center;
 }
 
+.logo {
+  margin: unset;
+}
+
 .nav-hamb {
   display: flex;
   flex-direction: column;
@@ -443,11 +447,10 @@ input[type="text"],
 }
 
 .close {
-  position: absolute;
-  top: 8px;
-  left: 15px;
+  position: relative;
+  top: -15px;
+  left: -122px;
   cursor: pointer;
-  display: none;
 }
 
 .night {

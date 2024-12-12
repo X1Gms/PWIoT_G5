@@ -35,6 +35,7 @@
 }
 
 .logo {
+  margin: unset;
   height: 9.4rem;
   width: 9.4rem;
   border-radius: 50%;
@@ -53,12 +54,6 @@ main {
   display: flex;
   justify-content: space-between;
   align-content: center;
-}
-
-#copyright {
-  margin-top: auto;
-  font-size: 2rem;
-  color: #a1b7b0;
 }
 
 /* NavBar Experimental Code */
@@ -112,7 +107,8 @@ main {
   margin-bottom: 50px;
 }
 
-.nav-copyright {
+.nav-copyright,
+.nav-doc {
   font-family: "Mulish", sans-serif;
   font-size: 2rem;
   margin-left: 2rem;
@@ -121,9 +117,9 @@ main {
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
   left: 2rem;
   max-width: 240px;
+  text-align: left;
 }
 
 .list-container {
@@ -135,11 +131,10 @@ main {
   justify-content: space-between;
 }
 
-.nav-context > div > div > a {
+.nav-context > div > div > #logout {
   width: 24rem;
   height: 6rem;
   display: flex;
-  bottom: 11.6rem;
   margin-left: 2rem;
   font-family: "Inter", sans-serif;
   justify-content: center;
@@ -149,6 +144,7 @@ main {
   color: #ffffff;
   font-weight: bold;
   font-size: 2.5rem;
+  margin-top: 20px;
 }
 
 .nav-context ul {

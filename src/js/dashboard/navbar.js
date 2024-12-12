@@ -52,22 +52,16 @@ function renderNavbar() {
           .join("")}
       </ul>
       <div>
-        <a  id="logout" href="/index.html">Sign Out</a>
+        <a  id="logout" href="/index.html" onclick="EndSession();">Sign Out</a>
         <p class="nav-copyright">&copy; Group 5 PWDAM 2024/2026</p>
+        <a href="../../documentation/documentation.html" target="_blank"><p class="nav-doc">Documentation</p></a>
       </div>
     </div>`;
 }
 
-
 function showNavbar() {
-  /* DEFAULT BODY MARGIN AND PADDING
-          margin: 0 auto;
-          padding: 2rem;
-      */
-  // If we don't have hidden class it's because there is navbar. Otherwise navbar it's closed.
   className =
     document.querySelectorAll(".hidden").length == 0 ? "nav-context" : "hidden";
-  // If navbar is hidden keep margin/padding
   const [myBody] = document.getElementsByTagName("body");
   if (className === "hidden") {
     document.getElementsByClassName("hidden")[0].className = "nav-context";
@@ -76,6 +70,11 @@ function showNavbar() {
     document.getElementsByClassName("nav-context")[0].className = "hidden";
     document.getElementsByClassName("night")[0].className = "night";
   }
+}
+
+function EndSession() {
+  sessionStorage.removeItem("session");
+  window.location.replace("http://127.0.0.1:3000/");
 }
 
 function RenderEverything() {
@@ -88,11 +87,3 @@ function RenderEverything() {
 }
 
 RenderEverything();
-
-
-document.getElementById("logout").addEventListener('click', function(e) {
-
-  sessionStorage.removeItem("session");
-  window.location.replace("http://127.0.0.1:3000/")
-
-});

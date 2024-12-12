@@ -53,6 +53,7 @@ header {
 }
 
 .logo {
+  margin: unset;
   height: 9.4rem;
   width: 9.4rem;
   border-radius: 50%;

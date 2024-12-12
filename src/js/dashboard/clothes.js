@@ -216,8 +216,10 @@ const RenderTable = async () => {
     return;
   }
 
+  console.log(clothesData);
+
   table.innerHTML = clothesData
-    .map((item, index, id) => {
+    .map((item, index) => {
       return `
       <tr class="linha-clara">
         <td style="font-weight: 800">${index + 1}</td>
@@ -243,7 +245,7 @@ const RenderTable = async () => {
           <button
             class="openDeletePopup"
             style="background: none; border: none; cursor: pointer; margin-left: 8px;"
-            onclick="Toggle('YON', ${index + 1});"
+            onclick="Toggle('YON', ${item.id});"
           >
           
             <span class="material-symbols-outlined" style="font-size: 20px; color: #960202">
@@ -373,6 +375,8 @@ const Toggle = (id, idObj) => {
 
   if (id == "YON" && idObj) {
     RenderYN(idObj);
+  } else if (id == "PopMessage") {
+    RenderTable();
   }
   const Container = document.getElementById(id);
   const night = document.querySelector(".night");
@@ -559,7 +563,6 @@ const DeleteClothe = (id) => {
       if (data.success) {
         Toggle("YON");
         RenderMessage(true, "Clothing successfully deleted");
-        RenderTable();
       } else {
         RenderMessage(false, data.message || "Failed to delete clothing");
       }
@@ -570,10 +573,6 @@ const DeleteClothe = (id) => {
     });
 };
 
-document.addEventListener("DOMContentLoaded", () => {
-  refreshFilter();
-});
-
 const AddClothes = (obj) => {
   G5Fetch(
     "http://localhost:80/addClothe.php",
@@ -582,9 +581,10 @@ const AddClothes = (obj) => {
     obj
   )
     .then((data) => {
-      Toggle("AddClothe");
-      RenderMessage(true, data.message);
-      RenderTable();
+      if (data.success == "1") {
+        Toggle("AddClothe");
+        RenderMessage(true, data.message);
+      }
     })
     .catch((error) => {
       console.error("Error:", error); // Handle errors
@@ -602,7 +602,6 @@ const EditClothes = (obj, id) => {
       if (data.success) {
         Toggle("AddClothe");
         RenderMessage(true, "Clothing successfully updated!");
-        RenderTable(); // Atualiza a tabela após a edição
       } else {
         RenderMessage(false, data.message || "Failed to update clothing.");
       }
@@ -613,6 +612,8 @@ const EditClothes = (obj, id) => {
     });
 };
 
+refreshFilter();
+
 window.check = check;
 window.submitClothe = submitClothe;
 window.syncInput = syncInput;
@@ -622,3 +623,4 @@ window.RenderEditClothe = RenderEditClothe;
 window.RenderTable = RenderTable;
 window.DeleteClothe = DeleteClothe;
 window.RenderYN = RenderYN;
+window.refreshFilter = refreshFilter;

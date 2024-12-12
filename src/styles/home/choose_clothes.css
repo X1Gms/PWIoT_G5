@@ -9,6 +9,10 @@ header {
   justify-content: center;
 }
 
+.logo {
+  margin: unset;
+}
+
 nav {
   max-width: 1400px;
   width: 100%;
@@ -87,6 +91,7 @@ aside.filter {
 }
 
 aside.all_clothes {
+  position: relative;
   min-height: 25em;
   max-height: 750px;
   overflow-y: auto;
@@ -435,11 +440,10 @@ input[type="text"],
 }
 
 .close {
-  position: absolute;
-  top: 8px;
-  left: 15px;
+  position: relative;
+  top: -15px;
+  left: -122px;
   cursor: pointer;
-  display: none;
 }
 
 .night {

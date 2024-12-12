@@ -4,6 +4,9 @@
 
 body {
   padding: 0 calc(1em + 2vw);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .login-form {
@@ -142,4 +145,16 @@ input[type="checkbox"] {
   border: 0;
   box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
+}
+
+#copyright,
+#documentation {
+  margin-top: auto;
+  font-size: 2rem;
+  color: #a1b7b0;
+  margin-bottom: 20px;
+}
+
+#documentation {
+  margin-left: 40px;
 }

@@ -33,8 +33,7 @@ const setSessionWithExpiry = (
   const now = new Date();
   const sessionData = {
     value: value,
-    // expiry: now.getTime() + expirationMinutes * 60 * 1000,
-    expiry: now.getTime() + expirationMinutes * 60 * 10000000000000000,
+    expiry: now.getTime() + expirationMinutes * 60 * 1000,
   };
   sessionStorage.setItem(key, JSON.stringify(sessionData));
 };
@@ -55,8 +54,8 @@ const getSessionWithExpiry = (key) => {
 
 const validateSession = async () => {
   const session = getSessionWithExpiry("session");
+  console.log(session);
 
-  // Redirect to login if no session exists
   if (!session) return redirectToLogin("No session found.");
 
   try {
@@ -71,11 +70,11 @@ const validateSession = async () => {
     );
 
     if (!response.success) {
-      redirectToLogin("Session invalid or expired.");
+      redirectToLogin();
     }
   } catch (error) {
     console.error("Error during session validation:", error);
-    redirectToLogin("Error validating session.");
+    redirectToLogin();
   }
 };
 
