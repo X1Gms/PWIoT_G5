@@ -9,38 +9,10 @@ const search = [
     from: "Search",
   },
   {
-    values: ["Event", "Sports", "Walk", "Beach", "Business", "Academic"],
-    arrow: "s_ear",
-    dropdown: "EventType",
-    name: "Event",
-    type: "dropdown",
-  },
-  {
-    values: ["Weather", "Windy", "Rainy", "Sunny", "Cloudy", "Snowing"],
-    arrow: "s_wth",
-    dropdown: "Weather",
-    name: "Weather",
-    type: "dropdown",
-  },
-  {
-    values: [
-      "Temperature Range",
-      "-40 – -30ºC",
-      "-29 – -20ºC",
-      "-10 – 0ºC",
-      "-19 – -10ºC",
-      "-9 – 0ºC",
-      "1 – 10ºC",
-      "11 – 20ºC",
-      "21 – 30ºC",
-      "31 – 40ºC",
-      "41 – 50ºC",
-      "51 – 60ºC",
-      "61 – 70ºC",
-    ],
-    arrow: "s_temp",
-    dropdown: "TempRange",
-    name: "Temperature Range",
+    values: ["Type", "Top", "Bottom", "Shoes", "Outerwear", "Accessory"],
+    arrow: "s_type",
+    dropdown: "Type",
+    name: "Type",
     type: "dropdown",
   },
 ];
@@ -64,14 +36,22 @@ const clothes_attributes = [
     arrow: "t-e",
     dropdown: "T-EventType",
     name: "Event",
+    resetName: "Event",
     type: "mdropdown",
   },
   {
-    values: ["Weather", "Windy", "Rainy", "Sunny", "Cloudy", "Snowing"],
+    values: [
+      { name: "Windy", isChecked: false },
+      { name: "Rainy", isChecked: false },
+      { name: "Sunny", isChecked: false },
+      { name: "Cloudy", isChecked: false },
+      { name: "Snowing", isChecked: false },
+    ],
     arrow: "t_wth",
     dropdown: "T-Weather",
     name: "Weather",
-    type: "dropdown",
+    resetName: "Weather",
+    type: "mdropdown",
   },
   {
     values: [
@@ -126,7 +106,7 @@ var created_clothes = [];
 const create_clothes = {
   name: "",
   events: [],
-  weather: "",
+  weather: [],
   tempRange: "",
   index: 0,
   material: "",
@@ -136,7 +116,7 @@ const create_clothes = {
 const CleanClothe = () => {
   create_clothes.name = "";
   create_clothes.events = [];
-  create_clothes.weather = "";
+  create_clothes.weather = [];
   create_clothes.tempRange = "";
   create_clothes.src = "";
   create_clothes.index = 0;
@@ -145,13 +125,15 @@ const CleanClothe = () => {
 };
 
 const resetNames = (attributes) => {
+  console.log(attributes);
+
   attributes.forEach((attr) => {
     if (attr.type === "search") {
       attr.name = "";
     } else if (attr.type === "dropdown") {
       attr.name = attr.values[0];
     } else if (attr.type === "mdropdown") {
-      attr.name = "Event";
+      attr.name = attr.resetName;
 
       attr.values.forEach((item) => {
         if (item.isChecked !== undefined) {
@@ -163,7 +145,6 @@ const resetNames = (attributes) => {
 
   CleanClothe();
 };
-
 /*Search */
 
 const dropdown = ({ values, dropdown, name, arrow }) => `
@@ -527,15 +508,13 @@ const DropdownName = (dropdown, value) => {
   if (searchItem) searchItem.name = value;
 
   const filterMappings = {
-    EventType: { filterKey: "event", defaultValue: "Event" },
-    Weather: { filterKey: "weather", defaultValue: "Weather" },
-    TempRange: { filterKey: "temperature", defaultValue: "Temperature Range" },
     "T-Weather": { createKey: "weather", defaultValue: "Weather" },
     "T-TempRange": {
       createKey: "tempRange",
       defaultValue: "Temperature Range",
     },
     "T-Material": { createKey: "material", defaultValue: "Material" },
+    Type: { filterKey: "type", defaultValue: "Type" },
   };
 
   const { filterKey, createKey, defaultValue } = filterMappings[dropdown] || {};
@@ -584,11 +563,20 @@ const check = (index, checkboxId, dropdown) => {
   const { name: eventName } = attribute.values[index];
   attribute.values[index].isChecked = checkbox.checked;
 
-  create_clothes.events = checkbox.checked
-    ? Array.from(new Set([...create_clothes.events, eventName])) // Ensure no duplicates using Set
-    : create_clothes.events.filter((event) => event !== eventName);
-};
+  const addTo =
+    attribute.dropdown === "T-Weather"
+      ? create_clothes.weather
+      : create_clothes.events;
 
+  if (checkbox.checked) {
+    if (!addTo.includes(eventName)) addTo.push(eventName);
+  } else {
+    const indexToRemove = addTo.indexOf(eventName);
+    if (indexToRemove > -1) addTo.splice(indexToRemove, 1);
+  }
+
+  console.log(create_clothes);
+};
 var SelectedClothes = null;
 
 const submitClothe = (path, id) => {
@@ -634,7 +622,7 @@ const CreateClothe = (src, id, index, type) => {
 
   if (window.innerWidth < 1201) {
     const aside = document.querySelector(`.all_clothes`);
-    const night = document.querySelector(".night");
+    const night = document.querySelector(".night2");
     const neonav = document.querySelector(".neo-nav");
 
     neonav.classList.add("enable");
@@ -710,15 +698,9 @@ const changeSchema = () => {
   AllClothes();
 };
 
-const showNavbar = () => {
-  const neoNav = document.querySelector(".neo-nav");
-
-  neoNav.classList.toggle("enable");
-};
-
 const showAside = (aside) => {
   const aside01 = document.querySelector(`.${aside}`);
-  const night = document.querySelector(".night");
+  const night = document.querySelector(".night2");
 
   // Ensure elements exist before proceeding
   if (!aside01 || !night) {
@@ -756,7 +738,10 @@ const SubmitAllClothes = () => {
       (event) =>
         clothes_attributes[1].values.findIndex((e) => e.name === event) + 1
     ),
-    weather: clothes_attributes[2].values.indexOf(cloth.weather),
+    weather: cloth.weather.map(
+      (weather) =>
+        clothes_attributes[2].values.findIndex((e) => e.name === weather) + 1
+    ),
     tempRange: clothes_attributes[3].values.indexOf(cloth.tempRange), // Skip "Temperature Range" label
     material: clothes_attributes[4].values.indexOf(cloth.material), // Skip "Material" label
     type: TypeOfClothes.indexOf(cloth.type),
@@ -804,7 +789,6 @@ window.CreateClothe = CreateClothe;
 window.submitClothe = submitClothe;
 window.onEdit = onEdit;
 window.changeSchema = changeSchema;
-window.showNavbar = showNavbar;
 window.showAside = showAside;
 window.SubmitAllClothes = SubmitAllClothes;
 window.syncInput = syncInput;

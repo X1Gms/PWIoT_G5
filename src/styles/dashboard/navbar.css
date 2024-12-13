@@ -81,7 +81,7 @@ main {
   width: 280px;
   border-top-right-radius: 2rem;
   border-bottom-right-radius: 2rem;
-  z-index: 1000;
+  z-index: 10010;
   background-color: #ffffff;
 }
 

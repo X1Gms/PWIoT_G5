@@ -54,7 +54,6 @@ const getSessionWithExpiry = (key) => {
 
 const validateSession = async () => {
   const session = getSessionWithExpiry("session");
-  console.log(session);
 
   if (!session) return redirectToLogin("No session found.");
 

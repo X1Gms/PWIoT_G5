@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../../../../style.css" />
+    <link rel="stylesheet" href="../../../styles/dashboard/navbar.css" />
+    <script src="/src/js/dashboard/navbar.js" defer></script>
     <link
       rel="stylesheet"
       href="../../../styles/dashboard/choose_clothes.css"
@@ -13,10 +15,12 @@
       href="/public/imgs/logo/logo.png"
       type="image/x-icon"
     />
-    <script type="module" src="../../../js/utils/sessionValidate.js"></script>
+    <!-- <script type="module" src="../../../js/utils/sessionValidate.js"></script> -->
     <title>WearWeather</title>
   </head>
   <body>
+    <div class="night"></div>
+    <div class="hidden" id="navbar"></div>
     <header>
       <nav>
         <div class="logo">
@@ -40,7 +44,7 @@
     </div>
 
     <main>
-      <div class="night"></div>
+      <div class="night2"></div>
       <aside class="filter">
         <h2>Search For Clothes</h2>
         <div id="S_Dropdowns"></div>

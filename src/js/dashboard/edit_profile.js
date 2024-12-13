@@ -137,6 +137,8 @@ function SubmitData() {
     password: currentPassword,
   };
 
+  console.log(formData);
+
   G5Fetch(
     "http://localhost:80/edit_user.php",
     "POST",

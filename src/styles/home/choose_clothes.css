@@ -1,5 +1,6 @@
 body {
   max-width: none;
+  justify-content: unset;
 }
 
 header {
@@ -21,27 +22,6 @@ nav {
   align-items: center;
 }
 
-.nav-hamb {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  width: 6rem;
-  height: 5rem;
-  padding: 0;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-  display: none;
-}
-
-.nav-hamb .bar {
-  width: 100%;
-  height: 0.9rem;
-  background-color: #918f8f;
-  border-radius: 20rem;
-  transition: transform 0.3s ease;
-}
-
 .neo-nav {
   display: none;
   background: var(--button-color);
@@ -50,6 +30,7 @@ nav {
   justify-content: space-around;
   flex-wrap: wrap;
   z-index: 1001;
+  padding: 0 calc(10px + 3vw) 0 calc(10px + 3vw);
 }
 
 .nav-op,
@@ -515,7 +496,7 @@ input[type="text"],
     background: #fff;
   }
 
-  .neo-nav.enable {
+  .neo-nav {
     display: flex;
   }
 }

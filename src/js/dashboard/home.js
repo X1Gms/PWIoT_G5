@@ -36,7 +36,6 @@ let myW = null;
 let clothes = [];
 getWeather(api_url).then((data) => {
   const wstatus = filterConditions(data);
-  // console.log(wstatus);
   gtemperature = formatTemperature(data["temperature"].toString());
   gtemperature = Number(gtemperature);
   const temperature = formatTemperature(data["temperature"].toString());

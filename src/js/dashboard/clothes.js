@@ -22,51 +22,6 @@ const clothes_attributes = [
     from: "Create",
   },
   {
-    values: [
-      { name: "Sports", isChecked: false },
-      { name: "Walk", isChecked: false },
-      { name: "Beach", isChecked: false },
-      { name: "Business", isChecked: false },
-      { name: "Academic", isChecked: false },
-    ],
-    arrow: "e",
-    dropdown: "EventType",
-    name: "Event",
-    type: "mdropdown",
-  },
-  {
-    values: [
-      { name: "Windy", isChecked: false },
-      { name: "Rainy", isChecked: false },
-      { name: "Sunny", isChecked: false },
-      { name: "Cloudy", isChecked: false },
-      { name: "Snowing", isChecked: false },
-    ],
-    arrow: "wth",
-    dropdown: "Weather",
-    name: "Weather",
-    type: "mdropdown",
-  },
-  {
-    values: [
-      { name: "-40 – -30ºC", isChecked: false },
-      { name: "-29 – -20ºC", isChecked: false },
-      { name: "-19 – -10ºC", isChecked: false },
-      { name: "-9 – 0ºC", isChecked: false },
-      { name: "1 – 10ºC", isChecked: false },
-      { name: "11 – 20ºC", isChecked: false },
-      { name: "21 – 30ºC", isChecked: false },
-      { name: "31 – 40ºC", isChecked: false },
-      { name: "41 – 50ºC", isChecked: false },
-      { name: "51 – 60ºC", isChecked: false },
-      { name: "61 – 70ºC", isChecked: false },
-    ],
-    arrow: "temp",
-    dropdown: "TempRange",
-    name: "Temperature Range",
-    type: "mdropdown",
-  },
-  {
     values: ["Type", "Top", "Bottom", "Shoes", "Outerwear", "Accessory"],
     arrow: "ty",
     dropdown: "Type",
@@ -80,9 +35,6 @@ const clothesBackup = [...clothes_attributes];
 //The values chosen in clothes_attributes
 const create_clothes = {
   name: "",
-  EventType: [],
-  Weather: [],
-  TempRange: [],
   type: "",
   image: "",
 };
@@ -121,36 +73,6 @@ const dropdown = ({ values, dropdown, name, arrow }) => `
         .join("")}
     </div>
   </div>
-`;
-
-//Render a Dropdown with Multiple Choice
-const multipleDropdown = ({ values, dropdown, name, arrow }) => `
-<div class="dropdown" id="${dropdown}">
-  <div class="mdropdown-box dropbox">
-    <p>${name}</p>
-    <span class="material-symbols-outlined arrow multiple" id="${arrow}"">
-      keyboard_arrow_up
-    </span>
-  </div>
-  <div class="dropdown-list list">
-    ${values
-      .map(
-        (item, index) => `
-      <div class="m-item">
-        <input type="checkbox" id="${dropdown + "_check_" + index}" 
-          ${item.isChecked ? "checked" : ""} 
-          onclick="check(${index}, '${
-          dropdown + "_check_" + index
-        }', '${dropdown}')"
-        />
-          <label for="${dropdown + "_check_" + index}"><p>${
-          item.name
-        }</p></label>
-      </div>`
-      )
-      .join("")}
-  </div>
-</div>
 `;
 
 //Renders a Normal Input Text
@@ -215,8 +137,6 @@ const RenderTable = async () => {
     table.innerHTML = "<tr><td colspan='5'>No data available</td></tr>";
     return;
   }
-
-  console.log(clothesData);
 
   table.innerHTML = clothesData
     .map((item, index) => {
@@ -313,21 +233,10 @@ const resetNames = (attributes) => {
       attr.name = "";
     } else if (attr.type === "dropdown") {
       attr.name = attr.values[0];
-    } else if (attr.type === "mdropdown") {
-      attr.name = clothesBackup[index].name;
-
-      attr.values.forEach((item) => {
-        if (item.isChecked !== undefined) {
-          item.isChecked = false;
-        }
-      });
     }
   });
 
   create_clothes.name = "";
-  create_clothes.EventType = [];
-  create_clothes.Weather = [];
-  create_clothes.TempRange = [];
   create_clothes.image = "";
   create_clothes.type = "";
 };
@@ -355,24 +264,11 @@ const attributeNames = (attributes, item) => {
   });
 
   create_clothes.name = item.name;
-  create_clothes.EventType = item.EventType.map(
-    (i) => clothes_attributes[1].values[i - 1].name
-  );
-  create_clothes.Weather = item.Weather.map(
-    (i) => clothes_attributes[2].values[i - 1].name
-  );
-  create_clothes.TempRange = item.TempRange.map(
-    (i) => clothes_attributes[3].values[i - 1].name
-  );
   create_clothes.image = item.image;
-  create_clothes.type = clothes_attributes[4].values[item.type];
-
-  console.log(create_clothes);
+  create_clothes.type = clothes_attributes[1].values[item.type];
 };
 //Function to Toggle the Form
 const Toggle = (id, idObj) => {
-  console.log(idObj);
-
   if (id == "YON" && idObj) {
     RenderYN(idObj);
   } else if (id == "PopMessage") {
@@ -514,19 +410,7 @@ const submitClothe = (path, id) => {
 
   const ClothesToSend = {
     ...backup,
-    EventType: backup.EventType.map(
-      (event) =>
-        clothes_attributes[1].values.findIndex((e) => e.name === event) + 1
-    ),
-    Weather: backup.Weather.map(
-      (item) =>
-        clothes_attributes[2].values.findIndex((e) => e.name === item) + 1
-    ),
-    TempRange: backup.TempRange.map(
-      (item) =>
-        clothes_attributes[3].values.findIndex((e) => e.name === item) + 1
-    ),
-    type: clothes_attributes[4].values.indexOf(backup.type),
+    type: clothes_attributes[1].values.indexOf(backup.type),
   };
 
   console.log(ClothesToSend);

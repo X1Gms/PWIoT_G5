@@ -17,7 +17,7 @@
   <body>
     <header class="main-header">
       <nav>
-        <a href="./../../pages/home/welcome.html">
+        <a href="./../../../index.html">
           <div class="logo">
             <p>G5</p>
           </div>
@@ -25,9 +25,14 @@
         <div class="docstitle">
           <p>WearWeather Docs</p>
         </div>
+        <div id="nav-opener" class="nav-hamb">
+          <span class="bar"></span><span class="bar"></span
+          ><span class="bar"></span>
+        </div>
       </nav>
     </header>
     <div class="content">
+      <div class="night"></div>
       <aside>
         <ul>
           <div id="firstoption">
@@ -322,80 +327,21 @@
             In the Settings page, users can manage their wardrobe and
             preferences.
           </p>
-
-          <h3>Admin Settings</h3>
-          <p>Admins have additional options, such as:</p>
           <div id="listasseparador">
             <ul>
               <li>
-                Manage Accounts: The ability to add, edit, or delete user
+                Account Management: The ability to add, edit, or delete user
                 accounts.
               </li>
-            </ul>
-          </div>
-          <h3>User Settings</h3>
-          <p>For regular users, they can manage their wardrobe by:</p>
-          <div id="listasseparadorlast">
-            <ul>
               <li>
-                Edit Clothing: Update the properties of any clothing items in
-                their virtual closet.
-              </li>
-              <li>Delete Clothing: Remove clothing items no longer in use.</li>
-              <li>
-                Add More Clothes: Add new clothing items to their wardrobe.
+                Clothes Management: The ability to add, edit, or delete clothes
+                available on the appplication.
               </li>
             </ul>
           </div>
         </section>
       </main>
     </div>
-    <script>
-      // Select all collapsible list items
-      const collapsibleLists = document.querySelectorAll(".collapse.list");
-
-      collapsibleLists.forEach((list) => {
-        list.addEventListener("click", (event) => {
-          // Check if the click is on the main button (not on sublist items)
-          if (!event.target.closest(".button")) return;
-
-          // Prevent the click from affecting subelements unnecessarily
-          event.stopPropagation();
-
-          // Select the corresponding sublist
-          const sublist = list.querySelector(".sublist");
-
-          // Close all other open sublists except the current one
-          document.querySelectorAll(".sublist.open").forEach((openSublist) => {
-            if (openSublist !== sublist) {
-              openSublist.style.maxHeight = null; // Reset max-height to close the sublist
-              openSublist.classList.remove("open"); // Remove the "open" class
-            }
-          });
-
-          // Toggle the clicked sublist
-          if (sublist.classList.contains("open")) {
-            sublist.style.maxHeight = null; // Close the sublist
-            sublist.classList.remove("open"); // Remove the "open" class
-          } else {
-            sublist.style.maxHeight = sublist.scrollHeight + "px"; // Open the sublist by setting its max-height
-            sublist.classList.add("open"); // Add the "open" class
-          }
-        });
-      });
-
-      // Select all buttons
-      const buttons = document.querySelectorAll(".button");
-
-      buttons.forEach((button) => {
-        button.addEventListener("click", () => {
-          // Removes class "active" of the others buttons
-          buttons.forEach((btn) => btn.classList.remove("active"));
-
-          // Add class "active" to the clicked button
-          button.classList.add("active");
-        });
-      });
-    </script>
+    <script src="../../js/documentation/documentation.js"></script>
   </body>
 </html>
