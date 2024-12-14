@@ -36,6 +36,7 @@ let myW = null;
 let clothes = [];
 getWeather(api_url).then((data) => {
   const wstatus = filterConditions(data);
+  // console.log(wstatus);
   gtemperature = formatTemperature(data["temperature"].toString());
   gtemperature = Number(gtemperature);
   const temperature = formatTemperature(data["temperature"].toString());
@@ -181,19 +182,19 @@ activaRequest((event) => {
   console.log(event);
   clothes_filtered = ClothesFilter(clothes, event.toLowerCase());
 
-  let topClothes = clothes_filtered.filter(
+  let topClothes = clothes_filtered?.filter(
     (clothing) => clothing.name_type.toLowerCase() === "top"
   );
-  let bottomClothes = clothes_filtered.filter(
+  let bottomClothes = clothes_filtered?.filter(
     (clothing) => clothing.name_type.toLowerCase() === "bottom"
   );
-  let outerwearClothes = clothes_filtered.filter(
+  let outerwearClothes = clothes_filtered?.filter(
     (clothing) => clothing.name_type.toLowerCase() === "outerwear"
   );
-  let accessoryClothes = clothes_filtered.filter(
+  let accessoryClothes = clothes_filtered?.filter(
     (clothing) => clothing.name_type.toLowerCase() === "accessory"
   );
-  let shoesClothes = clothes_filtered.filter(
+  let shoesClothes = clothes_filtered?.filter(
     (clothing) => clothing.name_type.toLowerCase() === "shoes"
   );
 
@@ -350,6 +351,7 @@ function ValidateR(myR) {
       roupatitle[6].innerHTML = myR[2][yy[1]].clothes_name;
     }
   }
+  
   if (!counts.top >= 1 && !counts.bottom >= 1) return ShowError();
   if (counts.bottom < 1) {
     plusCloth[0].style.display = "none";
@@ -427,7 +429,7 @@ function getClothes(id) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      temperature: gtemperature.toString(), // Send the current temperature, gotten by the API
+      temperature: gtemperature, // Send the current temperature, gotten by the API
       id: id,
     }),
   })
@@ -450,6 +452,7 @@ function getClothes(id) {
 
 // Function to filter the array of clothes based on their "Event"
 function ClothesFilter(clothes, eventFilter) {
+  if(!clothes) return ShowError();
   if (eventFilter === "walk")
     return clothes.filter((clothing) => clothing.Event.includes(eventFilter));
   if (eventFilter === "academic")

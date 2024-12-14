@@ -71,7 +71,7 @@ section {
   padding: 30px;
 }
 
-.recommendations > h4 {
+.recommendations > .recommendations-displayer > h4 {
   margin-bottom: 20px;
   color: #868383;
 }
@@ -173,4 +173,35 @@ hr {
     padding: 15px;
     background-color: white;
   }
+
+  .recommendations-displayer{
+    flex-direction: column;
+  }
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 100px;
+  background: #868383 !important;
+}
+
+.refresh-button{
+  width: 40px;
+  height: 40px;
+}
+
+.recommendations-displayer{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.refresh-container{
+  background-color: #d9d9d9;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 25%;
+
 }
